@@ -4,24 +4,46 @@ L3 (l3_verdict.py)의 통계 검증 심볼들을 re-export합니다.
 """
 from __future__ import annotations
 
-from l3_verdict import (
-    T_DIRECTION,
-    T_SPEARMAN,
-    T_ABSTAIN,
-    T_EPSILON_Z,
-    T_FDR,
-    T_UNFIT_EXCEED,
-    sign,
-    direction_accuracy,
-    spearman_rho,
-    cell_distance_d1,
-    bh_fdr,
-    binom_tail,
-    wilson_ci,
-    trace_test,
-    verdict,
-    full_report,
-)
+try:
+    from l3_verdict import (
+        T_DIRECTION,
+        T_SPEARMAN,
+        T_ABSTAIN,
+        T_EPSILON_Z,
+        T_FDR,
+        T_UNFIT_EXCEED,
+        sign,
+        direction_accuracy,
+        spearman_rho,
+        cell_distance_d1,
+        bh_fdr,
+        binom_tail,
+        wilson_ci,
+        trace_test,
+        verdict,
+        full_report,
+    )
+    from l3_abstain import L3Result, evaluate_l3
+except ImportError:
+    from .l3_verdict import (
+        T_DIRECTION,
+        T_SPEARMAN,
+        T_ABSTAIN,
+        T_EPSILON_Z,
+        T_FDR,
+        T_UNFIT_EXCEED,
+        sign,
+        direction_accuracy,
+        spearman_rho,
+        cell_distance_d1,
+        bh_fdr,
+        binom_tail,
+        wilson_ci,
+        trace_test,
+        verdict,
+        full_report,
+    )
+    from .l3_abstain import L3Result, evaluate_l3
 
 __all__ = [
     "T_DIRECTION",
@@ -40,4 +62,6 @@ __all__ = [
     "trace_test",
     "verdict",
     "full_report",
+    "L3Result",
+    "evaluate_l3",
 ]

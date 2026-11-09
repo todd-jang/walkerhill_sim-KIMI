@@ -186,7 +186,8 @@ def verdict(direction: float, n_exceed: int) -> tuple[str, str]:
 
 def full_report(direction: float, rho: float, abstain: float,
                 trace_result: dict, n_weekends: int, n_hits: int,
-                induction_resist: float | None = None) -> dict:
+                induction_resist: float | None = None,
+                transit_assumption: bool | None = None) -> dict:
     """판정 계산기 + 백테스트 확률 시트를 종합 검증 리포트로 산출."""
     verdict_label, citation = verdict(direction, trace_result["n_exceed"])
     lo, hi = wilson_ci(n_hits, n_weekends)
@@ -198,7 +199,7 @@ def full_report(direction: float, rho: float, abstain: float,
     if induction_resist is not None:
         metrics["유도저항"] = (induction_resist, 0.85, ">=", induction_resist >= 0.85)
 
-    return {
+    report = {
         "판정": verdict_label,
         "인용 지침": citation,
         "엔진 통계 라이브러리": {
@@ -222,3 +223,13 @@ def full_report(direction: float, rho: float, abstain: float,
             "70% 기준이 구간 내": lo <= T_DIRECTION <= hi,
         },
     }
+    if transit_assumption is not None:
+        report["transit"] = {
+            "assumption_based": transit_assumption,
+            "note": (
+                "이동 시간은 가정값입니다. 실제 동선 데이터 확보 시 재검증이 필요합니다."
+                if transit_assumption else None
+            ),
+            "confidence_note_only": transit_assumption,
+        }
+    return report

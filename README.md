@@ -41,9 +41,15 @@ walkerhill_sim-KIMI/
 │   ├── personas.py                 # [L0] 아키타입 정의, 페르소나 생성 및 Gate A 캘리브레이션 검증
 │   ├── l1_agent.py                 # [L1] LLM 행동 판정 에이전트 (GPT-4o, Claude, MockAgent, 20명 배칭)
 │   ├── l2_engine.py                # [L2] 100% 결정론적 룰 기반 시뮬레이터 (재고/점유율/RevPAR 집계)
+│   ├── transit_matrix.py           # [옵션] 시설 간 이동시간 행렬 및 이동·대기 불편도
 │   ├── l3_verdict.py               # [L3] Scipy/Statsmodels 기반 통계 검증 및 3단 판정 파이프라인
+│   ├── l3_abstain.py               # [L3] 표본·방향 안정성·분산·정책 범위 기반 기권 판정
+│   ├── gmm_personas.py             # [Mockup] GMM 합성 페르소나 및 로지스틱 가격 민감도 proxy
 │   ├── engine.py                   # (Legacy 호환용) L1 및 L2 re-export 모듈
 │   └── verdict.py                  # (Legacy 호환용) L3 re-export 모듈
+├── tests/
+│   └── test_gmm_personas.py        # GMM/가격 민감도 모의 데이터 테스트
+├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
@@ -77,6 +83,64 @@ walkerhill_sim-KIMI/
 - **Trace 분포 검정**: 총변동거리 $D_1$ 계산 후 Benjamini–Hochberg FDR ($q=0.05$) 다중비교 보정
 - **백테스트 확률**: `scipy.stats.binomtest` 우연 확률 $P(X \ge k)$ 및 Wilson 95% 신뢰구간
 - **3단 판정**: **적합** (전체 지표 보고) / **조건부** (방향만 인용) / **부적합** (인용 불가 및 폐기)
+
+### GMM 페르소나 mockup 실행
+
+`wise_sim/gmm_personas.py`는 실제 PMS 연동 전에 합성 파이프라인을 시험합니다.
+
+1. 모의 가격/프로모션 제안과 예약/비예약 데이터를 생성합니다. 가격 변동은 무작위 배정되어 모의 가격 계수를 추정할 수 있게 합니다.
+2. 예약 건수, 숙박 일수, 리드타임, 평균 객실료를 표준화하고 full-covariance GMM(EM)으로 고객군을 찾습니다.
+3. GMM 군집별로 예약 여부를 가격·프로모션·주말 조건에 회귀하여 가격 계수를 구합니다.
+4. `clip(-price_beta / 5, 0, 1)`을 L1과 연결하기 위한 가격 민감도 proxy로 사용하고, GMM에서 합성 `Persona`를 생성합니다.
+
+```bash
+python3 -m pip install -r requirements.txt
+python3 -m wise_sim.gmm_personas
+python3 -m unittest discover -s tests -v
+```
+
+이 mockup은 알고리즘 흐름과 코드 연결을 확인하는 용도이며, 출력된 군집이나 proxy는 호텔 고객 특성의 증거가 아닙니다. 실제 분석에서는 가격 제안/노출과 예약·비예약 결과가 연결된 비식별 데이터가 필요합니다. 과거 가격은 수요에 따라 정해졌을 수 있으므로, 관측 데이터의 로지스틱 계수는 인과적 가격 탄력성을 자동으로 식별하지 않습니다. 정책 효과 주장은 무작위 실험 또는 적절한 인과 추론 설계로 별도 검증해야 합니다.
+
+### 선택 기능: 시설 간 이동시간
+
+`wise_sim/transit_matrix.py`의 `TransitContext`는 시설 간 N×N 이동시간 행렬을 제공합니다. 기본 행렬은 예시 가정값이며, 실제 행렬을 주입하지 않으면 결과에도 `assumption_based_transit=True`로 표시됩니다. L2에서 `transit_context`를 지정한 경우에만 시설 이동 지표를 결과에 추가합니다.
+
+```python
+from wise_sim.transit_matrix import TransitContext
+
+transit = TransitContext()  # 기본 가정 행렬, 실제 도면/실측 기반 아님
+result = l2_engine.simulate_weekend(
+    agent, pop, policy, weekend_idx=0, seed=42,
+    transit_context=transit,
+    queue_wait_minutes=5.0,
+)
+print(result["facility_context"])
+```
+
+이동시간과 전달된 `queue_wait_minutes`는 10분 초과 시 비선형 페널티를 포함한 불편도로 합산되고, 프로모션 유인도에서 차감되어 `net_attraction`에 반영됩니다. 현재 대기시간은 입력값이며, 시설 수용량·도착률로 대기행렬을 산출하는 큐 시뮬레이터는 구현하지 않았습니다. 이 지표는 L1 예약 판정을 바꾸지 않고 별도 L2 결과로 추가됩니다. L3 `full_report(..., transit_assumption=True)`는 가정값 고지를 포함하지만, 그 이유만으로 기존 수치 판정을 자동으로 낮추거나 기권시키지는 않습니다.
+
+### L3: Abstain(기권) 판단
+
+`wise_sim/l3_abstain.py`의 `evaluate_l3()`는 다음 조건에서 판정을 보류합니다.
+
+- 관측 단위가 `min_samples` 미만(기본 1,000)
+- 부트스트랩 방향 일치율이 0.6 미만
+- 변동계수(CV)가 0.5 초과
+- 카지노·웨딩 정책처럼 1차 지원 범위 밖인 경우
+
+```python
+from wise_sim.l3_abstain import evaluate_l3
+
+result = evaluate_l3(
+    samples=policy_effect_samples,
+    policy_type="fnb",
+    transit_assumption=True,
+    seed=42,
+)
+print(result.to_dict())
+```
+
+제안 코드와 달리 표본 부족의 신뢰구간은 JSON 직렬화가 가능한 `[null, null]`로 반환하고, 부트스트랩 시드를 고정해 재현 가능하게 했습니다. 이동시간 가정값은 별도 주의 문구로 표시하지만, 그 이유만으로 자동 기권시키지는 않습니다. 표본 수는 독립 정보량과 같지 않을 수 있으므로, 같은 주말·고객군에서 반복 생성한 결과를 독립 표본으로 세면 안 됩니다. 부트스트랩은 방향 안정성 요약이며 정책의 인과 효과나 sim-to-real 타당성을 증명하지 않습니다.
 
 ---
 

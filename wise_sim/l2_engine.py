@@ -8,14 +8,16 @@
 from __future__ import annotations
 
 import hashlib
-from typing import Iterator
+from typing import Iterator, Mapping
 
 try:
     from personas import Persona
     from l1_agent import BaseAgent, Decision, Policy, BATCH_SIZE, BASE_ROOM_PRICE
+    from transit_matrix import TransitContext
 except ImportError:
     from .personas import Persona
     from .l1_agent import BaseAgent, Decision, Policy, BATCH_SIZE, BASE_ROOM_PRICE
+    from .transit_matrix import TransitContext
 
 TOTAL_ROOMS = 580          # 워커힐 기준 총 가용 객실 수 (가정치/설정치)
 TIME_COMPRESSION = 24    # Gate F: 24배 smoke (12배 조건부)
@@ -36,9 +38,41 @@ def _batched(seq: list, size: int) -> Iterator[list]:
         yield seq[i:i + size]
 
 
+def evaluate_facility_policy(
+    policy: Mapping[str, float],
+    transit: TransitContext,
+    origin: str = "room",
+    dest: str = "fnb",
+    queue_wait_minutes: float = 0.0,
+) -> dict:
+    """정책 유인도와 이동·대기 불편도를 L2에서 결정론적으로 평가한다."""
+    promo_strength = policy.get("fnb_promo_strength", 0.0)
+    if (isinstance(promo_strength, bool)
+            or not isinstance(promo_strength, (int, float))
+            or not 0.0 <= promo_strength <= 1.0):
+        raise ValueError("fnb_promo_strength must be between 0 and 1")
+    transit_minutes = transit.get_transit_time(origin, dest)
+    disutility = transit.get_disutility(
+        origin,
+        dest,
+        queue_wait_minutes=queue_wait_minutes,
+    )
+    return {
+        "origin": origin,
+        "destination": dest,
+        "transit_minutes": transit_minutes,
+        "queue_wait_minutes": float(queue_wait_minutes),
+        "disutility": round(disutility, 4),
+        "net_attraction": round(float(promo_strength) - disutility, 4),
+        "assumption_based_transit": transit.is_assumption,
+    }
+
+
 def simulate_weekend(agent: BaseAgent, personas: list[Persona], policy: Policy,
                      weekend_idx: int, weekend: bool = True,
-                     seed: int = 1000) -> dict:
+                     seed: int = 1000,
+                     transit_context: TransitContext | None = None,
+                     queue_wait_minutes: float = 0.0) -> dict:
     """단일 주말 시뮬레이션 — 100% 결정론적 집계.
     
     1. L1 에이전트를 BATCH_SIZE(20명) 단위로 호출하여 개별 예약 결정을 획득.
@@ -75,7 +109,7 @@ def simulate_weekend(agent: BaseAgent, personas: list[Persona], policy: Policy,
     revpar = total_spend / TOTAL_ROOMS if TOTAL_ROOMS > 0 else 0.0
     adr = total_spend / max(n_booked, 1)
 
-    return {
+    result = {
         "policy": policy.label,
         "weekend_idx": weekend_idx,
         "n_personas": n_total,
@@ -88,10 +122,24 @@ def simulate_weekend(agent: BaseAgent, personas: list[Persona], policy: Policy,
         "adr": round(adr, 0),
         "decisions": decisions,
     }
+    if transit_context is not None:
+        promo_strength = {
+            "none": 0.0,
+            "package": 0.12,
+            "breakfast": 0.06,
+        }.get(policy.promo, 0.0)
+        result["facility_context"] = evaluate_facility_policy(
+            {"fnb_promo_strength": promo_strength},
+            transit_context,
+            queue_wait_minutes=queue_wait_minutes,
+        )
+    return result
 
 
 def run_policy_grid(agent: BaseAgent, personas: list[Persona], n_weekends: int,
-                    seed: int = 1000) -> dict[str, list[dict]]:
+                    seed: int = 1000,
+                    transit_context: TransitContext | None = None,
+                    queue_wait_minutes: float = 0.0) -> dict[str, list[dict]]:
     """3×3 정책 격자 × n개 주말 전체 시뮬레이션 일괄 실행.
     
     모든 정책과 주말에 걸친 trace 로그 및 집계 통계를 반환.
@@ -100,6 +148,15 @@ def run_policy_grid(agent: BaseAgent, personas: list[Persona], n_weekends: int,
     results: dict[str, list[dict]] = {p.label: [] for p in grid}
     for p in grid:
         for w in range(n_weekends):
-            sim_res = simulate_weekend(agent, personas, p, weekend_idx=w, weekend=True, seed=seed)
+            sim_res = simulate_weekend(
+                agent,
+                personas,
+                p,
+                weekend_idx=w,
+                weekend=True,
+                seed=seed,
+                transit_context=transit_context,
+                queue_wait_minutes=queue_wait_minutes,
+            )
             results[p.label].append(sim_res)
     return results
