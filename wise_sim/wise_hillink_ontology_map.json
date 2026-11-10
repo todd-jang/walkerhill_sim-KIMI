@@ -1,0 +1,91 @@
+{
+  "$schema_version": "1.0.0",
+  "contract_name": "WISE_HILLINK_ONTOLOGY_MAP",
+  "description": "워커힐 거시 L2(수요/수용량)와 미시 L5(동선/소비) 간의 정적 온톨로지 매핑 계약",
+  "principles": {
+    "zero_llm_mapping": true,
+    "hierarchy_model": "MASTER_DETAIL",
+    "master_authority": "WISE_L2_ENGINE_580_ROOMS",
+    "detail_authority": "HILLINK_L5_CONSUMPTION_LEDGER",
+    "join_key": "stay_id"
+  },
+  "room_inventory_allocation": {
+    "total_rooms": 580,
+    "basis_source": "객실_온톨로지참고계수_31일.csv (실제 801실 비례 분할)",
+    "buildings": {
+      "GRAND": {
+        "allocated_rooms": 367,
+        "ratio": 0.633,
+        "target_archetypes": ["family", "foreign", "business"]
+      },
+      "VISTA": {
+        "allocated_rooms": 177,
+        "ratio": 0.305,
+        "target_archetypes": ["couple"]
+      },
+      "DOUGLAS": {
+        "allocated_rooms": 36,
+        "ratio": 0.062,
+        "target_archetypes": ["premium"]
+      }
+    }
+  },
+  "archetype_to_profile_binding": {
+    "selection_rule": "DETERMINISTIC_ROUND_ROBIN",
+    "formula": "selected_profile = profile_pool[persona_id % len(profile_pool)]",
+    "mappings": {
+      "family": {
+        "description": "다인 가족 / 키즈 / 피자힐 선호",
+        "default_building": "GRAND",
+        "profile_pool": ["IG02_family_pool", "PH23_kids_pizza", "blog18_grand_family"]
+      },
+      "couple": {
+        "description": "2인 호캉스 / 리버뷰 / 럭스바 선호",
+        "default_building": "VISTA",
+        "profile_pool": ["PH29_anniversary", "blog33_vista_river", "luxbar_couple_01"]
+      },
+      "business": {
+        "description": "1인 단기 출장 / 클럽라운지 / 조식 중심",
+        "default_building": "GRAND",
+        "profile_pool": ["corp_walkerhill_single", "blog05_biz_club"]
+      },
+      "foreign": {
+        "description": "외국인 관광 / 장기 2~3박",
+        "default_building": "GRAND",
+        "profile_pool": ["inbound_asia_stay3", "tourist_grand_04"]
+      },
+      "premium": {
+        "description": "성인 전용 조용한 휴식 / 더글라스 / 미식 코스",
+        "default_building": "DOUGLAS",
+        "profile_pool": ["douglas_quiet_rest", "vista_spa_suite", "gourmet_ondal_vip"]
+      }
+    }
+  },
+  "promo_to_sku_binding": {
+    "none": {
+      "description": "객실 온리 (부대시설 현장 결제)",
+      "included_skus": []
+    },
+    "breakfast": {
+      "description": "더뷔페 조식 2인 포함",
+      "included_skus": [
+        "SKU_THE_BUFFET_ADULT_2P"
+      ]
+    },
+    "package": {
+      "description": "조식 2인 + 피자힐 5만원 쿠폰 + 사우나 2인",
+      "included_skus": [
+        "SKU_THE_BUFFET_ADULT_2P",
+        "SKU_PIZZA_HILL_COUPON_50K",
+        "SKU_SAUNA_ADULT_2P"
+      ]
+    }
+  },
+  "stay_lifecycle_constraints": {
+    "stay_id_format": "STAY_{weekend_idx}_{building}_{room_seq:03d}_{persona_id}",
+    "default_check_in_time": "15:00:00",
+    "default_check_out_time": "11:00:00",
+    "temporal_rule": "L5 ordered_at MUST satisfy (check_in_time <= ordered_at <= check_out_time)"
+  }
+}
+
