@@ -32,7 +32,12 @@
       "additionalProperties": false
     },
     "studyDesign": {
-      "enum": ["randomized", "observational", "synthetic"]
+      "enum": [
+        "randomized",
+        "observational",
+        "synthetic",
+        "synthetic_randomized"
+      ]
     },
     "assignmentLevel": {
       "enum": ["customer", "reservation", "session", "stay_date_cluster", "other"]
@@ -239,6 +244,26 @@
       "unknown_offer_products_must_remain_unmapped_until_added_to_ontology": true,
       "direct_personal_identifiers_allowed": false
     }
+  },
+  "canonical_terms": {
+    "building": {
+      "GRAND": "WISE:Building:GRAND",
+      "VISTA": "WISE:Building:VISTA",
+      "DOUGLAS": "WISE:Building:DOUGLAS"
+    },
+    "promotion": {
+      "none": "WISE:Promotion:none",
+      "breakfast": "WISE:Promotion:breakfast",
+      "package": "WISE:Promotion:package"
+    },
+    "sku": {
+      "SKU_THE_BUFFET_ADULT_2P": "WISE:SKU:SKU_THE_BUFFET_ADULT_2P",
+      "SKU_PIZZA_HILL_COUPON_50K": "WISE:SKU:SKU_PIZZA_HILL_COUPON_50K",
+      "SKU_SAUNA_ADULT_2P": "WISE:SKU:SKU_SAUNA_ADULT_2P"
+    },
+    "room_type": {},
+    "season": {},
+    "event": {}
   },
   "principles": {
     "zero_llm_mapping": true,

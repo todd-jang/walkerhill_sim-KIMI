@@ -39,6 +39,7 @@ def valid_randomized_record():
             "assignment_unit_id": "unit-001",
             "assigned_arm": "treatment",
             "assignment_probability": 0.5,
+            "randomization_block_id": None,
             "randomization_strata": ["WISE:StayDate"],
             "assigned_at": "2026-01-01T10:00:00+09:00",
             "protocol_id": "protocol-001",

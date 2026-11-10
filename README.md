@@ -136,6 +136,14 @@ python3 -m pip install -r requirements.txt
 python3 -m unittest discover -s tests -p 'test_experiment_schema.py' -v
 ```
 
+합성 레코드 생성 → strict ontology 매핑 → JSON Schema 및 단위 연결 검증 → 예약률/매출 ITT 집계를 한 번에 검증하는 회귀 테스트는 다음과 같이 실행합니다.
+
+```bash
+python3 -m unittest discover -s tests -p 'test_synthetic_experiment_pipeline.py' -v
+```
+
+테스트 fixture는 200개 가상 단위를 만들며 처리군 10%의 제안 미노출도 포함합니다. ITT는 실제 노출 여부로 대상을 걸러내지 않고 원래 배정군으로 계산합니다. 알려진 fixture 효과(예약률 +9%p, 총매출 +21,600원/배정 단위)를 회수하는지 검사합니다. 가상 응답 유형에 따른 쌍 무작위 배정의 블록 ID를 보존해 paired-block 표준오차와 95% 정규근사 구간을 계산합니다. 이 숫자는 테스트 장치의 정답일 뿐 실제 호텔 효과가 아니며, synthetic 출처로만 표시됩니다. 실제 군집 배정 실험은 별도의 군집 단위 추론이 필요합니다.
+
 ### 선택 기능: 시설 간 이동시간
 
 `wise_sim/transit_matrix.py`의 `TransitContext`는 시설 간 N×N 이동시간 행렬을 제공합니다. 기본 행렬은 예시 가정값이며, 실제 행렬을 주입하지 않으면 결과에도 `assumption_based_transit=True`로 표시됩니다. L2에서 `transit_context`를 지정한 경우에만 시설 이동 지표를 결과에 추가합니다.
