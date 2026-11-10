@@ -9,6 +9,34 @@
     "detail_authority": "HILLINK_L5_CONSUMPTION_LEDGER",
     "join_key": "stay_id"
   },
+  "external_reference_inputs": {
+    "repository": "https://github.com/BK8909/Hillink",
+    "room_reference": {
+      "path": "hillink/docs/data/ontology_inverse_followup_shh_20261013/객실_온톨로지참고계수_31일.csv",
+      "role": "AGGREGATE_REFERENCE_ONLY",
+      "source_room_count": 801,
+      "simulation_room_count": 580,
+      "building_mapping": {
+        "그랜드": "GRAND",
+        "비스타": "VISTA",
+        "더글라스": "DOUGLAS"
+      },
+      "calibration_allowed": false,
+      "limitation": "날짜·목적·행사효과가 섞인 온톨로지 참고계수; PMS 예약 원장이나 독립 실험 데이터가 아님"
+    },
+    "instagram_persona_sample": {
+      "path": "hillink/docs/instagram_persona_sample.csv",
+      "role": "ANONYMIZED_BEHAVIORAL_EVIDENCE",
+      "calibration_allowed": false,
+      "limitation": "게시물 표본이며 실제 예약·가격 노출·무작위 배정 자료가 아님"
+    },
+    "evidence_chain": {
+      "path": "docs/evidence_chain_20261010.csv",
+      "role": "QUALITATIVE_CROSS_EVIDENCE",
+      "calibration_allowed": false,
+      "limitation": "가설·모델 결과·제약을 기록한 근거표이며 관측 단위별 실험 데이터가 아님"
+    }
+  },
   "room_inventory_allocation": {
     "total_rooms": 580,
     "basis_source": "객실_온톨로지참고계수_31일.csv (실제 801실 비례 분할)",
@@ -88,4 +116,3 @@
     "temporal_rule": "L5 ordered_at MUST satisfy (check_in_time <= ordered_at <= check_out_time)"
   }
 }
-

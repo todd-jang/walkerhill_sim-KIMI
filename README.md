@@ -101,6 +101,28 @@ python3 -m unittest discover -s tests -v
 
 이 mockup은 알고리즘 흐름과 코드 연결을 확인하는 용도이며, 출력된 군집이나 proxy는 호텔 고객 특성의 증거가 아닙니다. 실제 분석에서는 가격 제안/노출과 예약·비예약 결과가 연결된 비식별 데이터가 필요합니다. 과거 가격은 수요에 따라 정해졌을 수 있으므로, 관측 데이터의 로지스틱 계수는 인과적 가격 탄력성을 자동으로 식별하지 않습니다. 정책 효과 주장은 무작위 실험 또는 적절한 인과 추론 설계로 별도 검증해야 합니다.
 
+### Hillink 공개 자료를 WISE 온톨로지에 연결
+
+`wise_sim/hillink_data_adapter.py`는 Hillink 공개 레포의 객실 참고계수, Instagram 행동 표본, 근거 체인 CSV를 검증·요약하고 건물명을 WISE 온톨로지 코드로 매핑합니다. Hillink 레포를 이 레포 옆에 복제한 뒤 실행합니다.
+
+```bash
+python3 - <<'PY'
+import json
+from pathlib import Path
+from wise_sim.hillink_data_adapter import extract_hillink_inputs
+
+hillink = Path("../Hillink")
+report = extract_hillink_inputs(
+    hillink / "hillink/docs/data/ontology_inverse_followup_shh_20261013/객실_온톨로지참고계수_31일.csv",
+    hillink / "hillink/docs/instagram_persona_sample.csv",
+    hillink / "docs/evidence_chain_20261010.csv",
+)
+print(json.dumps(report, ensure_ascii=False, indent=2))
+PY
+```
+
+이 자료는 801실로 집계되는 객실 참고표와 WISE 시뮬레이션의 580실 설정이 달라 자동 보정하지 않습니다. 게시물 표본과 서술형 근거도 예약/비예약 관측치가 아니므로 GMM 페르소나 학습이나 인과효과 추정에 사용하지 않습니다. 보고서에는 매핑된 요약, 불일치, 누락된 분석 입력이 표시됩니다.
+
 ### 선택 기능: 시설 간 이동시간
 
 `wise_sim/transit_matrix.py`의 `TransitContext`는 시설 간 N×N 이동시간 행렬을 제공합니다. 기본 행렬은 예시 가정값이며, 실제 행렬을 주입하지 않으면 결과에도 `assumption_based_transit=True`로 표시됩니다. L2에서 `transit_context`를 지정한 경우에만 시설 이동 지표를 결과에 추가합니다.
