@@ -100,7 +100,7 @@
           }
         },
         {
-          "if": {"properties": {"design": {"enum": ["observational", "synthetic"]}}},
+          "if": {"properties": {"design": {"enum": ["observational", "synthetic", "synthetic_observational"]}}},
           "then": {
             "properties": {
               "assigned_arm": {"const": "not_randomized"}
@@ -456,7 +456,7 @@
       "if": {
         "properties": {
           "experiment": {
-            "properties": {"design": {"enum": ["synthetic", "synthetic_randomized"]}}
+            "properties": {"design": {"enum": ["synthetic", "synthetic_randomized", "synthetic_observational"]}}
           }
         }
       },
@@ -504,7 +504,7 @@
       "if": {
         "properties": {
           "experiment": {
-            "properties": {"design": {"const": "synthetic_randomized"}}
+            "properties": {"design": {"enum": ["synthetic_randomized", "synthetic_observational"]}}
           }
         }
       },

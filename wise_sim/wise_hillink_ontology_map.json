@@ -36,7 +36,8 @@
         "randomized",
         "observational",
         "synthetic",
-        "synthetic_randomized"
+        "synthetic_randomized",
+        "synthetic_observational"
       ]
     },
     "assignmentLevel": {
