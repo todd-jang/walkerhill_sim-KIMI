@@ -1,7 +1,245 @@
 {
-  "$schema_version": "1.0.0",
+  "$schema_version": "1.1.0",
   "contract_name": "WISE_HILLINK_ONTOLOGY_MAP",
   "description": "워커힐 거시 L2(수요/수용량)와 미시 L5(동선/소비) 간의 정적 온톨로지 매핑 계약",
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "pseudonymousId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "description": "비가역 또는 접근 통제된 가명 ID. 이름·전화번호·이메일 등 직접 식별자를 넣지 않는다."
+    },
+    "currencyCode": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO 4217 통화 코드"
+    },
+    "money": {
+      "type": "object",
+      "required": ["amount", "currency", "unit"],
+      "properties": {
+        "amount": {"type": "number", "minimum": 0},
+        "currency": {"$ref": "#/$defs/currencyCode"},
+        "unit": {"$ref": "#/$defs/moneyUnit"},
+        "tax_included": {"type": ["boolean", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "studyDesign": {
+      "enum": ["randomized", "observational", "synthetic"]
+    },
+    "assignmentLevel": {
+      "enum": ["customer", "reservation", "session", "stay_date_cluster", "other"]
+    },
+    "assignedArm": {
+      "enum": ["control", "treatment", "not_randomized"]
+    },
+    "exposureStatus": {
+      "enum": ["shown", "eligible_not_shown", "unknown"]
+    },
+    "bookingOutcome": {
+      "enum": ["booked", "not_booked", "unknown", "not_applicable"]
+    },
+    "cancellationOutcome": {
+      "enum": ["kept", "cancelled", "pending", "not_applicable", "unknown"]
+    },
+    "outcomeStatus": {
+      "enum": ["complete", "pending", "censored"]
+    },
+    "dataOrigin": {
+      "enum": [
+        "approved_pms_extract",
+        "randomized_experiment",
+        "observational_extract",
+        "synthetic_fixture",
+        "aggregate_reference"
+      ]
+    },
+    "moneyUnit": {
+      "enum": ["per_stay", "per_night", "per_person", "per_item", "total"]
+    },
+    "discountKind": {
+      "enum": ["none", "percentage", "fixed_amount", "other"]
+    },
+    "discountUnit": {
+      "enum": ["percent", "amount", "not_applicable"]
+    },
+    "availabilityStatus": {
+      "enum": ["available", "limited", "unavailable", "unknown"]
+    },
+    "availabilityUnit": {
+      "enum": ["room", "room_night", "offer_unit", "unknown"]
+    },
+    "completenessStatus": {
+      "enum": ["complete", "partial", "unknown"]
+    },
+    "qualityFlag": {
+      "enum": ["estimated", "imputed", "right_censored", "mapping_unresolved", "source_conflict", "other"]
+    },
+    "identifierProtectionMethod": {
+      "enum": ["keyed_hmac", "token_vault", "source_deidentified", "synthetic"]
+    },
+    "identityMappingAccess": {
+      "enum": ["separate_restricted", "none"]
+    },
+    "weekday": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "maximum": 7,
+      "description": "ISO weekday: Monday=1 ... Sunday=7"
+    },
+    "canonicalBuildingId": {
+      "enum": [
+        "WISE:Building:GRAND",
+        "WISE:Building:VISTA",
+        "WISE:Building:DOUGLAS"
+      ]
+    },
+    "canonicalPromotionId": {
+      "enum": [
+        "WISE:Promotion:none",
+        "WISE:Promotion:breakfast",
+        "WISE:Promotion:package"
+      ]
+    },
+    "canonicalSkuId": {
+      "enum": [
+        "WISE:SKU:SKU_THE_BUFFET_ADULT_2P",
+        "WISE:SKU:SKU_PIZZA_HILL_COUPON_50K",
+        "WISE:SKU:SKU_SAUNA_ADULT_2P"
+      ]
+    },
+    "canonicalRoomTypeId": {
+      "not": {},
+      "description": "현재 확정된 WISE 객실 유형 코드가 없음. 온톨로지 등록 전에는 unmapped로 유지."
+    },
+    "canonicalEventId": {
+      "not": {},
+      "description": "현재 확정된 WISE 행사 코드가 없음. 온톨로지 등록 전에는 unmapped로 유지."
+    },
+    "canonicalSeasonId": {
+      "not": {},
+      "description": "현재 확정된 WISE 시즌 코드가 없음. 온톨로지 등록 전에는 unmapped로 유지."
+    },
+    "buildingBinding": {
+      "allOf": [
+        {"$ref": "#/$defs/conceptBinding"},
+        {
+          "if": {"properties": {"mapping_status": {"const": "mapped"}}},
+          "then": {"properties": {"canonical_id": {"$ref": "#/$defs/canonicalBuildingId"}}}
+        }
+      ]
+    },
+    "promotionBinding": {
+      "allOf": [
+        {"$ref": "#/$defs/conceptBinding"},
+        {
+          "if": {"properties": {"mapping_status": {"const": "mapped"}}},
+          "then": {"properties": {"canonical_id": {"$ref": "#/$defs/canonicalPromotionId"}}}
+        }
+      ]
+    },
+    "productBinding": {
+      "allOf": [
+        {"$ref": "#/$defs/conceptBinding"},
+        {
+          "if": {"properties": {"mapping_status": {"const": "mapped"}}},
+          "then": {"properties": {"canonical_id": {"$ref": "#/$defs/canonicalSkuId"}}}
+        }
+      ]
+    },
+    "roomTypeBinding": {
+      "allOf": [
+        {"$ref": "#/$defs/conceptBinding"},
+        {
+          "if": {"properties": {"mapping_status": {"const": "mapped"}}},
+          "then": {"properties": {"canonical_id": {"$ref": "#/$defs/canonicalRoomTypeId"}}}
+        }
+      ]
+    },
+    "eventBinding": {
+      "allOf": [
+        {"$ref": "#/$defs/conceptBinding"},
+        {
+          "if": {"properties": {"mapping_status": {"const": "mapped"}}},
+          "then": {"properties": {"canonical_id": {"$ref": "#/$defs/canonicalEventId"}}}
+        }
+      ]
+    },
+    "seasonBinding": {
+      "allOf": [
+        {"$ref": "#/$defs/conceptBinding"},
+        {
+          "if": {"properties": {"mapping_status": {"const": "mapped"}}},
+          "then": {"properties": {"canonical_id": {"$ref": "#/$defs/canonicalSeasonId"}}}
+        }
+      ]
+    },
+    "conceptBinding": {
+      "type": "object",
+      "required": ["source_system", "source_code", "mapping_status"],
+      "properties": {
+        "source_system": {"$ref": "#/$defs/nonEmptyString"},
+        "source_code": {"$ref": "#/$defs/nonEmptyString"},
+        "display": {"type": ["string", "null"]},
+        "canonical_id": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Za-z][A-Za-z0-9._:-]*$"
+        },
+        "mapping_status": {"enum": ["mapped", "unmapped"]},
+        "mapping_basis": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Za-z][A-Za-z0-9._:-]*$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"mapping_status": {"const": "mapped"}}},
+          "then": {"properties": {"canonical_id": {"type": "string"}}},
+          "else": {"properties": {"canonical_id": {"type": "null"}}}
+        }
+      ],
+      "additionalProperties": false
+    }
+  },
+  "experiment_data_contract": {
+    "schema": "wise_sim/schemas/reservation_exposure.schema.json",
+    "contract_id": "WISE:experiment:reservation-exposure:v1",
+    "record_grain": "one eligible experimental or observational unit × one offer",
+    "causal_use_requires": [
+      "randomized assignment recorded before offer exposure",
+      "eligible units in both assigned arms, including unexposed and non-booked units",
+      "offer price and outcome linked to the same pseudonymous unit",
+      "outcome observation window and cancellations reported"
+    ],
+    "data_origin_terms": [
+      "approved_pms_extract",
+      "randomized_experiment",
+      "observational_extract",
+      "synthetic_fixture",
+      "aggregate_reference"
+    ],
+    "assignment_level_terms": [
+      "customer",
+      "reservation",
+      "session",
+      "stay_date_cluster",
+      "other"
+    ],
+    "ontology_rules": {
+      "mapped_terms_require_canonical_id": true,
+      "unmapped_terms_preserve_source_system_and_code": true,
+      "unknown_room_types_must_remain_unmapped_until_added_to_ontology": true,
+      "unknown_offer_products_must_remain_unmapped_until_added_to_ontology": true,
+      "direct_personal_identifiers_allowed": false
+    }
+  },
   "principles": {
     "zero_llm_mapping": true,
     "hierarchy_model": "MASTER_DETAIL",

@@ -1,0 +1,497 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://walkerhill.example/wise_sim/schemas/reservation-exposure-v1.json",
+  "title": "WISE reservation offer exposure and outcome",
+  "description": "One eligible unit and one offer, linked through pseudonymous identifiers and ontology concepts. This record shape alone does not establish a causal design.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "record_id",
+    "experiment",
+    "unit",
+    "offer",
+    "conditions",
+    "outcome",
+    "data_quality",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "record_id": {
+      "$ref": "../wise_hillink_ontology_map.json#/$defs/pseudonymousId",
+      "x-ontology": "WISE:ExperimentRecord"
+    },
+    "experiment": {
+      "type": "object",
+      "required": [
+        "experiment_id",
+        "design",
+        "assignment_level",
+        "assignment_unit_id",
+        "assigned_arm",
+        "assignment_probability",
+        "assigned_at"
+      ],
+      "properties": {
+        "experiment_id": {
+          "$ref": "../wise_hillink_ontology_map.json#/$defs/nonEmptyString",
+          "x-ontology": "WISE:Experiment"
+        },
+        "design": {
+          "$ref": "../wise_hillink_ontology_map.json#/$defs/studyDesign",
+          "x-ontology": "WISE:StudyDesign"
+        },
+        "assignment_level": {
+          "$ref": "../wise_hillink_ontology_map.json#/$defs/assignmentLevel",
+          "x-ontology": "WISE:AssignmentLevel"
+        },
+        "assignment_unit_id": {
+          "$ref": "../wise_hillink_ontology_map.json#/$defs/pseudonymousId",
+          "x-ontology": "WISE:ExperimentalUnit"
+        },
+        "assigned_arm": {
+          "$ref": "../wise_hillink_ontology_map.json#/$defs/assignedArm",
+          "x-ontology": "WISE:AssignedArm"
+        },
+        "assignment_probability": {
+          "type": ["number", "null"],
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "description": "사전 무작위 배정 확률. 관측 연구에서는 null."
+        },
+        "randomization_strata": {
+          "type": "array",
+          "items": {"$ref": "../wise_hillink_ontology_map.json#/$defs/nonEmptyString"},
+          "uniqueItems": true,
+          "description": "사전 층화에 사용한 온톨로지 차원 ID"
+        },
+        "assigned_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "(Z|[+-][0-9]{2}:[0-9]{2})$",
+          "description": "시간대 오프셋을 포함하는 ISO-8601 시각"
+        },
+        "protocol_id": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "../wise_hillink_ontology_map.json#/$defs/nonEmptyString"}
+          ],
+          "x-ontology": "WISE:ExperimentProtocol"
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"design": {"const": "randomized"}}},
+          "then": {
+            "properties": {
+              "assigned_arm": {"enum": ["control", "treatment"]},
+              "assignment_probability": {"type": "number", "exclusiveMinimum": 0, "maximum": 1}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"design": {"enum": ["observational", "synthetic"]}}},
+          "then": {
+            "properties": {
+              "assigned_arm": {"const": "not_randomized"}
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "unit": {
+      "type": "object",
+      "required": ["unit_id", "eligible", "offer_time", "stay_date"],
+      "properties": {
+        "unit_id": {
+          "$ref": "../wise_hillink_ontology_map.json#/$defs/pseudonymousId",
+          "x-ontology": "WISE:ExperimentalUnit"
+        },
+        "eligible": {
+          "const": true,
+          "description": "이 계약은 사전 정의된 대상/적격 단위만 기록한다."
+        },
+        "offer_time": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "(Z|[+-][0-9]{2}:[0-9]{2})$"
+        },
+        "stay_date": {
+          "type": "string",
+          "format": "date",
+          "x-ontology": "WISE:StayDate"
+        },
+        "stay_end_date": {
+          "type": ["string", "null"],
+          "format": "date"
+        }
+      },
+      "additionalProperties": false
+    },
+    "offer": {
+      "type": "object",
+      "required": ["exposure_status", "exposed", "product", "room_type", "price"],
+      "properties": {
+        "exposure_status": {
+          "$ref": "../wise_hillink_ontology_map.json#/$defs/exposureStatus",
+          "x-ontology": "WISE:OfferExposureStatus"
+        },
+        "exposed": {
+          "type": "boolean",
+          "description": "실제 제시/노출 여부를 기록하며, 배정과 구분한다."
+        },
+        "exposed_at": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "pattern": "(Z|[+-][0-9]{2}:[0-9]{2})$"
+        },
+        "product": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "$ref": "../wise_hillink_ontology_map.json#/$defs/productBinding"
+            }
+          ],
+          "x-ontology": "WISE:OfferProduct"
+        },
+        "room_type": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "$ref": "../wise_hillink_ontology_map.json#/$defs/roomTypeBinding"
+            }
+          ],
+          "x-ontology": "WISE:RoomType"
+        },
+        "building": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "$ref": "../wise_hillink_ontology_map.json#/$defs/buildingBinding"
+            }
+          ],
+          "x-ontology": "WISE:Building"
+        },
+        "promotion": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "../wise_hillink_ontology_map.json#/$defs/promotionBinding"}
+          ],
+          "x-ontology": "WISE:Promotion"
+        },
+        "price": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "../wise_hillink_ontology_map.json#/$defs/money"}
+          ],
+          "x-ontology": "WISE:OfferedPrice"
+        },
+        "discount": {
+          "type": ["object", "null"],
+          "required": ["kind", "value"],
+          "properties": {
+            "kind": {"$ref": "../wise_hillink_ontology_map.json#/$defs/discountKind"},
+            "value": {"type": ["number", "null"], "minimum": 0},
+            "unit": {"$ref": "../wise_hillink_ontology_map.json#/$defs/discountUnit"}
+          },
+          "additionalProperties": false,
+          "x-ontology": "WISE:Discount"
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"exposure_status": {"const": "shown"}}},
+          "then": {
+            "properties": {
+              "exposed": {"const": true},
+              "exposed_at": {"type": "string"},
+              "price": {"$ref": "../wise_hillink_ontology_map.json#/$defs/money"}
+            },
+            "required": ["exposed_at"]
+          }
+        },
+        {
+          "if": {"properties": {"exposure_status": {"const": "eligible_not_shown"}}},
+          "then": {"properties": {"exposed": {"const": false}}}
+        }
+      ],
+      "additionalProperties": false
+    },
+    "conditions": {
+      "type": "object",
+      "required": [
+        "lead_time_days",
+        "weekday",
+        "season",
+        "events",
+        "availability"
+      ],
+      "properties": {
+        "lead_time_days": {"type": ["integer", "null"], "minimum": 0, "x-ontology": "WISE:BookingLeadTime"},
+        "weekday": {
+          "$ref": "../wise_hillink_ontology_map.json#/$defs/weekday",
+          "x-ontology": "WISE:Weekday"
+        },
+        "season": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "../wise_hillink_ontology_map.json#/$defs/seasonBinding"}
+          ],
+          "x-ontology": "WISE:Season"
+        },
+        "events": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "../wise_hillink_ontology_map.json#/$defs/eventBinding"},
+          "x-ontology": "WISE:Event"
+        },
+        "availability": {
+          "type": "object",
+          "required": ["status", "available"],
+          "properties": {
+            "status": {"$ref": "../wise_hillink_ontology_map.json#/$defs/availabilityStatus"},
+            "available": {"type": ["boolean", "null"]},
+            "remaining_inventory": {"type": ["integer", "null"], "minimum": 0},
+            "inventory_unit": {"$ref": "../wise_hillink_ontology_map.json#/$defs/availabilityUnit"}
+          },
+          "additionalProperties": false,
+          "x-ontology": "WISE:InventoryAvailability"
+        }
+      },
+      "additionalProperties": false
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["status", "window_start", "window_end", "booking_status", "cancel_status"],
+      "properties": {
+        "status": {"$ref": "../wise_hillink_ontology_map.json#/$defs/outcomeStatus"},
+        "window_start": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "(Z|[+-][0-9]{2}:[0-9]{2})$"
+        },
+        "window_end": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "(Z|[+-][0-9]{2}:[0-9]{2})$"
+        },
+        "booking_status": {"$ref": "../wise_hillink_ontology_map.json#/$defs/bookingOutcome", "x-ontology": "WISE:BookingOutcome"},
+        "booked_at": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "pattern": "(Z|[+-][0-9]{2}:[0-9]{2})$"
+        },
+        "booking_id": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "../wise_hillink_ontology_map.json#/$defs/pseudonymousId"}
+          ],
+          "x-ontology": "WISE:Booking"
+        },
+        "cancel_status": {"$ref": "../wise_hillink_ontology_map.json#/$defs/cancellationOutcome", "x-ontology": "WISE:CancellationOutcome"},
+        "room_revenue": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "../wise_hillink_ontology_map.json#/$defs/money"}
+          ],
+          "x-ontology": "WISE:RoomRevenue"
+        },
+        "total_revenue": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "../wise_hillink_ontology_map.json#/$defs/money"}
+          ],
+          "x-ontology": "WISE:TotalRevenue"
+        },
+        "contribution_margin": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "../wise_hillink_ontology_map.json#/$defs/money"}
+          ],
+          "x-ontology": "WISE:ContributionMargin"
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"booking_status": {"const": "booked"}}},
+          "then": {
+            "properties": {
+              "booked_at": {"type": "string"},
+              "booking_id": {"$ref": "../wise_hillink_ontology_map.json#/$defs/pseudonymousId"},
+              "cancel_status": {"enum": ["kept", "cancelled", "pending", "unknown"]}
+            },
+            "required": ["booked_at", "booking_id"]
+          }
+        },
+        {
+          "if": {"properties": {"booking_status": {"const": "not_booked"}}},
+          "then": {
+            "properties": {
+              "booked_at": {"type": "null"},
+              "booking_id": {"type": "null"},
+              "cancel_status": {"const": "not_applicable"}
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "data_quality": {
+      "type": "object",
+      "required": ["completeness", "missing_fields", "currency_unit"],
+      "properties": {
+        "completeness": {"$ref": "../wise_hillink_ontology_map.json#/$defs/completenessStatus"},
+        "missing_fields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^(/[^/]+)+$"},
+          "description": "이 레코드에서 누락된 JSON Pointer 경로"
+        },
+        "currency_unit": {"$ref": "../wise_hillink_ontology_map.json#/$defs/currencyCode"},
+        "quality_flags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "../wise_hillink_ontology_map.json#/$defs/qualityFlag"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "data_origin",
+        "source_system",
+        "source_record_id",
+        "extracted_at",
+        "identifier_protection"
+      ],
+      "properties": {
+        "data_origin": {
+          "$ref": "../wise_hillink_ontology_map.json#/$defs/dataOrigin",
+          "x-ontology": "WISE:DataOrigin"
+        },
+        "source_system": {"$ref": "../wise_hillink_ontology_map.json#/$defs/nonEmptyString"},
+        "source_table": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Za-z0-9_.:-]+$"
+        },
+        "source_record_id": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "../wise_hillink_ontology_map.json#/$defs/pseudonymousId"}
+          ],
+          "description": "원본 식별자는 저장하지 말고, 승인된 가명/해시 참조만 기록한다."
+        },
+        "extracted_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "(Z|[+-][0-9]{2}:[0-9]{2})$"
+        },
+        "transformation_version": {"type": ["string", "null"]},
+        "source_sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "consent_or_legal_basis_ref": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "description": "개인정보 처리 적법성 검토 참조 ID만 기록; 자유문장 개인정보 금지."
+        },
+        "identifier_protection": {
+          "type": "object",
+          "required": ["method", "identity_mapping_access"],
+          "properties": {
+            "method": {"$ref": "../wise_hillink_ontology_map.json#/$defs/identifierProtectionMethod"},
+            "identity_mapping_access": {"$ref": "../wise_hillink_ontology_map.json#/$defs/identityMappingAccess"},
+            "key_version": {
+              "type": ["string", "null"],
+              "pattern": "^[A-Za-z0-9_.:-]+$"
+            },
+            "transformation_ref": {
+              "type": ["string", "null"],
+              "pattern": "^[A-Za-z0-9_.:-]+$"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"data_origin": {"const": "synthetic_fixture"}}},
+          "then": {
+            "properties": {
+              "source_system": {"const": "WISE_SYNTHETIC"},
+              "source_record_id": {"type": "null"},
+              "identifier_protection": {
+                "properties": {"method": {"const": "synthetic"}}
+              }
+            }
+          }
+        },
+        {
+          "if": {"properties": {"data_origin": {"const": "randomized_experiment"}}},
+          "then": {
+            "properties": {
+              "source_system": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "experiment": {
+            "properties": {"design": {"const": "synthetic"}}
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "provenance": {
+            "properties": {"data_origin": {"const": "synthetic_fixture"}}
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "experiment": {
+            "properties": {"design": {"const": "randomized"}}
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "provenance": {
+            "properties": {"data_origin": {"const": "randomized_experiment"}}
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "experiment": {
+            "properties": {"design": {"const": "observational"}}
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "provenance": {
+            "properties": {"data_origin": {"enum": ["approved_pms_extract", "observational_extract"]}}
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}

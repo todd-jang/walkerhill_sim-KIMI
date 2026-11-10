@@ -123,6 +123,19 @@ PY
 
 이 자료는 801실로 집계되는 객실 참고표와 WISE 시뮬레이션의 580실 설정이 달라 자동 보정하지 않습니다. 게시물 표본과 서술형 근거도 예약/비예약 관측치가 아니므로 GMM 페르소나 학습이나 인과효과 추정에 사용하지 않습니다. 보고서에는 매핑된 요약, 불일치, 누락된 분석 입력이 표시됩니다.
 
+### 예약 노출·결과 데이터 계약 (온톨로지 기반)
+
+`wise_sim/schemas/reservation_exposure.schema.json`은 실험/관측 단위 하나와 하나의 제안을 연결하는 JSON Schema입니다. 예약을 한 고객뿐 아니라 적격 대조군, 미노출·비예약·취소 결과도 같은 단위로 보존합니다. 필드는 연결·시점, 실험 배정, 실제 노출/가격, 조건·재고, 관측 기간 내 결과, 데이터 품질, 출처 계층으로 나뉩니다.
+
+스키마는 [wise_hillink_ontology_map.json](./wise_sim/wise_hillink_ontology_map.json)의 `$defs`를 참조해 금액·통화·배정·노출·결과 용어와 건물/SKU/프로모션 매핑을 공유합니다. 각 개념은 `source_system`과 원본 `source_code`, `mapping_status`, `canonical_id`를 함께 기록합니다. 온톨로지에 아직 객실 유형·행사·시즌 코드가 없으므로 이 항목은 `unmapped`로 보존해야 하며, 이름이 비슷하다는 이유로 임의 연결하면 안 됩니다. 정식 코드를 승인해 온톨로지에 등록한 다음 해당 코드의 매핑 스키마를 확장합니다.
+
+식별자는 가명 ID만 허용하고 이메일 등 직접 식별 필드는 스키마에서 거부합니다. 문자열 형식 검사만으로 숫자형 전화번호 같은 직접 식별자나 실제 가명처리 여부를 판별할 수는 없으므로, 승인된 가명처리 절차와 제한된 키 접근을 별도로 확인해야 합니다. `data_origin=synthetic_fixture`는 코드 테스트 자료라는 뜻이며 실제 예약 결과나 인과효과로 보고할 수 없습니다. 스키마 적합성만으로 무작위 배정의 실제 수행, 데이터 품질, 인과 식별 가정이 입증되는 것도 아닙니다.
+
+```bash
+python3 -m pip install -r requirements.txt
+python3 -m unittest discover -s tests -p 'test_experiment_schema.py' -v
+```
+
 ### 선택 기능: 시설 간 이동시간
 
 `wise_sim/transit_matrix.py`의 `TransitContext`는 시설 간 N×N 이동시간 행렬을 제공합니다. 기본 행렬은 예시 가정값이며, 실제 행렬을 주입하지 않으면 결과에도 `assumption_based_transit=True`로 표시됩니다. L2에서 `transit_context`를 지정한 경우에만 시설 이동 지표를 결과에 추가합니다.
