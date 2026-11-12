@@ -8,7 +8,7 @@
 from __future__ import annotations
 
 import hashlib
-from typing import Iterator, Mapping
+from typing import Any, Callable, Iterator, Mapping, Sequence
 
 try:
     from personas import Persona
@@ -160,3 +160,46 @@ def run_policy_grid(agent: BaseAgent, personas: list[Persona], n_weekends: int,
             )
             results[p.label].append(sim_res)
     return results
+
+
+def forecast_from_history(
+    daily_records: Sequence[Mapping[str, Any]],
+    days: int = 365,
+    available_rooms: Sequence[int] | None = None,
+) -> dict[str, Any]:
+    """Run L2 on a historical-demand forecast without inventing policy lift."""
+    try:
+        from .demand_backtest import forecast_future
+    except ImportError:
+        from demand_backtest import forecast_future
+
+    return {
+        "simulation_layer": "L2",
+        "demand_source": "historical_daily_forecast",
+        "policy_effect_applied": False,
+        "analysis_unit": "hotel × calendar day",
+        "days": forecast_future(daily_records, days, available_rooms),
+    }
+
+
+def replay_forecast_from_history(
+    daily_records: Sequence[Mapping[str, Any]],
+    days: int = 365,
+    speed: float = TIME_COMPRESSION,
+    tick_seconds: float | None = None,
+    available_rooms: Sequence[int] | None = None,
+    on_tick: Callable[[Mapping[str, Any]], None] | None = None,
+) -> list[dict[str, Any]]:
+    """Replay L2 historical forecasts at virtual-time speed (24x by default)."""
+    try:
+        from .demand_backtest import forecast_future, run_virtual_clock
+    except ImportError:
+        from demand_backtest import forecast_future, run_virtual_clock
+
+    forecasts = forecast_future(daily_records, days, available_rooms)
+    return run_virtual_clock(
+        forecasts,
+        speed=speed,
+        tick_seconds=tick_seconds,
+        on_tick=on_tick,
+    )

@@ -13,6 +13,7 @@ import os
 import random
 import urllib.request
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Protocol
 
 try:
@@ -22,6 +23,23 @@ except ImportError:
 
 BATCH_SIZE = 20          # Gate B: 20명/호출
 BASE_ROOM_PRICE = 350_000  # KRW 기본 객실료(가정치)
+_SYSTEM_INSTRUCTIONS = (
+    "당신은 워커힐 호텔 수요 시뮬레이터입니다. "
+    "제공된 각 고객 페르소나의 성향(가격 민감도, 프로모션 친화도, 체류 일정 등)을 "
+    "면밀히 검토하여 주어진 호텔 가격 정책과 프로모션 조건 하에서 객실 예약 여부를 논리적으로 판단하세요. "
+    "판단이 불가능할 정도로 조건이 애매한 경우 abstain을 true로 표시하세요."
+)
+
+
+@lru_cache(maxsize=32)
+def _stable_system_prompt(system_context: str) -> str:
+    if not system_context:
+        return _SYSTEM_INSTRUCTIONS
+    return (
+        f"{_SYSTEM_INSTRUCTIONS}\n\n"
+        "아래는 반복 사용되는 출처 계약 및 해석 규칙입니다. 이 계약은 원자료 전체가 아닙니다:\n"
+        f"{system_context}"
+    )
 
 
 @dataclass(frozen=True)
@@ -95,11 +113,17 @@ class LLMAgent:
     name = "llm"
 
     def __init__(self, model: str | None = None,
-                 base_url: str | None = None, api_key: str | None = None):
+                 base_url: str | None = None, api_key: str | None = None,
+                 system_context: str = ""):
         self.model = model or os.environ.get("WISE_LLM_MODEL", "gpt-4o")
         self.base_url = base_url or os.environ.get(
             "WISE_LLM_BASE_URL", "https://api.openai.com/v1")
         self.api_key = api_key or os.environ.get("WISE_LLM_API_KEY", "")
+        self.system_prompt = _stable_system_prompt(system_context)
+        self.last_prompt_usage: dict[str, int | None] = {
+            "prompt_tokens": None,
+            "cached_prompt_tokens": None,
+        }
         if not self.api_key:
             raise RuntimeError(
                 f"LLM API 키가 설정되지 않았습니다. WISE_LLM_API_KEY 환경변수를 설정하거나 MockAgent를 사용하세요."
@@ -113,30 +137,36 @@ class LLMAgent:
             "temperature": 0.7,
             "seed": seed,  # Gate B: 재현성 시드
             "messages": [
-                {
-                    "role": "system",
-                    "content": (
-                        "당신은 워커힐 호텔 수요 시뮬레이터입니다. "
-                        "제공된 각 고객 페르소나의 성향(가격 민감도, 프로모션 친화도, 체류 일정 등)을 "
-                        "면밀히 검토하여 주어진 호텔 가격 정책과 프로모션 조건 하에서 객실 예약 여부를 논리적으로 판단하세요. "
-                        "판단이 불가능할 정도로 조건이 애매한 경우 abstain을 true로 표시하세요."
-                    )
-                },
+                {"role": "system", "content": self.system_prompt},
                 {"role": "user", "content": prompt}
             ],
             "response_format": {"type": "json_object"},
         }).encode("utf-8")
 
         req = urllib.request.Request(
-            f"{self.base_url}/chat/completions",
+            f"{self.base_url.rstrip('/')}/chat/completions",
             data=body,
             headers={
                 "Authorization": f"Bearer {self.api_key}",
                 "Content-Type": "application/json"
             }
         )
+        self.last_prompt_usage = {
+            "prompt_tokens": None,
+            "cached_prompt_tokens": None,
+        }
         with urllib.request.urlopen(req, timeout=120) as resp:
-            content = json.loads(resp.read().decode("utf-8"))["choices"][0]["message"]["content"]
+            response_data = json.loads(resp.read().decode("utf-8"))
+        usage = response_data.get("usage") or {}
+        token_details = usage.get("prompt_tokens_details") or {}
+        cached_tokens = token_details.get("cached_tokens")
+        if cached_tokens is None:
+            cached_tokens = response_data.get("prompt_eval_cached_count")
+        self.last_prompt_usage = {
+            "prompt_tokens": usage.get("prompt_tokens"),
+            "cached_prompt_tokens": cached_tokens,
+        }
+        content = response_data["choices"][0]["message"]["content"]
         return self._parse(content, personas, policy)
 
     def _build_prompt(self, personas: list[Persona], policy: Policy, weekend: bool) -> str:
@@ -167,6 +197,41 @@ class LLMAgent:
             reason = str(d.get("reason", ""))[:200]
             out.append(Decision(p.id, p.archetype, booked, is_abstain, spend, reason))
         return out
+
+
+class OllamaCloudAgent(LLMAgent):
+    """Run persona batches through Ollama's authenticated cloud-model route."""
+    name = "ollama-cloud"
+
+    def __init__(
+        self,
+        model: str | None = None,
+        base_url: str | None = None,
+        system_context: str = "",
+    ):
+        super().__init__(
+            model=model or os.environ.get(
+                "WISE_OLLAMA_MODEL", "glm-5.3-flash:cloud"
+            ),
+            base_url=base_url or os.environ.get(
+                "WISE_OLLAMA_BASE_URL", "http://127.0.0.1:11434/v1"
+            ),
+            api_key="ollama",
+            system_context=system_context,
+        )
+
+
+def get_ollama_cloud_agent(
+    model: str | None = None,
+    base_url: str | None = None,
+    system_context: str = "",
+) -> OllamaCloudAgent:
+    """Construct an Ollama Cloud agent; never silently substitutes MockAgent."""
+    return OllamaCloudAgent(
+        model=model,
+        base_url=base_url,
+        system_context=system_context,
+    )
 
 
 def get_agent(prefer_llm: bool = True, model: str | None = None) -> BaseAgent:
