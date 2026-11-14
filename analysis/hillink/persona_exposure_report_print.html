@@ -383,6 +383,21 @@ python3 -m unittest test_persona_exposure        # 39 tests OK</code></pre>
   <li>체류 표본의 28.6%(8,611)는 객실 행이 없는 체류다 — 시어터 의사체류(객실 없음 3,449) 외에도 5,162가 있다. 후속 검증(§15.4): 이 5,162는 <strong>전부 유료 · 체류당 1.02행 · 르파사쥬 1,637 · 명월관 1,613 · 피자힐 1,359</strong>(상위 3개 87.9%) — 외부 식당 방문객(워크인) 추정(검증 전 표기).</li>
 </ul>
 
+<h3>15.4 객실 동반 체류 표본화 재적합 (§15.3-3 실행 · 사용자 승인 2026-11-14)</h3>
+<p><code>--room-companion-only</code> 플래그를 추가하고 두 옵션을 조합한 재적합을 실행했다.</p>
+<table>
+  <tr><th style="width:44%">조합</th><th style="width:14%">셀</th><th style="width:18%">체류</th><th>비고</th></tr>
+  <tr><td>기준</td><td>121</td><td>30,126</td><td>§11 값과 동일</td></tr>
+  <tr><td>--exclude-external</td><td>120</td><td>30,126</td><td>§15.2</td></tr>
+  <tr><td>--room-companion-only</td><td>117</td><td>21,515</td><td></td></tr>
+  <tr><td><strong>--exclude-external --room-companion-only</strong></td><td>116</td><td><strong>21,515</strong></td><td>승인 구성</td></tr>
+</table>
+<p>제외 규칙 순서: ①시어터 행 제외(§12) ②객실 행 있는 체류만 유지 — 시어터 의사체류 중 객실 보유 669는 실객실이므로 표본에 남는다.</p>
+<p><strong>결과 (N̂=24,195 · V=356.9806 · â=+0.0506 · b̂=1.0032)</strong>: 순위가 본격적으로 재편됐다 — 가족·친족(30~49)이 1·2위(0.0785/0.0755)로 확고해지고 휴식·산책 동행은 4~5위로 하향, 50대+는 가족·친족이 휴식·산책을 압도, 20대는 가족·친족(여성)이 진입. 외부 방문객·의사체류가 걷힌 뒤 투숙객의 실제 소비 구조가 드러난 그림이다. N̂ 24,195는 객실 동반 체류 21,515 대비 +12.5% — 이전 +16%보다 비대칭이 줄었다.</p>
+<ul>
+  <li><strong>표준 설정 변경 제안</strong>: 이후 페르소나 기반 계산은 <code>--exclude-external --room-companion-only</code> 구성을 기본으로 쓰는 것을 제안한다. 기존 값(§11)은 전체 방문객 포함 '전체 시장' 관점으로 남긴다 — 두 관점이 답하는 질문이 다르다(투숙객 행동 vs 원장 전체 수요).</li>
+</ul>
+
 <div class="footer-note">
   HILLINK 실데이터 적합 보고 · 2026-11-14 · 재현 명령은 §5 · 소스: research/persona_exposure_report.md
 </div>
