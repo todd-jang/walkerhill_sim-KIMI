@@ -61,7 +61,18 @@ def main(argv: Optional[List[str]] = None) -> int:
     def factory() -> DayBatchClient:
         return DayBatchClient(mode=args.llm, model=args.model)
 
-    swarm_ids = [g.id for g in sorted(guests, key=lambda g: (g.arrival_day, -g.nights))[:args.swarm]] if args.swarm else None
+    if args.swarm:
+        # 전 기간 커버 — 도착일별로 균등 배분해 7일 내내 점이 보이도록
+        by_arrival: dict = {}
+        for g in sorted(guests, key=lambda g: g.arrival_day):
+            by_arrival.setdefault(g.arrival_day, []).append(g)
+        per = max(1, args.swarm // max(1, len(by_arrival)))
+        swarm_ids = []
+        for day in sorted(by_arrival):
+            swarm_ids.extend(g.id for g in by_arrival[day][:per])
+        swarm_ids = swarm_ids[:args.swarm]
+    else:
+        swarm_ids = None
 
     if args.mode == "compare":
         result = compare(world, guests, args.days, args.seed, scenario, factory)
