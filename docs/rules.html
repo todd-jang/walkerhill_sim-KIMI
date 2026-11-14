@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang=ko><head><meta charset=utf-8><style>
+body { font-family: 'Apple SD Gothic Neo', sans-serif; max-width: 800px;
+       margin: 40px auto; line-height: 1.7; color: #1a1a1a; font-size: 14px; }
+h1 { font-size: 24px; border-bottom: 3px solid #2c5f8a; padding-bottom: 10px; color: #2c5f8a; }
+h2 { font-size: 19px; border-bottom: 1.5px solid #ccc; padding-bottom: 6px; margin-top: 32px; color: #2c5f8a; }
+h3 { font-size: 16px; color: #444; margin-top: 22px; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; page-break-inside: avoid; }
+th, td { border: 1px solid #bbb; padding: 7px 10px; text-align: left; font-size: 13px; }
+th { background: #eef3f8; }
+code { background: #f2f2f2; padding: 2px 5px; border-radius: 3px; font-family: Menlo, monospace; font-size: 12.5px; }
+pre { background: #f6f6f6; border: 1px solid #ddd; border-radius: 6px; padding: 12px; page-break-inside: avoid; }
+pre code { background: none; }
+hr { border: none; border-top: 1px solid #ddd; margin: 26px 0; }
+</style></head><body><h1>Fact → F&amp;B 상품 연결 규칙 (L1~L3) 초안</h1>
+<table>
+<thead>
+<tr>
+<th>문서 정보</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>상태</td>
+<td>초안 (검토 대기)</td>
+</tr>
+<tr>
+<td>버전</td>
+<td>v3</td>
+</tr>
+<tr>
+<td>작성</td>
+<td>A팀 (페르소나 정밀화)</td>
+</tr>
+<tr>
+<td>검토 대상</td>
+<td>D팀장 — 승인 / C팀 — 협의</td>
+</tr>
+<tr>
+<td>기한</td>
+<td>C팀 합의 회의 전 초안 확정 필요</td>
+</tr>
+</tbody>
+</table>
+<p><strong>변경 이력</strong> — v1: 3계층 기본 구조 / v2: 근거 등급·문턱·신상품 태그 규칙·C 인터페이스 추가 / v3: L2 공유 태그를 상태기계 enum 5축으로 구체화 (meeting.md 연계)</p>
+<hr />
+<h2>1. 목적과 범위</h2>
+<h3>1.1 목적</h3>
+<p>작성자당 워커힐 후기가 0~4편(중앙값 1개)으로 부족하므로, <strong>다른 호텔·식당 경험을 워커힐 상품의 근거로 옮겨 쓰는 규칙</strong>을 계층화하고 각 근거의 강도와 채택 문턱을 명시한다.</p>
+<h3>1.2 설계 원칙</h3>
+<ol>
+<li><strong>근거를 숨기지 않는다</strong> — 모든 연결은 근거 계층(L1/L2/L3)과 출처(후기 ID·문장 위치)를 함께 남긴다. 근거가 없는 속성은 빈 값이 아니라 <code>evidence_gap</code>으로 기록한다.</li>
+<li><strong>약한 근거에는 문턱이 있다</strong> — L3는 개인 근거의 양과 일관성이 문턱을 넘을 때만 쓴다. 연구질문 3(설명력 평가) 판정의 선결 조건이다.</li>
+</ol>
+<h3>1.3 적용 범위</h3>
+<ul>
+<li>적용 대상: <strong>F&amp;B 상품 (SKU 178개)</strong></li>
+<li>규칙은 객실·부대시설에도 범용으로 설계하되 <strong>적용은 후속 과제</strong> (기획서 확정 사항 준수)</li>
+</ul>
+<hr />
+<h2>2. 근거 계층 정의</h2>
+<h3>2.1 요약 비교</h3>
+<table>
+<thead>
+<tr>
+<th>계층</th>
+<th>이름</th>
+<th>등급</th>
+<th>채택 문턱</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1</td>
+<td>직접 근거</td>
+<td>강</td>
+<td>없음 — 원문 방문 기록 있으면 채택</td>
+<td>"온달에서 갈비 코스를 먹었다" → 온달 코스 SKU</td>
+</tr>
+<tr>
+<td>L2</td>
+<td>유추 근거</td>
+<td>중</td>
+<td>①업장타입+①외 1축 이상 공유 (태그 5축, §2.3) + 출처 한정 서술 없음</td>
+<td>"더뷔페는 부담됐다" → 고가 코스 가격 기피 경향</td>
+</tr>
+<tr>
+<td>L3</td>
+<td>이전 근거</td>
+<td>약</td>
+<td><strong>2편 이상 일관된 서술</strong></td>
+<td>"○○호텔 스테이크 20만원, 가치 없었다" → 고가 코스 가격 수용 범위 상단 경향</td>
+</tr>
+</tbody>
+</table>
+<h3>2.2 L1 — 직접 근거 (강)</h3>
+<ul>
+<li><strong>정의:</strong> 워커힐 후기 원문에서 직접 뽑은 Fact를, 그 Fact가 실제로 쓰인 업장·상품에 직접 연결한다.</li>
+<li><strong>문턱:</strong> 없음. 원문에 실제 방문 기록이 있으면 곧바로 채택한다.</li>
+<li><strong>기록:</strong> Fact ID, 후기 ID, 문장 위치, 연결 대상 SKU.</li>
+</ul>
+<h3>2.3 L2 — 유추 근거 (중)</h3>
+<ul>
+<li><strong>정의:</strong> 워커힐 내 타 업장 경험을, 같은 속성을 공유하는 다른 상품의 근거로 옮겨 쓴다.</li>
+<li><strong>공유 태그의 어휘 — 상태기계 문서의 5개 속성 축</strong> (임의 태그 금지, enum 값만 사용):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>축</th>
+<th>이름</th>
+<th>원본 출처</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>①</td>
+<td>업장 타입 (7종: 뷔페/정찬코스/라운지/바/델리/테이크아웃/인룸다이닝)</td>
+<td>§3.2 업장 타입별 state</td>
+</tr>
+<tr>
+<td>②</td>
+<td>가격 밴드</td>
+<td>§4 업장별 가격표 (◎ 공식)</td>
+</tr>
+<tr>
+<td>③</td>
+<td>끼니 슬롯</td>
+<td>§3.2 라운지 state + §4 운영 시간</td>
+</tr>
+<tr>
+<td>④</td>
+<td>구역</td>
+<td>§8.2 노드 그룹 (동선은 △ 추정치이므로 보조 지표 한정)</td>
+</tr>
+<tr>
+<td>⑤</td>
+<td>이용 조건</td>
+<td>§4 백틱 헤더 + §3.1 guard state (개인 성향 아닌 상황 조건 — D 판단 대기)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>문턱:</strong></li>
+<li>(a) <strong>① 업장타입 공유 필수 + ①외 1축 이상 공유</strong> — ①은 행동 맥락(업장 경험) 유지 조건, ①외 축은 전이 방향(②가격 민감도 / ③시간대 / ④동선 / ⑤조건 수용)을 결정</li>
+<li>(b) 출처 후기에 "그 업장만의 문제" 한정 서술이 있으면 채택 불가 (예: "피자힐만 별로였다"는 타 업장에 옮겨 쓰지 않음)</li>
+<li><strong>강도 세분화 (선택):</strong> L2-α = ①+3축 이상 공유, L2-β = ①+1~2축 공유</li>
+<li><strong>기록:</strong> Fact ID, 출처 SKU → 대상 SKU, 공유 축 목록, L2-α/β 등급.</li>
+<li>상세 근거·예시·C 매핑표는 <strong>meeting.md</strong> 참조.</li>
+</ul>
+<h3>2.4 L3 — 이전 근거 (약)</h3>
+<ul>
+<li><strong>정의:</strong> 타 호텔·식당 경험을 워커힐 상품 속성의 근거로 옮겨 쓴다. 작성자당 워커힐 후기가 부족해 <strong>정밀화의 대부분이 이 규칙에 달려 있다.</strong></li>
+<li><strong>핵심 문턱:</strong></li>
+<li><strong>2편 이상의 일관된 서술</strong>이 있을 때만 채택. 1편의 우연한 경험은 채택 불가.</li>
+<li>서술 방향이 반대면(부담된다/만족이다) 둘 다 채택하지 않고 <code>evidence_gap</code>에 남긴다.</li>
+<li><strong>기록:</strong> Fact ID 각각, 서술 일관성 여부, 대상 속성.</li>
+</ul>
+<hr />
+<h2>3. 근거 등급의 활용 (D 팀장 확인 요청)</h2>
+<table>
+<thead>
+<tr>
+<th>용도</th>
+<th>L1</th>
+<th>L2</th>
+<th>L3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>연구질문 3 — 설명력 평가의 뒷받침 인정</td>
+<td>인정</td>
+<td>인정 (공유 태그 조건 통과 시)</td>
+<td>문턱 통과 시에만 인정</td>
+</tr>
+<tr>
+<td>신상품 태그 생성</td>
+<td>직접 채택</td>
+<td>유추 채택</td>
+<td>순수 속성 매칭만 (취향 유추 절제)</td>
+</tr>
+<tr>
+<td>재현성 파일럿 — 예측 평가 투입 Fact</td>
+<td>전부</td>
+<td>전부</td>
+<td>전부 투입, 단 L3 근거가 깨진 사례 별도 수집</td>
+</tr>
+</tbody>
+</table>
+<p><strong>A팀 요청:</strong> 미정 사항 6번(재현성 파일럿 지표·판정 기준) 확정 시 위 등급 구분을 입력으로 활용할 것을 요청한다. 근거 등급별 오류율이 다를 수 있어 합쳐 쓰면 등급별 문제가 섞여 보인다.</p>
+<hr />
+<h2>4. 상품 속성 스키마 (C와의 인터페이스 초안)</h2>
+<p>작성자 × 상품속성 단위로 아래 형식을 유지한다. C의 미선택 사유 기록과 신상품 입력이 이 4축을 공유하는 것이 합의 회의의 핵심 의제다.</p>
+<h3>4.1 형식 예시</h3>
+<pre><code class="language-json">{
+  &quot;author_id&quot;: &quot;N27&quot;,
+  &quot;sku_id&quot;: &quot;ONDAL_COURSE_DINNER&quot;,
+  &quot;attributes&quot;: {
+    &quot;price_band&quot;: { &quot;value&quot;: [50000, 150000], &quot;grade&quot;: &quot;L2&quot;, &quot;evidence&quot;: [&quot;blog12#3&quot;, &quot;blog07#11&quot;] },
+    &quot;time_pref&quot;: { &quot;value&quot;: &quot;석식 19:00-21:00&quot;, &quot;grade&quot;: &quot;L1&quot; },
+    &quot;venue_tags&quot;: { &quot;value&quot;: [&quot;quiet&quot;, &quot;formal&quot;], &quot;grade&quot;: &quot;L1&quot; }
+  },
+  &quot;evidence_gap&quot;: [&quot;디저트&quot;, &quot;공유 여부&quot;]
+}
+</code></pre>
+<h3>4.2 공용 4축 (C 기록 장치와 동일 단위)</h3>
+<table>
+<thead>
+<tr>
+<th>축</th>
+<th>단위</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>가격</td>
+<td>원 구간 (상·하한)</td>
+<td>부담/여유 서술만 있으면 반폭 구간 추정, grade 낮춤</td>
+</tr>
+<tr>
+<td>시간</td>
+<td>끼니 슬롯 (조식/중식/석식/티타임/야식)</td>
+<td>저녁/낮 등 서술어의 범주 매핑표 별도 관리</td>
+</tr>
+<tr>
+<td>동선</td>
+<td>구역 단위</td>
+<td>D 팀장 확정 구역 정의(장소 노드·구내 이동표) 재사용</td>
+</tr>
+<tr>
+<td>취향</td>
+<td>태그어</td>
+<td>dining_pref.csv·온톨로지 태그 어휘 재사용, 새 단어는 추가 규칙으로 관리</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>5. 신상품 태그 규칙 (C와 공동 의제)</h2>
+<p>신상품에는 개인 근거가 없다. 근거 계층을 구분해 붙이고 어느 태그가 어느 계층인지 C에 전달한다. 기획서 리스크 3번(신상품 결과가 설계자 가정의 되풀이)을 최소화하는 장치다.</p>
+<h3>5.1 태그 생성 규칙</h3>
+<table>
+<thead>
+<tr>
+<th>계층</th>
+<th>신상품 적용 방식</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1 (직접)</td>
+<td>적용 불가 — 개인 방문 기록 없음</td>
+<td>—</td>
+</tr>
+<tr>
+<td>L2 (유추)</td>
+<td>신상품이 기존 상품과 공유 태그 2개 이상 + 개인이 해당 기존 상품 근거 보유 시 유추 채택</td>
+<td>크리스마스 코스가 온달과 태그 2개 공유 + 개인이 온달 L1 근거 보유 → 온달 성향을 신상품에 옮겨 씀</td>
+</tr>
+<tr>
+<td>속성 매칭</td>
+<td>취향 유추를 접고 가격 수용 범위·선호 시간대·동선 구역 등 순수 속성 일치로만 후보군 축소</td>
+<td>가격 상한 15만원 이하 + 저녁 선호 조건을 만족하는 개인</td>
+</tr>
+</tbody>
+</table>
+<h3>5.2 민감도 시험 (결론 유지 여부)</h3>
+<p>태그 설정을 바꿔가며 결론이 뒤집히는지 보고한다. 변경 축은 A·C 공동 정의하며 초안은 아래 2축이다.</p>
+<ol>
+<li><strong>공유 축 개수 문턱:</strong> ①+1축 vs ①+2축 (태그 5축 체계에서)</li>
+<li><strong>취향 유추 개입 방식:</strong> L2 유추 허용 vs 속성 매칭만</li>
+</ol>
+<p>각 조건에서 주요 결과(신상품 구매자 분포, 기존 상품 잠식 대상)의 랭킹 유지 여부를 함께 보고한다.</p>
+<hr />
+<h2>6. C와의 인터페이스 합의 사항 (합의 회의 의제)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>의제</th>
+<th>A 제안</th>
+<th>C에서 확인할 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>4축 카테고리 단위 통일</td>
+<td>§4.2 표의 단위</td>
+<td>A의 축 단위를 기록 장치에 그대로 쓸 수 있는지</td>
+</tr>
+<tr>
+<td>2</td>
+<td>미선택 사유에 Fact 참조</td>
+<td>취향 사유에 Fact ID를 함께 남긴다</td>
+<td>미선택 기록 형식에 참조 필드 추가 가능 여부</td>
+</tr>
+<tr>
+<td>3</td>
+<td>빈 근거의 표기</td>
+<td>evidence_gap 필드</td>
+<td>기존 기록 파일(review_queue 등)의 형식·키 재사용</td>
+</tr>
+<tr>
+<td>4</td>
+<td>신상품 노출 방식</td>
+<td>평범한 카탈로그 위치 기본값 + 노출 강조 조건 양방향 실험</td>
+<td>카탈로그·메뉴 문맥에 넣는 구현 (미정 사항 4번)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>태그 변경 축 목록</td>
+<td>§5.2의 2축</td>
+<td>태그를 실험 인자로 바꿔볼 수 있는 장치</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>7. 이 문서가 다루지 않는 것 (경계)</h2>
+<ul>
+<li><strong>미선택 사유 범주의 정의</strong> — C·D 담당. A는 §6의 2·3번 의제로 요구사항 전달만 한다.</li>
+<li><strong>평가 지표·판정 기준 확정</strong> — D 담당. A는 근거 등급 입력을 제공한다.</li>
+<li><strong>객실·부대시설 상품에 대한 연결 적용</strong> — 규칙은 범용으로 설계, 적용은 후속 과제.</li>
+<li><strong>페르소나 추출 규칙(V4.2) 변경</strong> — 기존 규칙을 그대로 쓴다. 이 문서는 Fact 이후의 상품 연결 단계만 규정한다.</li>
+</ul></body></html>
