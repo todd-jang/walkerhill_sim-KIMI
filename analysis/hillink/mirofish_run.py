@@ -43,6 +43,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     p.add_argument("--price", default=None, help="신의 눈 — 업장 가격지수 'GRAND_POOL=1.3,THE_BUFFET=0.9'")
     p.add_argument("--close", default=None, help="신의 눈 — 폐쇄 업장 'GEUMRYONG,MYONGWOLGWAN'")
     p.add_argument("--capacity-scale", type=float, default=1.0)
+    p.add_argument("--swarm", type=int, default=0, help="swarm 뷰에 내보낼 페르소나 수 (0=끔)")
     p.add_argument("--out", default="-")
     args = p.parse_args(argv)
 
@@ -58,11 +59,14 @@ def main(argv: Optional[List[str]] = None) -> int:
     def factory() -> DayBatchClient:
         return DayBatchClient(mode=args.llm, model=args.model)
 
+    swarm_ids = [g.id for g in sorted(guests, key=lambda g: (g.arrival_day, -g.nights))[:args.swarm]] if args.swarm else None
+
     if args.mode == "compare":
         result = compare(world, guests, args.days, args.seed, scenario, factory)
         headline = result["delta"]
     else:
-        result = simulate(world, guests, args.days, args.seed, scenario, factory())
+        result = simulate(world, guests, args.days, args.seed, scenario, factory(),
+                          swarm_agents=swarm_ids)
         result["experiment"] = "run"
         headline = result["summary"]
 

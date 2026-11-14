@@ -114,6 +114,9 @@ init();
 """
 
 
+SWARM_JS = '\nconst SWARM = DATA.swarm;\n(function () {\n  if (!SWARM) return;\n  const cv = document.getElementById(\'swarm\'); if (!cv) return;\n  const ctx = cv.getContext(\'2d\', {willReadFrequently: true});\n  const W = cv.width, H = cv.height, CX = W / 2, CY = H / 2 + 6, RX = W * 0.38, RY = H * 0.34;\n  const venues = Object.keys(ARM.venue_slot_fill || {});\n  const pos = {};\n  venues.forEach((v, i) => {\n    const a = -Math.PI / 2 + i * 2 * Math.PI / venues.length;\n    pos[v] = [CX + RX * Math.cos(a), CY + RY * Math.sin(a)];\n  });\n  const COLORS = {FAMILY:\'#0b5394\', COUPLE:\'#7b3fa0\', BUSINESS:\'#1a7f37\', LUXURY:\'#b8860b\', LEISURE:\'#0f7c8a\'};\n  const dots = {};\n  SWARM.agents.forEach((a, i) => {\n    dots[a.i] = {arch: a.a, x: CX, y: CY, tx: CX, ty: CY, ok: 1, active: 0, r: 2.6 + (i % 3) * 0.5};\n  });\n  let fi = 0, playing = false, timer = null, swSpeed = 24, seed = 12345;\n  function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }\n\n  function setFrame(f) {\n    const fr = SWARM.frames[f]; if (!fr) return;\n    Object.values(dots).forEach(d => d.active = 0);\n    let rej = 0;\n    fr.a.forEach(([id, v, ok]) => {\n      const d = dots[id], hub = pos[v]; if (!d || !hub) return;\n      d.tx = hub[0] + (rnd() - 0.5) * 44; d.ty = hub[1] + (rnd() - 0.5) * 44;\n      d.active = 1; d.ok = ok; if (!ok) rej++;\n    });\n    const c = document.getElementById(\'sw-counter\');\n    if (c) c.textContent = `Day ${fr.d + 1} · ${fr.s}`;\n    const fEl = document.getElementById(\'sw-frame\'); if (fEl) fEl.textContent = `${f + 1} / ${SWARM.frames.length}`;\n    const rEl = document.getElementById(\'sw-rej\'); if (rEl) rEl.textContent = rej;\n  }\n\n  function draw() {\n    ctx.clearRect(0, 0, W, H);\n    venues.forEach(v => {\n      const xy = pos[v];\n      ctx.beginPath(); ctx.arc(xy[0], xy[1], 17, 0, Math.PI * 2);\n      ctx.fillStyle = \'#eef3f9\'; ctx.fill();\n      ctx.strokeStyle = \'#0b5394\'; ctx.lineWidth = 1.2; ctx.stroke();\n      ctx.fillStyle = \'#1a1a1a\'; ctx.font = \'600 10px "Apple SD Gothic Neo", sans-serif\';\n      ctx.textAlign = \'center\';\n      ctx.fillText(v.replace(\'THE_\', \'\').replace(/_/g, \' \'), xy[0], xy[1] - 24);\n    });\n    let moving = 0;\n    Object.values(dots).forEach(d => {\n      if (d.active) { d.x += (d.tx - d.x) * 0.14; d.y += (d.ty - d.y) * 0.14; moving++; }\n      const far = Math.abs(d.x - CX) > 1.5 || Math.abs(d.y - CY) > 1.5;\n      if (!d.active && !far) return;\n      ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);\n      ctx.fillStyle = d.active ? (d.ok ? (COLORS[d.arch] || \'#57606a\') : \'#b42318\') : \'#9aa4ae\';\n      ctx.globalAlpha = d.active ? 0.92 : 0.10; ctx.fill(); ctx.globalAlpha = 1;\n      if (d.active && !d.ok) {\n        ctx.beginPath(); ctx.arc(d.x, d.y, d.r + 2.4, 0, Math.PI * 2);\n        ctx.strokeStyle = \'#b42318\'; ctx.lineWidth = 1; ctx.stroke();\n      }\n    });\n    const mEl = document.getElementById(\'sw-moving\'); if (mEl) mEl.textContent = moving;\n    requestAnimationFrame(draw);\n  }\n\n  function tick() {\n    if (fi >= SWARM.frames.length) { if (timer) clearInterval(timer); timer = null; playing = false; return; }\n    setFrame(fi); fi++;\n  }\n  function play() {\n    if (playing) return; playing = true;\n    if (fi >= SWARM.frames.length) fi = 0;\n    timer = setInterval(tick, 900 / swSpeed);\n  }\n  function stop() { playing = false; if (timer) clearInterval(timer); timer = null; }\n  function setSwSpeed(v) {\n    swSpeed = v;\n    document.querySelectorAll(\'button[data-sw-speed]\').forEach(b =>\n      b.classList.toggle(\'on\', Number(b.dataset.swSpeed) === v));\n    if (playing) { stop(); play(); }\n  }\n  document.getElementById(\'sw-play\').addEventListener(\'click\', play);\n  document.getElementById(\'sw-reset\').addEventListener(\'click\', () => {\n    stop(); fi = 0;\n    Object.values(dots).forEach(d => { d.x = CX; d.y = CY; d.active = 0; });\n    setFrame(0);\n    const c = document.getElementById(\'sw-counter\'); if (c) c.textContent = \'준비 — 재생을 누르세요\';\n  });\n  document.querySelectorAll(\'button[data-sw-speed]\').forEach(b =>\n    b.addEventListener(\'click\', () => setSwSpeed(Number(b.dataset.swSpeed))));\n  setSwSpeed(24);\n  setFrame(0);\n  requestAnimationFrame(draw);\n})();\n'
+
+
 def heat_table(venue_slot: dict) -> str:
     slots = ["BREAKFAST", "MORNING", "LUNCH", "AFTERNOON", "DINNER"]
     head = "<tr><th>업장</th>" + "".join(f"<th>{s}</th>" for s in slots) + "</tr>"
@@ -163,6 +166,14 @@ def build(data: dict) -> str:
   <div class="kpi"><div class="v">{sp['speedup_realtime_x']:,.0f}×</div><div class="l">실측 배속</div></div>"""
         verdict = ""
 
+    health = arm.get("llm_health", {})
+    banner = ""
+    if meta.get("llm_mode") != "mock" and health.get("fallbacks"):
+        detail = ", ".join(health.get("errors", [])[:2])
+        banner = (f"<div class='verdict' style='border-left-color:var(--bad)'>"
+                  f"<b>경고 — 이 결과는 실LLM 결과가 아닙니다</b>: 일부 라운드가 mock 대체로 실행됨 "
+                  f"(fallback {health.get('fallbacks', 0)} · {detail}). 재실행 필요.</div>")
+
     tags = ""
     if meta.get("price_index"):
         tags += "<span class='tag'>신의 눈 — 가격지수 " + ", ".join(
@@ -184,6 +195,8 @@ def build(data: dict) -> str:
         "<tr><td colspan='6' style='color:var(--muted)'>수용 없음</td></tr>")
 
     js = JS.replace("__DATA__", json.dumps(data, ensure_ascii=False).replace("</", "<\\/"))
+    if data.get("swarm"):
+        js += "\n" + SWARM_JS
     return f"""<!DOCTYPE html>
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -197,6 +210,10 @@ def build(data: dict) -> str:
 </div>
 <div class="kpis">{kpis}</div>
 {verdict}
+{banner}
+
+{'<h2>Swarm — 페르소나 동시 이동 <span class="note">점 1개 = 페르소나 1명 · 원 = 업장 허브 · 빨강 = 좌석 거절</span></h2>' + chr(10) + '<div class="controls"><button id="sw-play">▶ 재생</button><button id="sw-reset">⟲ 처음</button><button data-sw-speed="1">1×</button><button data-sw-speed="8">8×</button><button data-sw-speed="24">24×</button><span class="counter" id="sw-counter">준비 — 재생을 누르세요</span></div>' + chr(10) + '<canvas id="swarm" width="1040" height="460" style="width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:6px"></canvas>' + chr(10) + '<div class="live" style="margin-top:8px">프레임 <b id="sw-frame">-</b> · 이동 중 <b id="sw-moving">0</b> · 이번 프레임 좌석 거절 <b id="sw-rej">0</b></div>' if data.get("swarm") else ""}
+
 <h2>리플레이 <span class="note">일 단위 재생 · 1×/8×/24× 배속</span></h2>
 <div class="controls">
   <button id="play">▶ 재생</button><button id="reset">⟲ 처음</button>

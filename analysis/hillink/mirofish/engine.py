@@ -38,11 +38,14 @@ def simulate(
     scenario: Scenario,
     client: DayBatchClient,
     include_events: bool = False,
+    swarm_agents: Optional[Sequence[str]] = None,
 ) -> Dict:
     t0 = time.perf_counter()
     guests = copy.deepcopy(list(guests))
     world.capacity_scale = scenario.capacity_scale
     events: List[dict] = []
+    swarm_set = set(swarm_agents or ())
+    swarm_frames: List[dict] = []
     prev_fill: Dict[str, float] = {v: 0.0 for v in world.venues}
     seat_total = {v: world.venues[v].seats for v in world.venues}
     daily: List[dict] = []
@@ -125,6 +128,15 @@ def simulate(
             "reject_dup": sum(1 for e in day_events if e.get("reason") == "SLOT_DUP"),
             "reject_cap": sum(1 for e in day_events if e.get("reason") == "CAPACITY"),
         })
+        if swarm_set:
+            by_slot: Dict[str, Dict[str, list]] = {s: {} for s, _, _ in SLOTS}
+            for e in day_events:
+                if e["agent"] in swarm_set:
+                    by_slot[e["slot"]][e["agent"]] = [
+                        e["venue"], 1 if e["outcome"] == "ACCEPT" else 0]
+            for s, _, _ in SLOTS:
+                swarm_frames.append({"d": day_index, "s": s,
+                                     "a": [[a, v, ok] for a, (v, ok) in by_slot[s].items()]})
         for g in present:
             g.on_day_end()
         prev_fill = fill_ratio_by_venue_slot(events, day_index, seat_total)
@@ -173,6 +185,9 @@ def simulate(
         "daily": daily,
         "venue_slot_fill": venue_slot_ratio,
         **({"events": events} if include_events else {}),
+        **({"swarm": {"agents": [{"i": i, "a": next(g.archetype for g in guests if g.id == i)}
+                                 for i in sorted(swarm_set)],
+                      "frames": swarm_frames}} if swarm_set else {}),
         "state_sample": [
             {"id": g.id, "archetype": g.archetype, "party": g.party,
              "satisfaction": round(g.satisfaction, 3), "frustration": g.frustration,

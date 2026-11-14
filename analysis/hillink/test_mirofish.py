@@ -154,5 +154,27 @@ class StatefulAgentTests(unittest.TestCase):
         self.assertIn("satisfaction_by_archetype", res["summary"])
 
 
+class SwarmTests(unittest.TestCase):
+    def test_swarm_frames_cover_horizon_and_subset(self):
+        world = World()
+        gs = generate_guests(300, 5, 3)
+        ids = [g.id for g in gs[:40]]
+        res = simulate(world, gs, 5, 3, Scenario(), DayBatchClient(mode="mock"), swarm_agents=ids)
+        sw = res["swarm"]
+        self.assertEqual(len(sw["frames"]), 5 * len(SLOTS))
+        allowed = set(ids)
+        for fr in sw["frames"]:
+            for a, v, ok in fr["a"]:
+                self.assertIn(a, allowed)
+                self.assertIn(v, world.venues)
+                self.assertIn(ok, (0, 1))
+
+    def test_swarm_absent_when_disabled(self):
+        world = World()
+        gs = generate_guests(50, 2, 3)
+        res = simulate(world, gs, 2, 3, Scenario(), DayBatchClient(mode="mock"))
+        self.assertNotIn("swarm", res)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
