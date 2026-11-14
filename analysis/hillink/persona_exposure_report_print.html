@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>HILLINK 실데이터 적합 보고</title>
+<style>
+  @page {
+    size: A4;
+    margin: 16mm 15mm 18mm 15mm;
+  }
+  :root {
+    --ink: #1a1a1a;
+    --muted: #57606a;
+    --line: #d0d7de;
+    --accent: #0b5394;
+    --accent-soft: #eef3f9;
+    --code-bg: #f6f8fa;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0;
+    font-family: "Apple SD Gothic Neo", "NanumGothic", -apple-system, sans-serif;
+    font-size: 9.6pt;
+    line-height: 1.62;
+    color: var(--ink);
+  }
+  .doc-header { border-bottom: 2.5pt solid var(--accent); padding-bottom: 10pt; margin-bottom: 14pt; }
+  .doc-header .kicker {
+    font-size: 8pt; letter-spacing: 2.2pt; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin: 0 0 4pt;
+  }
+  h1 { font-size: 19pt; margin: 0 0 5pt; line-height: 1.25; }
+  .doc-header .subtitle { font-size: 10.5pt; color: var(--muted); margin: 0 0 8pt; }
+  .meta-grid { display: table; width: 100%; border-collapse: collapse; font-size: 8.8pt; }
+  .meta-grid .row { display: table-row; }
+  .meta-grid .label { display: table-cell; width: 78pt; font-weight: 700; color: var(--muted); padding: 1.5pt 6pt 1.5pt 0; white-space: nowrap; vertical-align: top; }
+  .meta-grid .value { display: table-cell; padding: 1.5pt 0; vertical-align: top; }
+  h2 {
+    font-size: 12.5pt; margin: 16pt 0 6pt; padding: 3pt 0 3pt 8pt;
+    border-left: 4pt solid var(--accent); background: var(--accent-soft);
+    page-break-after: avoid;
+  }
+  h3 { font-size: 10.5pt; margin: 11pt 0 4pt; page-break-after: avoid; }
+  p { margin: 4pt 0; }
+  strong { color: #0a0a0a; }
+  table {
+    width: 100%; border-collapse: collapse; margin: 7pt 0 10pt;
+    font-size: 9pt; page-break-inside: auto;
+  }
+  th, td { border: 0.6pt solid var(--line); padding: 3.5pt 6pt; vertical-align: top; text-align: left; }
+  th { background: #f2f5f8; font-weight: 700; white-space: nowrap; }
+  tr { page-break-inside: avoid; }
+  td.hl, th.hl { background: var(--accent-soft); font-weight: 700; }
+  .small-note { font-size: 8pt; color: var(--muted); margin-top: -6pt; }
+  code {
+    font-family: "SF Mono", Menlo, monospace; font-size: 8.6pt;
+    background: var(--code-bg); border: 0.5pt solid var(--line);
+    border-radius: 2pt; padding: 0.5pt 3pt;
+  }
+  pre {
+    background: var(--code-bg); border: 0.6pt solid var(--line); border-radius: 3pt;
+    padding: 7pt 9pt; font-size: 8.6pt; line-height: 1.5;
+    page-break-inside: avoid; overflow: hidden;
+  }
+  pre code { border: none; background: none; padding: 0; }
+  ol, ul { margin: 4pt 0 8pt; padding-left: 16pt; }
+  li { margin: 2.5pt 0; }
+  .callout {
+    border: 0.8pt solid var(--accent); border-left-width: 4pt; border-radius: 2pt;
+    background: var(--accent-soft); padding: 6pt 9pt; margin: 8pt 0;
+    page-break-inside: avoid;
+  }
+  .callout p { margin: 0; }
+  .footer-note {
+    margin-top: 16pt; padding-top: 6pt; border-top: 0.8pt solid var(--line);
+    font-size: 7.8pt; color: var(--muted); page-break-inside: avoid;
+  }
+  .keep-with-next { page-break-after: avoid; }
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <p class="kicker">Hillink Research · Algorithm 1 Report</p>
+  <h1>HILLINK 실데이터 적합 보고</h1>
+  <p class="subtitle">Algorithm 1 + (2.2) 캘리브레이션 — 실원장 검증 결과</p>
+  <div class="meta-grid">
+    <div class="row"><span class="label">작성일</span><span class="value">2026-11-14</span></div>
+    <div class="row"><span class="label">대상 논문</span><span class="value">arXiv 2606.16183 — Algorithm 1, 식 (2.2)·(2.3)·(2.6), Lemma 2.1</span></div>
+    <div class="row"><span class="label">구현</span><span class="value"><code>research/persona_exposure.py</code> (Algorithm 1 본체) · 어댑터 <code>research/hillink_fit.py</code></span></div>
+    <div class="row"><span class="label">원장</span><span class="value"><code>timeline/persona_grid.csv</code> × <code>timeline/menu.csv</code> × <code>timeline/revenue_l5.csv</code></span></div>
+    <div class="row"><span class="label">실행</span><span class="value">실험 1·2 (§2), 총 68초, 시스템 python3 (numpy)</span></div>
+  </div>
+</div>
+
+<h2>1. 요약</h2>
+<p>실원장 3종을 결합해 논문의 추정 구조를 그대로 올렸다. 핵심 결과는 세 가지다.</p>
+<ol>
+  <li><strong>노출 인원 N̂=30,241이 실제 체류 수 30,126을 0.4% 오차로 식별</strong>했다. profile band의 하한(29,991)이 실제 체류 수에 밀착하고 위쪽으로만 평탄하다.</li>
+  <li><strong>구매력 가중치 α̂가 인구 비중과 다른 세그먼트 구조</strong>를 드러냈다. 30~49세가 독점하고, 여성/20~29세/휴식은 인구점유의 4.8배 구매력이다.</li>
+  <li><strong>캘리브레이션(식 2.2)은 현재 단계에서 사실상 no-op</strong>이다. q가 같은 결제 원장에서 나왔기 때문이며, q를 LLM 시뮬레이션 출력으로 교체하는 단계에서 실질 역할을 한다.</li>
+</ol>
+
+<h2>2. 실험 결과</h2>
+<h3>2.1 두 실험의 비교</h3>
+<table>
+  <tr><th style="width:26%">항목</th><th style="width:37%">실험 1 — 식 (2.6) truncated</th><th style="width:37%">실험 2 — 식 (2.2) calibrated</th></tr>
+  <tr><td><strong>N̂</strong></td><td class="hl">30,241</td><td>34,241</td></tr>
+  <tr><td>실제 체류 수 대비 오차</td><td class="hl">0.4% (30,126)</td><td>13.7%</td></tr>
+  <tr><td>V (목적함수)</td><td>392.155</td><td>392.379 ※</td></tr>
+  <tr><td>캘리브레이션</td><td>—</td><td>â=+0.017, b̂=1.0008</td></tr>
+  <tr><td>profile band (ΔV≤0.1%)</td><td>29,991–39,991</td><td>30,741–38,241</td></tr>
+  <tr><td>평균수요 재현</td><td>67,681 / 67,686</td><td>67,683 / 67,686</td></tr>
+  <tr><td>실행시간</td><td>7초</td><td>61초</td></tr>
+</table>
+<p class="small-note">※ V는 격자 간격이 다르므로(250 vs 500) 직접 비교 불가.</p>
+
+<div class="callout">
+  <p><strong>2.2 보고 관례</strong> — 합성 데이터 실험에서 확인된 약식별 성질 때문에 N̂은 반드시 profile band와 함께 보고한다. 권장 형태: <strong>"N̂=30,241, band 30.0k–40.0k"</strong> — 단독 수치 보고 금지.</p>
+</div>
+
+<h2>3. 데이터 결합 규칙</h2>
+<p>어댑터 <code>hillink_fit.py</code>가 세 원장을 Algorithm 1 입력으로 변환하는 규칙이다 (docstring과 동일).</p>
+<table>
+  <tr><th style="width:18%">항목</th><th style="width:38%">규칙</th><th style="width:44%">근거</th></tr>
+  <tr><td>셀 (u, p)</td><td>결제액&gt;0인 (업장, 상품) 121개, p = menu 단가</td><td>포함(결제액 0) 행은 실현 가격이 없어 가격·수요 정의가 모호</td></tr>
+  <tr><td>페르소나 K=54</td><td>(성별, 연령, 목적) 고유 조합</td><td>박수·아동동반·인원수 변형은 풀링. revenue 목적 접미사('· 2인 · 비투숙')는 접두어 매칭 — 비매칭 0건</td></tr>
+  <tr><td>관측 수요 d</td><td>결제 건수</td><td>수요 정의 = 결제 이벤트 발생 수</td></tr>
+  <tr><td>q<sub>k</sub>(u)</td><td>세그먼트 k의 상품 u 결제건수 ÷ k의 체류수</td><td>체류 1회당 구매확률. 범위 [0, 0.531], 클립 0건</td></tr>
+  <tr><td>N 격자</td><td>n_max=40,000, n_step 250(truncated)·500(calibrated)</td><td>N≈3만 수준이라 정수 순회 불가 — <code>fit()</code>·<code>fit_calibrated()</code>에 <code>n_step</code> 옵션 추가 (기본 1 = 기존 동작 불변)</td></tr>
+</table>
+<p>데이터셋 규모: <strong>셀 121 × 페르소나 54 × 체류 30,126 · 수요 1~7,241 (합계 67,686)</strong></p>
+
+<h2>4. 발견</h2>
+
+<h3>4.1 N 식별이 실데이터에서 실제로 작동</h3>
+<p>합성 데이터에서는 약식별(위쪽 평탄)이었지만, 실원장에서는 다르다. profile band의 <strong>하한이 실제 체류 수에 밀착</strong>(30,126 vs 29,991)하고 위쪽으로만 평탄하다 — 푸아송 근사 방향 그대로. 실데이터 규모에서는 우도의 절단항이 N의 하한을 사실상 고정한다.</p>
+
+<h3>4.2 캘리브레이션 현재 단계에서 no-op</h3>
+<p>â=+0.017, b̂=1.0008. 당연한 결과다 — q를 같은 revenue 원장에서 뽑았으므로 보정할 체계 오차가 없다. <strong>q를 LLM 시뮬레이션 출력으로 교체하는 단계에서 캘리브레이션이 진짜 역할을 한다.</strong> 이것이 다음 작업 항목이다 (§7).</p>
+
+<h3>4.3 α̂ vs 인구 비중의 괴리 — 타깃 세그먼트 랭킹</h3>
+<table>
+  <tr><th>페르소나</th><th style="width:14%">α̂</th><th style="width:20%">persona_grid 비중</th><th style="width:12%">비율</th></tr>
+  <tr><td>남성/30~49세/가족·친족</td><td>0.0743</td><td>0.0214</td><td>3.5×</td></tr>
+  <tr><td>여성/30~49세/휴식·산책 동행</td><td>0.0741</td><td>0.0208</td><td>3.6×</td></tr>
+  <tr><td>여성/30~49세/가족·친족</td><td>0.0716</td><td>0.0217</td><td>3.3×</td></tr>
+  <tr><td>남성/30~49세/휴식·산책 동행</td><td>0.0698</td><td>0.0206</td><td>3.4×</td></tr>
+  <tr><td>여성/30~49세/커플·기념일</td><td>0.0616</td><td>0.0215</td><td>2.9×</td></tr>
+  <tr><td class="hl">여성/20~29세/휴식·산책 동행</td><td class="hl">0.0377</td><td class="hl">0.0079</td><td class="hl">4.8×</td></tr>
+  <tr><td>남성/50세 이상/휴식·산책 동행</td><td>0.0369</td><td>0.0258</td><td>1.4×</td></tr>
+</table>
+<ul>
+  <li>구매력 가중치는 <strong>30~49세가 독점</strong>한다 (가족·휴식·커플 목적).</li>
+  <li><strong>여성/20~29세/휴식은 인구점유를 크게 웃도는 구매 세그먼트</strong>로 식별된다 — 논문 구조의 실무적 산출물.</li>
+  <li>캘리브레이션 버전에서는 상위 스프레드가 다소 눌린다 (0.065 vs 0.074).</li>
+</ul>
+
+<h2>5. 재현 명령</h2>
+<pre><code>cd hillink/research
+
+python3 hillink_fit.py --n-step 250              # 실험 1 (7초)
+python3 hillink_fit.py --n-step 500 --calibrated # 실험 2 (61초)
+python3 hillink_fit.py --n-step 250 --json       # JSON 출력
+python3 -m unittest test_persona_exposure        # 39 tests OK</code></pre>
+
+<h2>6. 검증 상태</h2>
+<ul>
+  <li><code>test_persona_exposure.py</code> <strong>39개 테스트 OK</strong> (n_step 포함 회귀 무손상)</li>
+  <li>py_compile OK · q 클립 0건 (클립 발생 시 별도 카운팅 구현)</li>
+  <li>대비 검증(별도 세션): 공식 저자 코드(ch3702/LLM-demand-simulator) head-to-head — truncated α/N̂/V 4자리 일치, calibrated α 4자리 일치</li>
+</ul>
+
+<h2>7. 미완 / 다음 단계</h2>
+<ul>
+  <li><strong>커밋 + 포크 백업 push 대기</strong> — 대상 5파일: <code>persona_exposure.py</code>, <code>test_persona_exposure.py</code>, <code>hillink_fit.py</code>, <code>persona_exposure_report.md</code>(+<code>.pdf</code>), <code>route_analysis.py</code>, <code>test_route_analysis.py</code>, fork 원격 hillink 브랜치</li>
+  <li><strong>다음: q행렬을 LLM 시뮬레이션 q로 교체하는 파이프라인</strong> — 캘리브레이션이 실제 일하는 지점</li>
+</ul>
+
+<h2>8. Lemma 2.1 서술 결정 (동일 세션)</h2>
+<table>
+  <tr><th style="width:34%">반론</th><th style="width:12%">결정</th><th style="width:54%">근거</th></tr>
+  <tr>
+    <td>분자 양수 서술: "E[R]&lt;N−1" → "N−1−E[R]&gt;0이고 Var(R)≥0이므로 합이 양수"</td>
+    <td class="hl">채택</td>
+    <td>각 항의 근거가 명시된다. 첫 항은 엄격히 양수(E[R]=N−1은 퇴화분포에서만, t&lt;1에서 불가능)</td>
+  </tr>
+  <tr>
+    <td>"strongly convex" → "strictly convex"</td>
+    <td class="hl">기각 (원문 유지)</td>
+    <td>q→0⁺에서 R은 퇴화가 아니라 균등분포 → E[R]→(N−1)/2, Var→(N²−1)/12 → L1''(0⁺)=(N−1)/2+(N²−1)/12&gt;0. 수치: inf L1''이 N=2~1000 전 구간 (0,1)에서 양수(0.75~1,329.79). (0,1/2]에서는 해석적으로도 닫힘: g(t) 연속·양수 on [1/2,1] → L1''=g/t² ≥ 4·inf g &gt; 0. modulus는 N에 의존하지만 균일 하한 존재</td>
+  </tr>
+</table>
+
+
+<h2>10. 시간대별 동선 재구성 + 비현실 고객 필터 + RevPAR</h2>
+<p>원장에는 '무엇을 샀나'만 있고 '몇 시에'가 없다. 그래서 <strong>구매 집합은 실측 그대로 두고 시간만 재구성</strong>했다. 운영 창은 <code>timeline/walkerhill_timeline_validator.py</code>의 <code>WALKERHILL_VENUE_WINDOWS</code>(20개 업장 · 요일·계절·last_order 포함)를 그대로 재사용했고, 좌석 수는 <code>prices.SEATS</code>, 객실 수는 <code>prices.ROOMS</code>를 쓴다.</p>
+
+<h3>10.1 방법</h3>
+<table>
+  <tr><th style="width:16%">단계</th><th>내용</th></tr>
+  <tr><td>입력</td><td>체류-일별 관측 구매 집합(객실 패키지 제외) · 페르소나 박수/아동동반(persona_grid 비중 가중 추출)</td></tr>
+  <tr><td>시간 배정</td><td>업장 성격별 선호 시간창 ∩ 운영 창에서 체류시간(뷔페 90분 · 좌식 75분 · 수영 120분 등)을 지키며 배치. 40회 재시도</td></tr>
+  <tr><td>필터</td><td><strong>CLOSED</strong>(폐장일) · <strong>SLOT_DUP</strong>(같은 끼니 두 곳) · <strong>CAPACITY</strong>(좌석 초과) · <strong>COMPOSITION</strong>(아동동반×바) · <strong>TIMING</strong>(이동 15분 위반)</td></tr>
+  <tr><td>집계</td><td>시간대 재실(시간 환산) · 동선 전이 · RevPASH(원/시간·좌석) · RevPAR(객실 매출 ÷ 875실 × 33일)</td></tr>
+</table>
+
+<h3>10.2 결과 (12,000 체류-일 표본 · 94.2% 수용)</h3>
+<ul>
+  <li><strong>필터</strong>: CLOSED 647 (그중 빛의 시어터 폐장일 422 · 수영장 62 · 산책로 48 · 사우나 17) · SLOT_DUP 46 · TIMING 1 — <strong>불가능 고객 5.8%가 사유와 함께 걸러졌다.</strong></li>
+  <li><strong>시간대 재실</strong>(시간 환산): 08시 1,951 · 12시 1,924 · 18시 <strong>2,940(최대)</strong> · 19시 2,033 · 16시 1,658. <strong>20시 이후 210 · 21시 3</strong> — 저녁 피크 이후 채널 공백.</li>
+  <li><strong>동선 전이 상위</strong>: 스카이야드@10 → 뷔페@18 (268) · 스카이야드@16 → 뷔페@18 (112) · 피자힐@12 → 수영장@15 (97) · 수영장@07 → 뷔페@18 (90).</li>
+  <li><strong>RevPASH</strong>(원/시간·좌석 · 전체 모집단 환산): 뷔페 37,418 · 피자힐 27,353 · 명월관 23,036 · 온달 19,282 · 금룡 16,287.</li>
+  <li><strong>RevPAR 288,621원 · 객실박 점유율 84.7%</strong> (객실 매출 83.3억 ÷ 875실 × 33일 = 28,875 박 · 객실박 24,458).</li>
+</ul>
+
+<h3>10.3 경영 정책 반영 (도출)</h3>
+<table>
+  <tr><th style="width:30%">관찰</th><th>정책 레버</th></tr>
+  <tr><td>저녁 18–19시 최대 피크<br/>(뷔페 시간당 재실 1,595/1,248)</td><td>좌석 회전 상한(288석 × 2부)에 근접 → 피크 가격 프리미엄(ε&gt;1이면 역효과) 대신 <strong>피자힐·파빌리온·스카이야드로 동선 유도</strong>. 전이 데이터가 실제 대체 경로를 보여준다</td></tr>
+  <tr><td>20시 이후 수요 붕괴<br/>(재실 210 · 럭스바 연 36건)</td><td>야식·바 채널은 사실상 비어 있다. 심야 확장보다 <strong>저녁 1부(18:00)·2부(19:30) 회전 설계</strong>가 매출 레버</td></tr>
+  <tr><td>폐장 업장이 불가능 고객의 65%<br/>(빛의 시어터 422/647)</td><td>폐장일 원장 자체가 의심스럽다 — <strong>원장 검증(validator 시각 검사) 대상 1순위</strong></td></tr>
+  <tr><td>RevPAR 288,621원</td><td>결제액(부가세 포함) · 구매 수량=객실박 가정. 회계 확정 순매출·객실박 정의를 확정하면 곧바로 관리지표</td></tr>
+</table>
+
+<h3>10.4 한계</h3>
+<ul>
+  <li>시간은 <strong>재구성값</strong>(관측 아님). 선호 시간창은 가정이며 분포는 그 가정에 민감하다.</li>
+  <li>RevPAR은 결제액 기준·구매 수량=객실박 가정. 객실 875실 = 그랜드 557 + 비스타 253 + 더글라스 65.</li>
+  <li>폐장 업장이 포함된 고객-일은 통째로 버린다(부분 구제 없음) — '불가능 고객' 정의를 엄격하게 잡은 결과.</li>
+  <li>좌석 상한은 정원만 보고 점유율·회전은 반영하지 않는다(간이).</li>
+</ul>
+
+<div class="footer-note">
+  HILLINK 실데이터 적합 보고 · 2026-11-14 · 재현 명령은 §5 · 소스: research/persona_exposure_report.md
+</div>
+
+</body>
+</html>
