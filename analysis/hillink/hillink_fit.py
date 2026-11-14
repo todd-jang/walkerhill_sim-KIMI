@@ -67,7 +67,7 @@ def _match_purpose(purpose: str, prefixes: list[str]) -> str:
     raise ValueError(f'PERSONA_PURPOSE_UNMATCHED:{purpose}')
 
 
-def build_dataset(timeline_dir: Path = TIMELINE_DIR) -> HillinkDataset:
+def build_dataset(timeline_dir: Path = TIMELINE_DIR, exclude_external: bool = False) -> HillinkDataset:
     menu_rows = _read_csv(timeline_dir / 'menu.csv')
     menu_price = {(row['업장'].strip(), row['상품'].strip()): float(row['단가']) for row in menu_rows}
 
@@ -84,6 +84,9 @@ def build_dataset(timeline_dir: Path = TIMELINE_DIR) -> HillinkDataset:
     persona_shares = [share_by_name[name] / share_total for name in persona_names]
 
     revenue_rows = _read_csv(timeline_dir / 'revenue_l5.csv')
+    if exclude_external:
+        # §12: 빛의 시어터는 전시장(외부 운영사) — 의사체류가 페르소나 표본을 오염하므로 귀속 제외
+        revenue_rows = [row for row in revenue_rows if row['업장'].strip() != '빛의 시어터']
     stays_unique: dict[str, set[str]] = {name: set() for name in persona_names}
     events_by_pair: dict[tuple[str, tuple[str, str]], int] = {}
     for row in revenue_rows:
@@ -177,11 +180,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--max-iter', type=int, default=800)
     parser.add_argument('--band-delta', type=float, default=1e-3)
     parser.add_argument('--top', type=int, default=DEFAULT_TOP)
+    parser.add_argument('--exclude-external', action='store_true', help='§12 — 시어터(외부 운영 업장) 구매를 페르소나 표본에서 제외')
     parser.add_argument('--json', action='store_true')
     args = parser.parse_args(argv)
 
     try:
-        dataset = build_dataset(args.timeline_dir)
+        dataset = build_dataset(args.timeline_dir, exclude_external=args.exclude_external)
     except ValueError as exc:
         print(f'입력 확인 필요: {exc}', file=sys.stderr)
         return 2
