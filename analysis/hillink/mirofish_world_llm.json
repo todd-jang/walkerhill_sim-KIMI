@@ -1,0 +1,456 @@
+{
+  "scenario": "treatment",
+  "meta": {
+    "horizon": 2,
+    "guests": 20,
+    "seed": 17,
+    "llm_mode": "ainize",
+    "model": "GLM-5.3-Flash@0xe8f46f8c27b0569d12c4f6f8d01496882aeaa4ba",
+    "price_index": {},
+    "closed_venues": [],
+    "capacity_scale": 1.0
+  },
+  "summary": {
+    "visits": 107,
+    "accept_rate": 1.0,
+    "rejections": {
+      "CLOSED": 0,
+      "SLOT_DUP": 0,
+      "CAPACITY": 0
+    },
+    "unique_guests_served": 20,
+    "spend_proxy": 257.0
+  },
+  "daily": [
+    {
+      "day": 0,
+      "date": "2026-10-01",
+      "present": 20,
+      "visits": 62,
+      "parties": 150,
+      "spend_proxy": 150.0,
+      "reject_closed": 0,
+      "reject_dup": 0,
+      "reject_cap": 0
+    },
+    {
+      "day": 1,
+      "date": "2026-10-02",
+      "present": 14,
+      "visits": 45,
+      "parties": 107,
+      "spend_proxy": 107.0,
+      "reject_closed": 0,
+      "reject_dup": 0,
+      "reject_cap": 0
+    }
+  ],
+  "venue_slot_fill": {
+    "THE_BUFFET": {
+      "BREAKFAST": 0.087,
+      "MORNING": 0.0,
+      "LUNCH": 0.007,
+      "AFTERNOON": 0.0,
+      "DINNER": 0.05
+    },
+    "PIZZA_HILL": {
+      "BREAKFAST": 0.0,
+      "MORNING": 0.016,
+      "LUNCH": 0.12,
+      "AFTERNOON": 0.0,
+      "DINNER": 0.026
+    },
+    "THE_PAVILION": {
+      "BREAKFAST": 0.142,
+      "MORNING": 0.037,
+      "LUNCH": 0.025,
+      "AFTERNOON": 0.08,
+      "DINNER": 0.0
+    },
+    "MYONGWOLGWAN": {
+      "BREAKFAST": 0.0,
+      "MORNING": 0.0,
+      "LUNCH": 0.015,
+      "AFTERNOON": 0.0,
+      "DINNER": 0.033
+    },
+    "MOEGI": {
+      "BREAKFAST": 0.0,
+      "MORNING": 0.0,
+      "LUNCH": 0.068,
+      "AFTERNOON": 0.0,
+      "DINNER": 0.01
+    },
+    "ONDAL": {
+      "BREAKFAST": 0.0,
+      "MORNING": 0.0,
+      "LUNCH": 0.052,
+      "AFTERNOON": 0.0,
+      "DINNER": 0.031
+    },
+    "GEUMRYONG": {
+      "BREAKFAST": 0.0,
+      "MORNING": 0.0,
+      "LUNCH": 0.019,
+      "AFTERNOON": 0.0,
+      "DINNER": 0.031
+    },
+    "LE_PASSAGE": {
+      "BREAKFAST": 0.1,
+      "MORNING": 0.0,
+      "LUNCH": 0.1,
+      "AFTERNOON": 0.067,
+      "DINNER": 0.133
+    },
+    "LUX_BAR": {
+      "BREAKFAST": 0.0,
+      "MORNING": 0.0,
+      "LUNCH": 0.0,
+      "AFTERNOON": 0.0,
+      "DINNER": 0.05
+    }
+  },
+  "events_sample": [
+    {
+      "day": 0,
+      "slot": "AFTERNOON",
+      "agent": "g0006",
+      "venue": "THE_PAVILION",
+      "party": 2,
+      "archetype": "COUPLE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "AFTERNOON",
+      "agent": "g0014",
+      "venue": "THE_PAVILION",
+      "party": 3,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "AFTERNOON",
+      "agent": "g0016",
+      "venue": "THE_PAVILION",
+      "party": 3,
+      "archetype": "FAMILY",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0000",
+      "venue": "THE_BUFFET",
+      "party": 3,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0001",
+      "venue": "THE_BUFFET",
+      "party": 2,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0002",
+      "venue": "THE_PAVILION",
+      "party": 2,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0003",
+      "venue": "THE_BUFFET",
+      "party": 3,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0004",
+      "venue": "THE_PAVILION",
+      "party": 3,
+      "archetype": "FAMILY",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0005",
+      "venue": "THE_BUFFET",
+      "party": 2,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0006",
+      "venue": "LE_PASSAGE",
+      "party": 2,
+      "archetype": "COUPLE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0007",
+      "venue": "THE_BUFFET",
+      "party": 4,
+      "archetype": "FAMILY",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0008",
+      "venue": "THE_PAVILION",
+      "party": 2,
+      "archetype": "COUPLE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0010",
+      "venue": "THE_BUFFET",
+      "party": 1,
+      "archetype": "BUSINESS",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0011",
+      "venue": "THE_BUFFET",
+      "party": 2,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0012",
+      "venue": "THE_BUFFET",
+      "party": 2,
+      "archetype": "BUSINESS",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0013",
+      "venue": "THE_PAVILION",
+      "party": 2,
+      "archetype": "LUXURY",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0014",
+      "venue": "THE_BUFFET",
+      "party": 3,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0015",
+      "venue": "LE_PASSAGE",
+      "party": 2,
+      "archetype": "LUXURY",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0016",
+      "venue": "THE_BUFFET",
+      "party": 3,
+      "archetype": "FAMILY",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0017",
+      "venue": "THE_PAVILION",
+      "party": 2,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0018",
+      "venue": "THE_BUFFET",
+      "party": 4,
+      "archetype": "FAMILY",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "BREAKFAST",
+      "agent": "g0019",
+      "venue": "THE_PAVILION",
+      "party": 2,
+      "archetype": "COUPLE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "DINNER",
+      "agent": "g0000",
+      "venue": "THE_BUFFET",
+      "party": 3,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "DINNER",
+      "agent": "g0001",
+      "venue": "PIZZA_HILL",
+      "party": 2,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "DINNER",
+      "agent": "g0002",
+      "venue": "ONDAL",
+      "party": 2,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "DINNER",
+      "agent": "g0003",
+      "venue": "THE_BUFFET",
+      "party": 3,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "DINNER",
+      "agent": "g0004",
+      "venue": "GEUMRYONG",
+      "party": 3,
+      "archetype": "FAMILY",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "DINNER",
+      "agent": "g0005",
+      "venue": "THE_BUFFET",
+      "party": 2,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "DINNER",
+      "agent": "g0006",
+      "venue": "LUX_BAR",
+      "party": 2,
+      "archetype": "COUPLE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "DINNER",
+      "agent": "g0007",
+      "venue": "THE_BUFFET",
+      "party": 4,
+      "archetype": "FAMILY",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "price_index": 1.0
+    }
+  ],
+  "rejections_sample": [],
+  "llm_health": {
+    "calls": 4,
+    "fallbacks": 0,
+    "errors": []
+  },
+  "speed": {
+    "wall_seconds": 474.894,
+    "speedup_realtime_x": 363.9
+  },
+  "experiment": "run"
+}

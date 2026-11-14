@@ -9,6 +9,7 @@ import json
 import os
 import sys
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from typing import Dict, List, Optional, Sequence, Tuple
 
@@ -17,17 +18,29 @@ from .intent import Intent, parse_intents
 from .world import SLOTS, World
 
 GLM_ENDPOINT = "https://open.bigmodel.cn/api/paas/v4/chat/completions"
+AINIZE_ENDPOINT = "https://ainize.ai/v1/chat/completions"
+AINIZE_DEFAULT_MODEL = "GLM-5.3-Flash@0xe8f46f8c27b0569d12c4f6f8d01496882aeaa4ba"
 OPENAI_ENDPOINT = "https://api.openai.com/v1/chat/completions"
 
 
 class DayBatchClient:
-    def __init__(self, mode: str = "mock", model: str = "glm-5.3-flash", api_key: Optional[str] = None):
+    def __init__(self, mode: str = "mock", model: Optional[str] = None, api_key: Optional[str] = None):
         self.mode = mode
+        if model is None:
+            model = os.environ.get("AINIZE_MODEL", AINIZE_DEFAULT_MODEL) if mode == "ainize" else "glm-5.3-flash"
         self.model = model
-        self.api_key = api_key or os.environ.get("GLM_API_KEY") or os.environ.get("ZHIPUAI_API_KEY")
+        self.api_key = (
+            api_key
+            or os.environ.get("AINIZE_API_KEY")
+            or os.environ.get("GLM_API_KEY")
+            or os.environ.get("ZHIPUAI_API_KEY")
+        )
         self.calls = 0
         self.fallbacks = 0
         self.errors: List[str] = []
+        self.chunk_size = int(os.environ.get("MIROFISH_LLM_CHUNK", "10"))
+        self.timeout = int(os.environ.get("MIROFISH_LLM_TIMEOUT", "300"))
+        self.workers = int(os.environ.get("MIROFISH_LLM_WORKERS", "2"))
 
     def decide(
         self,
@@ -48,9 +61,19 @@ class DayBatchClient:
         if self.mode == "mock":
             return self._mock(day_index, guests, open_by_slot, price_index, prev_fill, seed)
 
+        chunks = [list(guests[i:i + self.chunk_size]) for i in range(0, len(guests), self.chunk_size)] or [[]]
         try:
-            self.calls += 1
-            return self._llm(day_index, day, guests, world, open_by_slot, price_index, prev_fill, closed_extra)
+            with ThreadPoolExecutor(max_workers=min(self.workers, len(chunks))) as pool:
+                futures = [
+                    pool.submit(self._llm, day_index, day, chunk, world, open_by_slot,
+                                price_index, prev_fill, closed_extra)
+                    for chunk in chunks if chunk
+                ]
+                intents: List[Intent] = []
+                for f in futures:
+                    intents.extend(f.result())
+            self.calls += len(chunks)
+            return intents
         except Exception as exc:
             self.fallbacks += 1
             self.errors.append(f"day{day_index}: {exc}")
@@ -68,7 +91,7 @@ class DayBatchClient:
 
     def _llm(self, day_index, day, guests, world, open_by_slot, price_index, prev_fill, closed_extra=None) -> List[Intent]:
         if not self.api_key:
-            raise RuntimeError("API 키 없음 (GLM_API_KEY)")
+            raise RuntimeError(f"API 키 없음 ({self.mode.upper()}_API_KEY)")
         lines = [f"=== WALKERHILL DAY {day_index + 1} ({day.isoformat()}, {day.strftime('%a')}) ==="]
         lines.append("\n[VENUES — slot: open venues (capacity, price index, yesterday fill)]")
         for slot, _, _ in SLOTS:
@@ -87,14 +110,20 @@ class DayBatchClient:
         lines.append(
             "\n[INSTRUCTION] Each guest may visit at most one venue per slot, and may skip slots. "
             "Respect party size vs capacity, price sensitivity by archetype, and avoid venues they were rejected from yesterday.\n"
-            "Return ONLY a JSON array of objects: "
-            '[{"agent_id":"g0001","slot":"DINNER","venue":"MYONGWOLGWAN","reasoning":"<short>"}]'
+            "Return ONLY JSON: "
+            '{"decisions":[{"agent_id":"g0001","slot":"DINNER","venue":"MYONGWOLGWAN","reasoning":"<short>"}]}'
         )
         prompt = "\n".join(lines)
-        url = GLM_ENDPOINT if self.mode == "glm" else OPENAI_ENDPOINT
+        if self.mode == "glm":
+            url = GLM_ENDPOINT
+        elif self.mode == "ainize":
+            url = AINIZE_ENDPOINT
+        else:
+            url = OPENAI_ENDPOINT
         body = {
             "model": self.model,
             "temperature": 0.0,
+            "max_tokens": 4000,
             "messages": [
                 {"role": "system", "content": "You are a multi-agent hotel guest simulator. Output JSON only."},
                 {"role": "user", "content": prompt},
@@ -105,7 +134,7 @@ class DayBatchClient:
             url, data=json.dumps(body).encode("utf-8"), method="POST",
             headers={"Content-Type": "application/json", "Authorization": f"Bearer {self.api_key}"},
         )
-        with urllib.request.urlopen(req, timeout=120) as resp:
+        with urllib.request.urlopen(req, timeout=self.timeout) as resp:
             payload = json.loads(resp.read().decode("utf-8"))
         content = payload["choices"][0]["message"]["content"]
         intents, errors = parse_intents(

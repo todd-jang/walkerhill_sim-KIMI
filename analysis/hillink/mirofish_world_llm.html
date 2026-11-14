@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HILLINK MiroFish — 라운드 세계</title><style>
+:root { --ink:#1a1a1a; --muted:#57606a; --line:#d0d7de; --accent:#0b5394;
+  --accent-soft:#eef3f9; --code-bg:#f6f8fa; --good:#1a7f37; --bad:#b42318; }
+* { box-sizing: border-box; }
+body { margin:0 auto; padding:28px 34px 40px; max-width:1180px;
+  font-family:"Apple SD Gothic Neo","NanumGothic",-apple-system,sans-serif;
+  font-size:14px; line-height:1.62; color:var(--ink); background:#fbfcfd; }
+.header { border-bottom:3px solid var(--accent); padding-bottom:14px; margin-bottom:20px; }
+.kicker { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); font-weight:700; margin:0 0 6px; }
+h1 { font-size:27px; margin:0 0 7px; line-height:1.25; }
+.subtitle { font-size:14px; color:var(--muted); margin:0 0 10px; }
+.meta { font-size:12.5px; color:var(--muted); }
+.meta code { background:var(--code-bg); border:1px solid var(--line); border-radius:3px; padding:1px 6px; font-size:11.5px; }
+h2 { font-size:17px; margin:26px 0 10px; padding:4px 0 4px 12px; border-left:5px solid var(--accent); background:var(--accent-soft); }
+h2 .note { float:right; font-size:11px; color:var(--muted); font-weight:400; padding-top:5px; }
+.kpis { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin:18px 0 6px; }
+.kpi { background:#fff; border:1px solid var(--line); border-radius:6px; padding:10px 12px; }
+.kpi .v { font-size:20px; font-weight:800; color:var(--accent); letter-spacing:-.5px; }
+.kpi .l { font-size:11px; color:var(--muted); margin-top:2px; }
+.kpi .v.good { color:var(--good); } .kpi .v.bad { color:var(--bad); }
+.controls { display:flex; align-items:center; gap:10px; margin:14px 0 10px; flex-wrap:wrap; }
+.controls button { border:1px solid var(--line); background:#fff; border-radius:6px;
+  padding:6px 14px; font-size:13px; font-weight:700; color:var(--ink); cursor:pointer; }
+.controls button.on { background:var(--accent); color:#fff; border-color:var(--accent); }
+.counter { font-variant-numeric:tabular-nums; font-weight:800; font-size:15px; color:var(--accent); min-width:150px; }
+.chartbox { background:#fff; border:1px solid var(--line); border-radius:6px; padding:14px; }
+.bars { display:flex; align-items:flex-end; gap:3px; height:170px; }
+.bars .bar { flex:1; background:var(--accent); border-radius:2px 2px 0 0; opacity:0; transition:opacity .18s; }
+.bars .bar.shown { opacity:.9; }
+.live { margin-top:10px; font-size:13px; color:var(--muted); display:flex; gap:22px; flex-wrap:wrap; }
+.live b { color:var(--ink); font-variant-numeric:tabular-nums; }
+table { width:100%; border-collapse:collapse; margin:8px 0 14px; font-size:12.5px; background:#fff; }
+th,td { border:1px solid var(--line); padding:5px 9px; text-align:left; }
+th { background:#f2f5f8; font-weight:700; white-space:nowrap; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+table.heat td { text-align:center; font-variant-numeric:tabular-nums; font-size:11.5px; }
+table.heat th:first-child, table.heat td:first-child { text-align:left; white-space:nowrap; font-weight:600; }
+.verdict { background:#fff; border:1px solid var(--line); border-left:5px solid var(--good); border-radius:6px; padding:12px 16px; margin:12px 0; }
+.verdict b { color:var(--good); }
+.tag { display:inline-block; background:var(--accent-soft); border:1px solid var(--line);
+  border-radius:10px; padding:1px 9px; font-size:11px; color:var(--accent); font-weight:700; margin-left:6px; }
+footer { margin-top:30px; padding-top:12px; border-top:2px solid var(--accent); font-size:11.5px; color:var(--muted); }
+footer code { background:var(--code-bg); border:1px solid var(--line); border-radius:3px; padding:1px 6px; font-size:11px; }
+</style></head>
+<body>
+<div class="header">
+  <p class="kicker">HILLINK · MiroFish World</p>
+  <h1>미로피쉬 — 라운드 기반 멀티에이전트 세계</h1>
+  <p class="subtitle">손님 의도 JSON → 결정론 재판관(폐쇄·슬롯·좌석) → 상태 피드백 루프</p>
+  <p class="meta">LLM <code>ainize</code> · 2일 · 손님 20 · 시드 <code>17</code></p>
+</div>
+<div class="kpis">
+  <div class="kpi"><div class="v">107</div><div class="l">방문 (수용)</div></div>
+  <div class="kpi"><div class="v">100.0%</div><div class="l">수용률</div></div>
+  <div class="kpi"><div class="v">0</div><div class="l">거절 합계</div></div>
+  <div class="kpi"><div class="v">0</div><div class="l">좌석 초과 거절</div></div>
+  <div class="kpi"><div class="v">20</div><div class="l">서비스 손님 수</div></div>
+  <div class="kpi"><div class="v">364×</div><div class="l">실측 배속</div></div></div>
+
+<h2>리플레이 <span class="note">일 단위 재생 · 1×/8×/24× 배속</span></h2>
+<div class="controls">
+  <button id="play">▶ 재생</button><button id="reset">⟲ 처음</button>
+  <button data-speed="1">1×</button><button data-speed="8">8×</button><button data-speed="24">24×</button>
+  <span class="counter" id="counter"></span>
+</div>
+<div class="chartbox">
+  <div class="bars" id="bars"></div>
+  <div class="live">누적 방문 <b id="lv-visits">0</b> · 좌석 초과 <b id="lv-cap">0</b> ·
+    슬롯 중복 <b id="lv-dup">0</b> · 폐쇄 <b id="lv-closed">0</b></div>
+</div>
+<h2>업장 × 슬롯 평균 점유율 <span class="note">개장일 기준 평균 — 좌석 대비 수용 인원</span></h2>
+<table class='heat'><tr><th>업장</th><th>BREAKFAST</th><th>MORNING</th><th>LUNCH</th><th>AFTERNOON</th><th>DINNER</th></tr><tr><td>THE_BUFFET</td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.12);color:var(--ink);padding:2px 4px'>9%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.06);color:var(--ink);padding:2px 4px'>1%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.09);color:var(--ink);padding:2px 4px'>5%</span></td></tr><tr><td>PIZZA_HILL</td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.06);color:var(--ink);padding:2px 4px'>2%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.15);color:var(--ink);padding:2px 4px'>12%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.07);color:var(--ink);padding:2px 4px'>3%</span></td></tr><tr><td>THE_PAVILION</td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.16);color:var(--ink);padding:2px 4px'>14%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.08);color:var(--ink);padding:2px 4px'>4%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.07);color:var(--ink);padding:2px 4px'>2%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.11);color:var(--ink);padding:2px 4px'>8%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td></tr><tr><td>MYONGWOLGWAN</td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.06);color:var(--ink);padding:2px 4px'>2%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.08);color:var(--ink);padding:2px 4px'>3%</span></td></tr><tr><td>MOEGI</td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.10);color:var(--ink);padding:2px 4px'>7%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.06);color:var(--ink);padding:2px 4px'>1%</span></td></tr><tr><td>ONDAL</td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.09);color:var(--ink);padding:2px 4px'>5%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.07);color:var(--ink);padding:2px 4px'>3%</span></td></tr><tr><td>GEUMRYONG</td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.07);color:var(--ink);padding:2px 4px'>2%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.07);color:var(--ink);padding:2px 4px'>3%</span></td></tr><tr><td>LE_PASSAGE</td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.13);color:var(--ink);padding:2px 4px'>10%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.13);color:var(--ink);padding:2px 4px'>10%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.10);color:var(--ink);padding:2px 4px'>7%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.16);color:var(--ink);padding:2px 4px'>13%</span></td></tr><tr><td>LUX_BAR</td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.00);color:var(--ink);padding:2px 4px'>0%</span></td><td><span style='display:inline-block;min-width:52px;border-radius:3px;background:rgba(11,83,148,0.09);color:var(--ink);padding:2px 4px'>5%</span></td></tr></table>
+<h2>거절 원장 (샘플 10)</h2>
+<table><tr><th>일</th><th>슬롯</th><th>손님</th><th>업장</th><th>인원</th><th>사유</th></tr></table>
+<h2>수용 원장 (샘플 10)</h2>
+<table><tr><th>일</th><th>슬롯</th><th>손님</th><th>업장</th><th>인원</th><th>아키타입</th></tr><tr><td>Day 1</td><td>AFTERNOON</td><td>g0006</td><td>THE_PAVILION</td><td>2</td><td>COUPLE</td></tr><tr><td>Day 1</td><td>AFTERNOON</td><td>g0014</td><td>THE_PAVILION</td><td>3</td><td>LEISURE</td></tr><tr><td>Day 1</td><td>AFTERNOON</td><td>g0016</td><td>THE_PAVILION</td><td>3</td><td>FAMILY</td></tr><tr><td>Day 1</td><td>BREAKFAST</td><td>g0000</td><td>THE_BUFFET</td><td>3</td><td>LEISURE</td></tr><tr><td>Day 1</td><td>BREAKFAST</td><td>g0001</td><td>THE_BUFFET</td><td>2</td><td>LEISURE</td></tr><tr><td>Day 1</td><td>BREAKFAST</td><td>g0002</td><td>THE_PAVILION</td><td>2</td><td>LEISURE</td></tr><tr><td>Day 1</td><td>BREAKFAST</td><td>g0003</td><td>THE_BUFFET</td><td>3</td><td>LEISURE</td></tr><tr><td>Day 1</td><td>BREAKFAST</td><td>g0004</td><td>THE_PAVILION</td><td>3</td><td>FAMILY</td></tr><tr><td>Day 1</td><td>BREAKFAST</td><td>g0005</td><td>THE_BUFFET</td><td>2</td><td>LEISURE</td></tr><tr><td>Day 1</td><td>BREAKFAST</td><td>g0006</td><td>LE_PASSAGE</td><td>2</td><td>COUPLE</td></tr></table>
+<footer>
+  재현: <code>python3 hillink/mirofish_run.py --mode run --days 2 --guests 20 --seed 17</code>
+  → <code>python3 hillink/mirofish_replay.py &lt;json&gt;</code> ·
+  결정론 — mock은 같은 시드에 항상 같은 세계 · GLM 실호는 <code>--llm glm</code> (GLM_API_KEY 필요) ·
+  운영 창·좌석 근거: walkerhill_timeline_validator ◎ · prices.SEATS ◎
+</footer>
+<script>
+const DATA = {"scenario": "treatment", "meta": {"horizon": 2, "guests": 20, "seed": 17, "llm_mode": "ainize", "model": "GLM-5.3-Flash@0xe8f46f8c27b0569d12c4f6f8d01496882aeaa4ba", "price_index": {}, "closed_venues": [], "capacity_scale": 1.0}, "summary": {"visits": 107, "accept_rate": 1.0, "rejections": {"CLOSED": 0, "SLOT_DUP": 0, "CAPACITY": 0}, "unique_guests_served": 20, "spend_proxy": 257.0}, "daily": [{"day": 0, "date": "2026-10-01", "present": 20, "visits": 62, "parties": 150, "spend_proxy": 150.0, "reject_closed": 0, "reject_dup": 0, "reject_cap": 0}, {"day": 1, "date": "2026-10-02", "present": 14, "visits": 45, "parties": 107, "spend_proxy": 107.0, "reject_closed": 0, "reject_dup": 0, "reject_cap": 0}], "venue_slot_fill": {"THE_BUFFET": {"BREAKFAST": 0.087, "MORNING": 0.0, "LUNCH": 0.007, "AFTERNOON": 0.0, "DINNER": 0.05}, "PIZZA_HILL": {"BREAKFAST": 0.0, "MORNING": 0.016, "LUNCH": 0.12, "AFTERNOON": 0.0, "DINNER": 0.026}, "THE_PAVILION": {"BREAKFAST": 0.142, "MORNING": 0.037, "LUNCH": 0.025, "AFTERNOON": 0.08, "DINNER": 0.0}, "MYONGWOLGWAN": {"BREAKFAST": 0.0, "MORNING": 0.0, "LUNCH": 0.015, "AFTERNOON": 0.0, "DINNER": 0.033}, "MOEGI": {"BREAKFAST": 0.0, "MORNING": 0.0, "LUNCH": 0.068, "AFTERNOON": 0.0, "DINNER": 0.01}, "ONDAL": {"BREAKFAST": 0.0, "MORNING": 0.0, "LUNCH": 0.052, "AFTERNOON": 0.0, "DINNER": 0.031}, "GEUMRYONG": {"BREAKFAST": 0.0, "MORNING": 0.0, "LUNCH": 0.019, "AFTERNOON": 0.0, "DINNER": 0.031}, "LE_PASSAGE": {"BREAKFAST": 0.1, "MORNING": 0.0, "LUNCH": 0.1, "AFTERNOON": 0.067, "DINNER": 0.133}, "LUX_BAR": {"BREAKFAST": 0.0, "MORNING": 0.0, "LUNCH": 0.0, "AFTERNOON": 0.0, "DINNER": 0.05}}, "events_sample": [{"day": 0, "slot": "AFTERNOON", "agent": "g0006", "venue": "THE_PAVILION", "party": 2, "archetype": "COUPLE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "AFTERNOON", "agent": "g0014", "venue": "THE_PAVILION", "party": 3, "archetype": "LEISURE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "AFTERNOON", "agent": "g0016", "venue": "THE_PAVILION", "party": 3, "archetype": "FAMILY", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0000", "venue": "THE_BUFFET", "party": 3, "archetype": "LEISURE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0001", "venue": "THE_BUFFET", "party": 2, "archetype": "LEISURE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0002", "venue": "THE_PAVILION", "party": 2, "archetype": "LEISURE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0003", "venue": "THE_BUFFET", "party": 3, "archetype": "LEISURE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0004", "venue": "THE_PAVILION", "party": 3, "archetype": "FAMILY", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0005", "venue": "THE_BUFFET", "party": 2, "archetype": "LEISURE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0006", "venue": "LE_PASSAGE", "party": 2, "archetype": "COUPLE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0007", "venue": "THE_BUFFET", "party": 4, "archetype": "FAMILY", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0008", "venue": "THE_PAVILION", "party": 2, "archetype": "COUPLE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0010", "venue": "THE_BUFFET", "party": 1, "archetype": "BUSINESS", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0011", "venue": "THE_BUFFET", "party": 2, "archetype": "LEISURE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0012", "venue": "THE_BUFFET", "party": 2, "archetype": "BUSINESS", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0013", "venue": "THE_PAVILION", "party": 2, "archetype": "LUXURY", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0014", "venue": "THE_BUFFET", "party": 3, "archetype": "LEISURE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0015", "venue": "LE_PASSAGE", "party": 2, "archetype": "LUXURY", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0016", "venue": "THE_BUFFET", "party": 3, "archetype": "FAMILY", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0017", "venue": "THE_PAVILION", "party": 2, "archetype": "LEISURE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0018", "venue": "THE_BUFFET", "party": 4, "archetype": "FAMILY", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "BREAKFAST", "agent": "g0019", "venue": "THE_PAVILION", "party": 2, "archetype": "COUPLE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "DINNER", "agent": "g0000", "venue": "THE_BUFFET", "party": 3, "archetype": "LEISURE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "DINNER", "agent": "g0001", "venue": "PIZZA_HILL", "party": 2, "archetype": "LEISURE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "DINNER", "agent": "g0002", "venue": "ONDAL", "party": 2, "archetype": "LEISURE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "DINNER", "agent": "g0003", "venue": "THE_BUFFET", "party": 3, "archetype": "LEISURE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "DINNER", "agent": "g0004", "venue": "GEUMRYONG", "party": 3, "archetype": "FAMILY", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "DINNER", "agent": "g0005", "venue": "THE_BUFFET", "party": 2, "archetype": "LEISURE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "DINNER", "agent": "g0006", "venue": "LUX_BAR", "party": 2, "archetype": "COUPLE", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}, {"day": 0, "slot": "DINNER", "agent": "g0007", "venue": "THE_BUFFET", "party": 4, "archetype": "FAMILY", "outcome": "ACCEPT", "reason": "-", "price_index": 1.0}], "rejections_sample": [], "llm_health": {"calls": 4, "fallbacks": 0, "errors": []}, "speed": {"wall_seconds": 474.894, "speedup_realtime_x": 363.9}, "experiment": "run"};
+const ARM = DATA.experiment === 'compare' ? DATA.treatment : DATA;
+const daily = ARM.daily;
+const $ = (s) => document.querySelector(s);
+const won = (n) => Number(n).toLocaleString('ko-KR', {maximumFractionDigits: 0});
+const SPEEDS = [1, 8, 24];
+let speed = 24, timer = null, cursor = 0, playing = false;
+const BASE_MS = 1200;
+
+function buildBars() {
+  const vmax = Math.max(...daily.map(d => d.visits), 1);
+  const box = $('#bars');
+  daily.forEach((d) => {
+    const b = document.createElement('div');
+    b.className = 'bar';
+    b.style.height = Math.max(2, d.visits / vmax * 160) + 'px';
+    b.title = `Day ${d.day + 1} — 방문 ${d.visits}`;
+    box.appendChild(b);
+  });
+}
+function showDay(i) {
+  document.querySelectorAll('#bars .bar').forEach((b, k) => b.classList.toggle('shown', k <= i));
+  let visits = 0, cap = 0, dup = 0, closed = 0;
+  for (let k = 0; k <= i; k++) {
+    const d = daily[k];
+    visits += d.visits; cap += d.reject_cap; dup += d.reject_dup; closed += d.reject_closed;
+  }
+  $('#counter').textContent = `Day ${daily[i].day + 1} / ${daily.length}`;
+  $('#lv-visits').textContent = won(visits);
+  $('#lv-cap').textContent = won(cap);
+  $('#lv-dup').textContent = won(dup);
+  $('#lv-closed').textContent = won(closed);
+}
+function tick() {
+  if (cursor >= daily.length) { stop(); return; }
+  showDay(cursor); cursor++;
+}
+function play() { if (playing) return; playing = true; timer = setInterval(tick, BASE_MS / speed); }
+function stop() { playing = false; clearInterval(timer); }
+function setSpeed(s) {
+  speed = s;
+  document.querySelectorAll('button[data-speed]').forEach(b => b.classList.toggle('on', Number(b.dataset.speed) === s));
+  if (playing) { stop(); play(); }
+}
+function init() {
+  buildBars();
+  $('#play').addEventListener('click', () => { if (cursor >= daily.length) { cursor = 0; showDay(0); } play(); });
+  $('#reset').addEventListener('click', () => { stop(); cursor = 0; showDay(0); });
+  document.querySelectorAll('button[data-speed]').forEach(b =>
+    b.addEventListener('click', () => setSpeed(Number(b.dataset.speed))));
+  setSpeed(24);
+  showDay(0);
+}
+init();
+</script>
+</body></html>

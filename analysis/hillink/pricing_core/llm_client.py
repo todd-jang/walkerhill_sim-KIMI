@@ -98,23 +98,34 @@ class LLMDecisionClient:
     mode:
       - "mock": 오프라인 결정론 에뮬레이터 (같은 입력 → 같은 결정, API 키 불필요)
       - "glm":  GLM(智谱 BigModel) OpenAI 호환 엔드포인트 — model 기본값 glm-5.3-flash
+      - "ainize": Ainize GLM 5.3 Flash 엔드포인트 — AINIZE_API_KEY, AINIZE_MODEL(선택)
       - "openai" / "anthropic": 실시간 API
     """
 
     GLM_ENDPOINT = "https://open.bigmodel.cn/api/paas/v4/chat/completions"
+    AINIZE_ENDPOINT = "https://ainize.ai/v1/chat/completions"
+    AINIZE_DEFAULT_MODEL = "GLM-5.3-Flash@0xe8f46f8c27b0569d12c4f6f8d01496882aeaa4ba"
 
     def __init__(
         self,
-        mode: str = "mock",        # "mock", "glm", "openai", "anthropic"
-        model_name: str = "glm-5.3-flash",
+        mode: str = "mock",        # "mock", "glm", "ainize", "openai", "anthropic"
+        model_name: Optional[str] = None,
         temperature: float = 0.0,  # 결정론 재현 실험 기본값 (paired A/B 재현성)
         api_key: Optional[str] = None,
     ):
         self.mode = mode
+        if model_name is None:
+            if mode == "ainize":
+                model_name = os.environ.get("AINIZE_MODEL", self.AINIZE_DEFAULT_MODEL)
+            elif mode == "glm":
+                model_name = "glm-5.3-flash"
+            else:
+                model_name = "gpt-4o"
         self.model_name = model_name
         self.temperature = temperature
         self.api_key = (
             api_key
+            or os.environ.get("AINIZE_API_KEY")
             or os.environ.get("GLM_API_KEY")
             or os.environ.get("ZHIPUAI_API_KEY")
             or os.environ.get("OPENAI_API_KEY")
@@ -190,7 +201,7 @@ class LLMDecisionClient:
             return self._evaluate_batch_mock(
                 day, categories, hotel_prices, availability, competitor_prices, reference_prices, active_agents
             )
-        elif self.mode in ("glm", "openai", "anthropic"):
+        elif self.mode in ("glm", "ainize", "openai", "anthropic"):
             return self._evaluate_batch_openai(
                 day, categories, hotel_prices, availability, competitor_prices, reference_prices, active_agents
             )
@@ -329,6 +340,8 @@ class LLMDecisionClient:
         """LLM API 실시간 배치 호출 (glm·openai·anthropic — OpenAI 호환 스키마)."""
         if self.mode == "glm":
             url = self.GLM_ENDPOINT
+        elif self.mode == "ainize":
+            url = self.AINIZE_ENDPOINT
         else:
             url = "https://api.openai.com/v1/chat/completions"
         try:

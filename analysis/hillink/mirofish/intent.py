@@ -40,7 +40,7 @@ def parse_intents(
     else:
         data = raw
     if isinstance(data, dict):
-        data = data.get("intents", [])
+        data = data.get("intents") or data.get("decisions") or []
     if not isinstance(data, list):
         return [], ["SCHEMA_NOT_LIST"]
 

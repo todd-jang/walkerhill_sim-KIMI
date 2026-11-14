@@ -92,7 +92,7 @@ def run_evaluate(args: argparse.Namespace) -> Dict[str, Any]:
     llm_calls = args.horizon if args.llm != "mock" else 0
     return {
         "experiment": "evaluate", "preset": args.preset, "policy": policy.name,
-        "llm_mode": args.llm, "model": args.model if args.llm != "mock" else "mock-engine",
+        "llm_mode": args.llm, "model": llm.model_name if args.llm != "mock" else "mock-engine",
         "seed": args.seed, "price_scale": args.scale,
         "metrics": {
             "total_revenue": metrics.total_revenue,
@@ -133,7 +133,7 @@ def run_compare(args: argparse.Namespace) -> Dict[str, Any]:
     return {
         "experiment": "compare", "preset": args.preset,
         "policy_a": result.policy_a_name, "policy_b": result.policy_b_name,
-        "llm_mode": args.llm, "model": args.model if args.llm != "mock" else "mock-engine",
+        "llm_mode": args.llm, "model": llm.model_name if args.llm != "mock" else "mock-engine",
         "base_seed": args.seed, "price_scale": args.scale, "trials": args.trials,
         "comparison": {
             "mean_revenue_a": result.mean_revenue_a,
@@ -168,8 +168,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     p.add_argument("--beta", type=float, default=0.4)
     p.add_argument("--f-min", type=float, default=0.65)
     p.add_argument("--markup", type=float, default=1.0)
-    p.add_argument("--llm", choices=["mock", "glm", "openai"], default="mock")
-    p.add_argument("--model", default="glm-5.3-flash")
+    p.add_argument("--llm", choices=["mock", "glm", "ainize", "openai"], default="mock")
+    p.add_argument("--model", default=None)
     p.add_argument("--out", default="-", help="JSON 출력 경로 (기본 stdout)")
     args = p.parse_args(argv)
 
