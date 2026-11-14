@@ -103,13 +103,19 @@ class DayBatchClient:
         closed = sorted((closed_extra or {}).get("venues", set()))
         if closed:
             lines.append(f"\n[CLOSED TODAY — do not choose] {', '.join(closed)}")
-        lines.append("\n[GUESTS IN STAY]")
+        lines.append("\n[GUESTS IN STAY — with personal state and memory]")
         for g in guests:
-            rej = ",".join(k for k, d in g.rejected.items() if d == day_index - 1) or "-"
-            lines.append(f"{g.id}: {g.archetype} party={g.party} loyalty={g.loyalty} rejected_yesterday={rej}")
+            aff = ",".join(f"{k}{v:+.2f}" for k, v in sorted(g.affinity.items(), key=lambda kv: -abs(kv[1]))[:3]) or "-"
+            mem = "; ".join(g.memory_digest()) or "no visits yet"
+            lines.append(
+                f"{g.id}: {g.archetype} party={g.party} loyalty={g.loyalty} "
+                f"satisfaction={g.satisfaction:.2f} budget_left={g.budget_left:.0f} "
+                f"visited_before={aff} memory=[{mem}]"
+            )
         lines.append(
             "\n[INSTRUCTION] Each guest may visit at most one venue per slot, and may skip slots. "
-            "Respect party size vs capacity, price sensitivity by archetype, and avoid venues they were rejected from yesterday.\n"
+            "Use each guest's satisfaction, remaining budget, learned affinity and memory. "
+            "Avoid venues where they were just rejected; respect party size vs capacity and archetype price sensitivity.\n"
             "Return ONLY JSON: "
             '{"decisions":[{"agent_id":"g0001","slot":"DINNER","venue":"MYONGWOLGWAN","reasoning":"<short>"}]}'
         )

@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from mirofish.agents import generate_guests
+from mirofish.agents import Guest, decide_venue, generate_guests
 from mirofish.engine import Scenario, compare, simulate
 from mirofish.intent import parse_intents
 from mirofish.llm import DayBatchClient
@@ -101,6 +101,57 @@ class IntentValidationTests(unittest.TestCase):
         )
         self.assertEqual(len(intents), 1)
         self.assertEqual(len(errors), 3)
+
+
+class StatefulAgentTests(unittest.TestCase):
+    def test_guest_state_updates(self):
+        g = Guest("g1", 0, 2, 2, "FAMILY", "low", budget=10.0)
+        g.on_accept(0, "LUNCH", "THE_BUFFET", 4.0)
+        self.assertEqual(g.spent, 4.0)
+        self.assertGreater(g.satisfaction, 0.6)
+        self.assertGreater(g.affinity["THE_BUFFET"], 0)
+        g.on_reject(0, "DINNER", "PIZZA_HILL", "CAPACITY")
+        self.assertEqual(g.frustration, 1)
+        self.assertLess(g.satisfaction, 0.6 + 0.05)
+        self.assertLess(g.affinity["PIZZA_HILL"], 0)
+        self.assertEqual(len(g.history), 2)
+        g.on_day_end()
+        self.assertLess(abs(g.affinity["THE_BUFFET"]), 0.15)
+
+    def test_exhausted_guest_skips_slots(self):
+        g = Guest("g2", 0, 2, 3, "BUSINESS", "medium", budget=5.0)
+        g.on_accept(0, "BREAKFAST", "THE_BUFFET", 5.0)
+        self.assertTrue(g.exhausted)
+        venue = decide_venue(g, 0, "DINNER", ["THE_BUFFET", "LE_PASSAGE"], {}, {}, 17)
+        self.assertIsNone(venue)
+
+    def test_rejected_guest_avoids_same_venue(self):
+        g = Guest("g3", 0, 3, 2, "LEISURE", "low", budget=60.0)
+        for _ in range(4):
+            g.on_reject(0, "LUNCH", "PIZZA_HILL", "CAPACITY")
+        picks = [decide_venue(g, 1, "LUNCH", ["PIZZA_HILL", "THE_PAVILION"], {}, {}, s)
+                 for s in range(120)]
+        chosen = [p for p in picks if p]
+        self.assertGreaterEqual(chosen.count("THE_PAVILION"), chosen.count("PIZZA_HILL"))
+
+    def test_reroutes_under_contention(self):
+        world = World()
+        gs = generate_guests(3000, 7, 99)
+        res = simulate(world, gs, 7, 99, Scenario(), DayBatchClient(mode="mock"), include_events=True)
+        rerouted = [e for e in res["events"] if e.get("rerouted")]
+        self.assertGreater(res["summary"]["reroutes"], 0)
+        self.assertEqual(res["summary"]["reroutes"], len(rerouted))
+        for e in rerouted:
+            self.assertIn("from", e)
+            self.assertNotEqual(e["venue"], e["from"])
+
+    def test_satisfaction_recorded_per_day(self):
+        world = World()
+        gs = generate_guests(1200, 10, 7)
+        res = simulate(world, gs, 10, 7, Scenario(), DayBatchClient(mode="mock"))
+        self.assertTrue(all(0.0 <= d["satisfaction"] <= 1.0 for d in res["daily"]))
+        self.assertGreaterEqual(res["summary"]["avg_satisfaction"], 0.3)
+        self.assertIn("satisfaction_by_archetype", res["summary"])
 
 
 if __name__ == "__main__":

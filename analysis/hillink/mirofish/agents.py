@@ -32,6 +32,15 @@ VENUE_PREF: Dict[str, Dict[str, float]] = {
 }
 PRICE_SENSITIVITY = {"FAMILY": 0.6, "COUPLE": 0.4, "BUSINESS": 0.15, "LUXURY": 0.05, "LEISURE": 0.8}
 CROWD_AVERSION = {"FAMILY": 0.2, "COUPLE": 0.3, "BUSINESS": 0.1, "LUXURY": 0.0, "LEISURE": 0.5}
+BUDGET = {"FAMILY": 42.0, "COUPLE": 60.0, "BUSINESS": 30.0, "LUXURY": 120.0, "LEISURE": 36.0}
+INITIAL_SATISFACTION = 0.6
+SATISFACTION_ACCEPT = 0.05
+SATISFACTION_CAPACITY = 0.09
+SATISFACTION_CLOSED = 0.02
+AFFINITY_ACCEPT = 0.15
+AFFINITY_REJECT = -0.10
+AFFINITY_DECAY = 0.98
+LOW_SATISFACTION = 0.30
 
 
 @dataclass
@@ -42,10 +51,50 @@ class Guest:
     party: int
     archetype: str
     loyalty: str
-    rejected: Dict[str, int] = field(default_factory=dict)
+    budget: float = 0.0
+    spent: float = 0.0
+    satisfaction: float = INITIAL_SATISFACTION
+    frustration: int = 0
+    affinity: Dict[str, float] = field(default_factory=dict)
+    history: List[tuple] = field(default_factory=list)
+    rejections: int = 0
+    reroutes: int = 0
 
     def present_on(self, day_index: int) -> bool:
         return self.arrival_day <= day_index < self.arrival_day + self.nights
+
+    @property
+    def budget_left(self) -> float:
+        return max(0.0, self.budget - self.spent)
+
+    @property
+    def exhausted(self) -> bool:
+        return self.spent >= self.budget
+
+    def memory_digest(self, limit: int = 3) -> List[str]:
+        return [f"D{d} {s} {v} {o}" for d, s, v, o in self.history[-limit:]]
+
+    def on_accept(self, day_index: int, slot: str, venue: str, cost: float) -> None:
+        self.spent += cost
+        self.satisfaction = min(1.0, self.satisfaction + SATISFACTION_ACCEPT)
+        self.affinity[venue] = self.affinity.get(venue, 0.0) + AFFINITY_ACCEPT
+        self.history.append((day_index, slot, venue, "ACCEPT"))
+
+    def on_reject(self, day_index: int, slot: str, venue: str, reason: str) -> None:
+        self.rejections += 1
+        if reason == "CAPACITY":
+            self.satisfaction = max(0.0, self.satisfaction - SATISFACTION_CAPACITY)
+            self.frustration += 1
+        elif reason == "CLOSED":
+            self.satisfaction = max(0.0, self.satisfaction - SATISFACTION_CLOSED)
+        self.affinity[venue] = self.affinity.get(venue, 0.0) + AFFINITY_REJECT
+        self.history.append((day_index, slot, venue, reason))
+
+    def on_day_end(self) -> None:
+        for venue in list(self.affinity):
+            self.affinity[venue] *= AFFINITY_DECAY
+            if abs(self.affinity[venue]) < 1e-3:
+                del self.affinity[venue]
 
 
 def generate_guests(
@@ -72,7 +121,8 @@ def generate_guests(
             "LEISURE": rng.choice([2, 2, 3]),
         }[arch]
         loyalty = rng.choices(["low", "medium", "high"], weights=[0.607, 0.321, 0.072], k=1)[0]
-        guests.append(Guest(f"g{i:04d}", arrival, nights, party, arch, loyalty))
+        guests.append(Guest(f"g{i:04d}", arrival, nights, party, arch, loyalty,
+                            budget=BUDGET[arch]))
     return guests
 
 
@@ -84,22 +134,31 @@ def decide_venue(
     price_index: Dict[str, float],
     prev_fill: Dict[str, float],
     seed: int,
+    exclude: Optional[Sequence[str]] = None,
 ) -> Optional[str]:
-    rng = random.Random(f"{seed}:{guest.id}:{day_index}:{slot_code}")
-    if rng.random() > SLOT_VISIT_P[slot_code] * (1.15 if guest.archetype == "LEISURE" else 1.0):
+    if guest.exhausted or guest.satisfaction < LOW_SATISFACTION * 0.5:
         return None
+    rng = random.Random(f"{seed}:{guest.id}:{day_index}:{slot_code}:{len(exclude or ())}")
+    willingness = SLOT_VISIT_P[slot_code] * (1.15 if guest.archetype == "LEISURE" else 1.0)
+    willingness *= 0.75 + 0.5 * guest.satisfaction
+    if rng.random() > willingness:
+        return None
+
     prefs = VENUE_PREF[guest.archetype]
     sens = PRICE_SENSITIVITY[guest.archetype]
-    crowd = CROWD_AVERSION[guest.archetype]
+    crowd = CROWD_AVERSION[guest.archetype] * (1.0 + 0.5 * guest.frustration)
+    banned = set(exclude or ())
+
     weights: Dict[str, float] = {}
     for venue in open_venues:
-        base = prefs.get(venue, 0.02)
+        if venue in banned:
+            continue
+        base = prefs.get(venue, 0.02) * (1.0 + guest.affinity.get(venue, 0.0))
         price_term = (price_index.get(venue, 1.0)) ** (-sens)
-        crowd_term = max(0.05, 1.0 - crowd * prev_fill.get(f"{venue}", 0.0))
-        memory_term = 0.35 if guest.rejected.get(venue) == day_index - 1 else 1.0
-        weights[venue] = base * price_term * crowd_term * memory_term
-    if not weights:
-        return None
+        crowd_term = max(0.05, 1.0 - crowd * prev_fill.get(venue, 0.0))
+        affordability = 0.15 if guest.budget_left < guest.party * 0.6 else 1.0
+        weights[venue] = max(0.0, base) * price_term * crowd_term * affordability
+
     total = sum(weights.values())
     if total <= 0:
         return None
