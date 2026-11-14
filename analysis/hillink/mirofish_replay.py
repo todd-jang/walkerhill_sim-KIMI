@@ -173,11 +173,13 @@ def build(data: dict) -> str:
     rej_rows = "".join(
         f"<tr><td>Day {e['day'] + 1}</td><td>{e['slot']}</td><td>{e['agent']}</td><td>{e['venue']}</td>"
         f"<td>{e['party']}</td><td>{e['reason']}</td></tr>"
-        for e in arm["rejections_sample"][:10])
+        for e in arm["rejections_sample"][:10]) or (
+        "<tr><td colspan='6' style='color:var(--muted)'>거절 없음 — 이 규모에서는 폐쇄·슬롯·좌석 경합이 발생하지 않았습니다</td></tr>")
     acc_rows = "".join(
         f"<tr><td>Day {e['day'] + 1}</td><td>{e['slot']}</td><td>{e['agent']}</td><td>{e['venue']}</td>"
         f"<td>{e['party']}</td><td>{e['archetype']}</td></tr>"
-        for e in arm["events_sample"][:10])
+        for e in arm["events_sample"][:10]) or (
+        "<tr><td colspan='6' style='color:var(--muted)'>수용 없음</td></tr>")
 
     js = JS.replace("__DATA__", json.dumps(data, ensure_ascii=False).replace("</", "<\\/"))
     return f"""<!DOCTYPE html>
