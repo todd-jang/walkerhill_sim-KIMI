@@ -380,3 +380,47 @@ pricing_sim의 ε(1.0/1.5/2.0)는 **가정값**이다(§9·§11). 원장에서 �
 1. **순위가 본격적으로 재편됐다**: 가족·친족(30~49) 1·2위로 확고해지고, 휴식·산책 동행은 4~5위로 내려왔다. 50대+는 가족·친족이 휴식·산책을 압도. 20대는 휴식·산책 대신 가족·친족(여성)이 진입 — 외부 방문객·의사체류가 걷힌 뒤 투숙객의 실제 소비 구조가 드러난 그림이다.
 2. N̂ 24,195는 객실 동반 체류 21,515 대비 +12.5% — 이전 34,991(30,126 대비 +16%)보다 비대칭이 줄었다.
 3. **표준 설정 변경 제안**: 이후 페르소나 기반 계산(pricing_sim 등)은 이 구성(--exclude-external --room-companion-only)을 기본으로 쓰는 것을 제안한다. 기존 값(§11)은 전체 방문객 포함 '전체 시장' 관점으로 남긴다 — 두 관점이 답하는 질문이 다르다(투숙객 행동 vs 원장 전체 수요).
+
+## 16. MiroFish 완성 — pricing_core 전체 리뷰·연결·24배속 (2026-11-14)
+
+`hillink/pricing_core/`(미커밋 상태로 발견)를 전수 리뷰하고, 결함을 수정해 결정론 반사실 실험 엔진으로 연결했다. 구현체는 Majidi et al. 2026 Algorithm 1(합성 인구·일별 배치 LLM 의사결정·재고 소멸)·Algorithm 2(동일 인구 paired A/B) 구조로, 논문 충실도는 높았다.
+
+### 16.1 리뷰에서 발견·수정한 결함 5건
+
+| # | 위치 | 결함 | 수정 |
+|---|---|---|---|
+| 1 | calibration_bridge | `FitResult.n_star/alpha_star/v_star` — 실제 필드는 `exposure/weights/value` → 캘리브레이션 **호출 즉시 AttributeError** | 필드명 정렬, `Any` 임포트 보강 |
+| 2 | state_machine_adapter | `TimelineSegment(start=,end=,source=,notes=)` vs 실제 `t_in/t_out` → `/api/pricing/evaluate` **TypeError** | 실제 validator API로 재작성, `report.ok`·`TimelineViolation(invariant,code,detail,at)` 정렬 |
+| 3 | viewer/app.py | POST 라우트 `evaluate·compare·calibrate` 미연결(GET 2개만) | 3개 라우트 추가 |
+| 4 | simulator | paired A/B가 **전역 `random.shuffle`** 사용 → A·B 경합 순서가 달라 ΔV에 순서 노이즈 혼입 | `order_seed` 도입 — A·B 동일 순서 보장(Δ = 순수 정책 효과), tuple seed deprecation 경고도 문자열 seed로 회피 |
+| 5 | llm_client | API 실패 시 **무음** mock 대체 — 실제 LLM 결과로 오인 가능 | stderr 경고 + 추론에 `[API실패→mock대체]` 태그 |
+
+### 16.2 추가 구현
+
+- **GLM 5.3 Flash 실호 모드**: `--llm glm`(BigModel OpenAI 호환 엔드포인트, `GLM_API_KEY`/`ZHIPUAI_API_KEY`, temperature 기본 0.0 — paired 재현성). 키 미설정 시에도 mock은 완전 결정론(같은 시드 → 같은 결과, 테스트로 고정).
+- **러너 `pricing_run.py`**: 전구간 실행 + **실측 배속** 측정 + **신의 눈** `--scale`(전 카테고리 가격 배율 시나리오) → JSON.
+- **뷰어 `pricing_replay.py`**: `route_analysis` 리플레이와 같은 디자인 토큰, **1×/8×/24× 재생 컨트롤**, 시행 원장·판정 패널. 브라우저 실측 검증: 24배속에서 1.2초에 10시행 완주, 행·막대 동기 표시, NaN 없음.
+- **테스트 `test_pricing_core.py`**: 결정론 재현·재고 불변식(음수 불가·매출 합 일치)·paired 재현성·신의 눈 시나리오 변화·**배속 ≥24×** 기준·캘리브레이션 브릿지 — 7건 OK.
+
+### 16.3 24배속 요구 검증(실측)
+
+| 실행 | 구성 | 실측 배속(실시간 대비) |
+|---|---|---|
+| compare (10시행×2정책×31일, 인구 2,500) | mock | **1,520,524×** |
+| evaluate (31일, 인구 2,500) | mock | 75,347,955× |
+
+요구(24×) 대비 5자리 이상 여유. GLM 실호출은 일 1배치 콜 구조라 31일 ≈ 31콜 — 네트워크만 감안해도 수백× 이상(실측 전 추정 표기). 병목은 계산이 아니라 LLM 호출 수.
+
+### 16.4 샘플 결과 (mock 에뮬레이터, 인구 2,500 · 10시행)
+
+| 지표 | 값 |
+|---|---|
+| ΔV = V(동적)−V(정적) | **−427,989,804원 (−18.66%)** |
+| 점유율 A/B | 21.02% / 21.04% |
+| t / p | −65.09 / 0.0000 |
+
+점유율은 거의 같은데 매출이 하락 → mock의 임계값 경제법칙(경쟁사 대비 인상 시 Budget·Leisure 전환 억제)에서 점유율 연동 인상이 전환 손실로 이어지는 구조. **이 수치는 mock 에뮬레이터의 행동 법칙 결과이며 GLM 실판단과 같다고 주장하지 않는다(가설).** 판정 방향이 뒤집히는지가 실제 LLM 라운드의 첫 검증 질문이다.
+
+**캘리브레이션 한계**: `/api/pricing/calibrate` 기본 샘플(4관측)은 priors가 Luxury·Leisure 바닥값(0.001)으로 편중된다 — 실서비스에는 §15.4 α̂(hillink_fit, 가족·친족 30~49 남·여 1·2위 구조)를 주입해야 한다. 연결 지점은 `archetype_priors` 파라미터로 이미 열려 있다.
+
+**남은 결합 지점**: 현재 축은 객실·가격(pricing_core)이고, 업장·동선 축(route_analysis·§14)은 별도다. 두 축을 `state_machine_adapter`(예약→M1/M2/M3 이벤트)로 잇는 것이 다음 단계다.

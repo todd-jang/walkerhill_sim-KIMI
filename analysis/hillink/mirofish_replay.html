@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HILLINK MiroFish — 쌍체 A/B 반사실 실험</title><style>
+:root {
+  --ink: #1a1a1a; --muted: #57606a; --line: #d0d7de;
+  --accent: #0b5394; --accent-soft: #eef3f9; --code-bg: #f6f8fa; --good: #1a7f37;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0 auto; padding: 28px 34px 40px; max-width: 1180px;
+  font-family: "Apple SD Gothic Neo", "NanumGothic", -apple-system, sans-serif;
+  font-size: 14px; line-height: 1.62; color: var(--ink); background: #fbfcfd;
+}
+.header { border-bottom: 3px solid var(--accent); padding-bottom: 14px; margin-bottom: 20px; }
+.kicker { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin: 0 0 6px; }
+h1 { font-size: 27px; margin: 0 0 7px; line-height: 1.25; }
+.subtitle { font-size: 14px; color: var(--muted); margin: 0 0 10px; }
+.meta { font-size: 12.5px; color: var(--muted); }
+.meta code { background: var(--code-bg); border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px; font-size: 11.5px; }
+h2 { font-size: 17px; margin: 26px 0 10px; padding: 4px 0 4px 12px; border-left: 5px solid var(--accent); background: var(--accent-soft); }
+.kpis { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin: 18px 0 6px; }
+.kpi { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; }
+.kpi .v { font-size: 20px; font-weight: 800; color: var(--accent); letter-spacing: -0.5px; }
+.kpi .l { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.kpi .v.good { color: var(--good); }
+.controls { display: flex; align-items: center; gap: 10px; margin: 14px 0 10px; }
+.controls button {
+  border: 1px solid var(--line); background: #fff; border-radius: 6px;
+  padding: 6px 14px; font-size: 13px; font-weight: 700; color: var(--ink); cursor: pointer;
+}
+.controls button.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+.daycounter { font-variant-numeric: tabular-nums; font-weight: 800; font-size: 15px; color: var(--accent); min-width: 130px; }
+.chartbox { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 14px; }
+.bars { display: flex; align-items: flex-end; gap: 3px; height: 180px; }
+.bars .bar { flex: 1; background: var(--accent); border-radius: 2px 2px 0 0; min-height: 0; position: relative; opacity: 0; transition: opacity .18s; }
+.bars .bar.shown { opacity: .9; }
+.occ { margin-top: 8px; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0 14px; font-size: 12.5px; background: #fff; }
+th, td { border: 1px solid var(--line); padding: 5px 9px; text-align: left; }
+th { background: #f2f5f8; font-weight: 700; white-space: nowrap; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.verdict { background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--good); border-radius: 6px; padding: 12px 16px; margin: 12px 0; font-size: 14px; }
+.verdict b { color: var(--good); }
+footer { margin-top: 30px; padding-top: 12px; border-top: 2px solid var(--accent); font-size: 11.5px; color: var(--muted); }
+footer code { background: var(--code-bg); border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px; font-size: 11px; }
+.tag { display: inline-block; background: var(--accent-soft); border: 1px solid var(--line); border-radius: 10px; padding: 1px 9px; font-size: 11px; color: var(--accent); font-weight: 700; margin-left: 6px; }
+</style></head>
+<body>
+<div class="header">
+  <p class="kicker">HILLINK · MiroFish Replay</p>
+  <h1>MiroFish — 쌍체 A/B 반사실 실험</h1>
+  <p class="subtitle">LLM 페르소나 의사결정 · 결정론 재판관 · paired 반사실 비교</p>
+  <p class="meta">프리셋 <code>walkerhill_801</code> · LLM <code>mock</code>
+     · 시드 <code>42</code></p>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="v ">-427,989,804</div><div class="l">ΔV = V(B)−V(A) (원)</div></div>
+  <div class="kpi"><div class="v good">-18.66%</div><div class="l">매출 증가율</div></div>
+  <div class="kpi"><div class="v">92,376</div><div class="l">RevPAR A (정적)</div></div>
+  <div class="kpi"><div class="v">75,140</div><div class="l">RevPAR B (동적)</div></div>
+  <div class="kpi"><div class="v">-65.09</div><div class="l">t (p=0.0000)</div></div>
+  <div class="kpi"><div class="v">1,520,524×</div><div class="l">실측 배속 (실시간 대비)</div></div></div>
+
+<h2>리플레이 <span class="note">시행 단위 재생 — 정적(A) 매출 막대 · 1×/8×/24× 배속 지원</span></h2>
+<div class="controls">
+  <button id="play">▶ 재생</button>
+  <button id="reset">⟲ 처음</button>
+  <button data-speed="1">1×</button>
+  <button data-speed="8">8×</button>
+  <button data-speed="24">24×</button>
+  <span class="daycounter" id="counter"></span>
+  <span id="cum" style="color:var(--muted);font-size:13px"></span>
+</div>
+<div class="chartbox"><div class="bars" id="bars"></div>
+  <div class="occ" id="cum2" style="color:var(--muted);font-size:12px">칸에 커서를 올리면 값이 보입니다</div>
+</div>
+
+<h2>시행 원장 — Paired A/B (동일 인구·동일 경합 순서)</h2>
+<table><tr><th>시행</th><th>V(A) 정적</th><th>V(B) 동적</th><th>Δ</th></tr><tbody id="trialbody"></tbody></table>
+<div class="verdict">판정: 동적 정책(B)은 정적(A) 대비 평균 <b>-427,989,804원 (-18.66%)</b> —
+ 10회 paired 시행, t=-65.09·p=0.0000 · 동일 인구·동일 경합 순서(order_seed 고정)로 Δ는 순수 정책 효과</div>
+
+<footer>
+  재현: <code>python3 hillink/pricing_run.py --mode compare --preset walkerhill_801</code>
+  → <code>python3 hillink/pricing_replay.py &lt;json&gt;</code> ·
+  결정론 — 같은 시드는 항상 같은 리플레이 · mock 모드는 오프라인 결정론 에뮬레이터,
+  GLM 실호 모드는 <code>--llm glm</code> (GLM_API_KEY 필요) ·
+  근거: Majidi et al. 2026 Algorithm 1/2 · Huang &amp; Wang α̂ 캘리브레이션 연계
+</footer>
+<script>
+const DATA = {"experiment": "compare", "preset": "walkerhill_801", "policy_a": "Static Flat Pricing (Policy A)", "policy_b": "Occupancy-Based Dynamic Pricing (Policy B)", "llm_mode": "mock", "model": "mock-engine", "base_seed": 42, "price_scale": 1.0, "trials": [{"trial": 1, "seed": 43, "revenue_a": 2312490000.0, "revenue_b": 1883435613.21, "delta": -429054386.78999996, "booking_rate_a": 88.76, "booking_rate_b": 88.68}, {"trial": 2, "seed": 44, "revenue_a": 2265430000.0, "revenue_b": 1839523995.03, "delta": -425906004.97, "booking_rate_a": 89.56, "booking_rate_b": 89.52}, {"trial": 3, "seed": 45, "revenue_a": 2282510000.0, "revenue_b": 1861592538.79, "delta": -420917461.21000004, "booking_rate_a": 88.64, "booking_rate_b": 88.64}, {"trial": 4, "seed": 46, "revenue_a": 2269770000.0, "revenue_b": 1868761620.56, "delta": -401008379.44000006, "booking_rate_a": 89.64, "booking_rate_b": 89.64}, {"trial": 5, "seed": 47, "revenue_a": 2294620000.0, "revenue_b": 1862410309.9, "delta": -432209690.0999999, "booking_rate_a": 91.08, "booking_rate_b": 91.24}, {"trial": 6, "seed": 48, "revenue_a": 2324800000.0, "revenue_b": 1884327636.22, "delta": -440472363.78, "booking_rate_a": 88.28, "booking_rate_b": 88.64}, {"trial": 7, "seed": 49, "revenue_a": 2264320000.0, "revenue_b": 1848972315.64, "delta": -415347684.3599999, "booking_rate_a": 88.92, "booking_rate_b": 89.08}, {"trial": 8, "seed": 50, "revenue_a": 2334040000.0, "revenue_b": 1917275168.69, "delta": -416764831.30999994, "booking_rate_a": 89.6, "booking_rate_b": 89.8}, {"trial": 9, "seed": 51, "revenue_a": 2315430000.0, "revenue_b": 1836687927.53, "delta": -478742072.47, "booking_rate_a": 89.76, "booking_rate_b": 90.2}, {"trial": 10, "seed": 52, "revenue_a": 2274430000.0, "revenue_b": 1854954836.24, "delta": -419475163.76, "booking_rate_a": 89.96, "booking_rate_b": 89.48}], "comparison": {"mean_revenue_a": 2293784000.0, "mean_revenue_b": 1865794196.18, "delta_v": -427989803.82, "revenue_uplift_pct": -18.66, "std_delta": 20793235.15, "t_statistic": -65.09, "p_value": 0.0, "mean_occupancy_a": 21.02, "mean_occupancy_b": 21.04, "mean_revpar_a": 92375.82, "mean_revpar_b": 75139.71, "segment_uplift_pp": {"Budget": 0.0, "Business": 0.13, "Luxury": 0.0, "Leisure": 0.04}}, "speed": {"wall_seconds": 1.761, "horizon_days": 31, "speedup_realtime_x": 1520524.5, "llm_calls": 0}};
+const $ = (s) => document.querySelector(s);
+const won = (n) => Number(n).toLocaleString('ko-KR', {maximumFractionDigits: 0});
+
+const SPEEDS = [1, 8, 24];
+let speed = 24, playing = false, timer = null, cursor = 0;
+const BASE_MS = 1500; // 1배속에서 1스텝 = 1.5초
+
+function stepCount() { return DATA.experiment === 'evaluate' ? DATA.daily_revenue.length : DATA.trials.length; }
+function renderStep(i) {
+  if (DATA.experiment === 'evaluate') showDay(i); else showTrial(i);
+}
+function tick() {
+  if (cursor >= stepCount()) { stop(); cursor = stepCount(); return; }
+  renderStep(cursor); cursor++;
+}
+function play() {
+  if (playing) return; playing = true;
+  timer = setInterval(tick, BASE_MS / speed);
+}
+function stop() { playing = false; clearInterval(timer); }
+function setSpeed(s) {
+  speed = s;
+  document.querySelectorAll('.controls button[data-speed]').forEach(b =>
+    b.classList.toggle('on', Number(b.dataset.speed) === s));
+  if (playing) { stop(); play(); }
+}
+
+function buildBars() {
+  const vals = DATA.experiment === 'evaluate' ? DATA.daily_revenue : DATA.trials.map(t => t.revenue_a);
+  const vmax = Math.max(...vals, 1);
+  const box = $('#bars');
+  vals.forEach((v, i) => {
+    const b = document.createElement('div');
+    b.className = 'bar';
+    b.style.height = Math.max(2, v / vmax * 170) + 'px';
+    b.title = `#${i + 1} — ${won(v)}원`;
+    box.appendChild(b);
+  });
+}
+function showDay(d) {
+  const bars = document.querySelectorAll('#bars .bar');
+  bars.forEach((b, i) => b.classList.toggle('shown', i <= d));
+  let rev = 0; for (let i = 0; i <= d; i++) rev += DATA.daily_revenue[i];
+  $('#counter').textContent = `Day ${d + 1} / ${DATA.daily_revenue.length}`;
+  $('#cum').textContent = `누적 매출 ${won(rev)}원 · 점유율 ${(DATA.daily_occupancy[d]).toFixed(1)}%`;
+}
+function showTrial(t) {
+  document.querySelectorAll('#bars .bar').forEach((b, i) => b.classList.toggle('shown', i <= t));
+  const tr = DATA.trials;
+  const shown = tr.slice(0, t + 1);
+  const mean = shown.reduce((s, x) => s + x.delta, 0) / shown.length;
+  $('#counter').textContent = `Trial ${t + 1} / ${tr.length}`;
+  $('#cum').textContent = `평균 ΔV ${won(mean)}원`;
+  const tbody = $('#trialbody'); if (tbody) {
+    const row = tr[t];
+    tbody.insertAdjacentHTML('beforeend',
+      `<tr><td>${row.trial}</td><td class="num">${won(row.revenue_a)}</td><td class="num">${won(row.revenue_b)}</td><td class="num">${won(row.delta)}</td></tr>`);
+  }
+}
+
+function init() {
+  buildBars();
+  $('#counter').textContent = '준비 — 재생을 누르세요';
+  document.querySelectorAll('.controls button[data-speed]').forEach(b =>
+    b.addEventListener('click', () => setSpeed(Number(b.dataset.speed))));
+  $('#play').addEventListener('click', () => { if (cursor >= stepCount()) { cursor = 0; renderStep(0); } play(); });
+  $('#reset').addEventListener('click', () => { stop(); cursor = 0; renderStep(0); });
+  setSpeed(24);
+}
+init();
+</script>
+</body></html>

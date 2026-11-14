@@ -1,0 +1,127 @@
+{
+  "experiment": "compare",
+  "preset": "walkerhill_801",
+  "policy_a": "Static Flat Pricing (Policy A)",
+  "policy_b": "Occupancy-Based Dynamic Pricing (Policy B)",
+  "llm_mode": "mock",
+  "model": "mock-engine",
+  "base_seed": 42,
+  "price_scale": 1.0,
+  "trials": [
+    {
+      "trial": 1,
+      "seed": 43,
+      "revenue_a": 2312490000.0,
+      "revenue_b": 1883435613.21,
+      "delta": -429054386.78999996,
+      "booking_rate_a": 88.76,
+      "booking_rate_b": 88.68
+    },
+    {
+      "trial": 2,
+      "seed": 44,
+      "revenue_a": 2265430000.0,
+      "revenue_b": 1839523995.03,
+      "delta": -425906004.97,
+      "booking_rate_a": 89.56,
+      "booking_rate_b": 89.52
+    },
+    {
+      "trial": 3,
+      "seed": 45,
+      "revenue_a": 2282510000.0,
+      "revenue_b": 1861592538.79,
+      "delta": -420917461.21000004,
+      "booking_rate_a": 88.64,
+      "booking_rate_b": 88.64
+    },
+    {
+      "trial": 4,
+      "seed": 46,
+      "revenue_a": 2269770000.0,
+      "revenue_b": 1868761620.56,
+      "delta": -401008379.44000006,
+      "booking_rate_a": 89.64,
+      "booking_rate_b": 89.64
+    },
+    {
+      "trial": 5,
+      "seed": 47,
+      "revenue_a": 2294620000.0,
+      "revenue_b": 1862410309.9,
+      "delta": -432209690.0999999,
+      "booking_rate_a": 91.08,
+      "booking_rate_b": 91.24
+    },
+    {
+      "trial": 6,
+      "seed": 48,
+      "revenue_a": 2324800000.0,
+      "revenue_b": 1884327636.22,
+      "delta": -440472363.78,
+      "booking_rate_a": 88.28,
+      "booking_rate_b": 88.64
+    },
+    {
+      "trial": 7,
+      "seed": 49,
+      "revenue_a": 2264320000.0,
+      "revenue_b": 1848972315.64,
+      "delta": -415347684.3599999,
+      "booking_rate_a": 88.92,
+      "booking_rate_b": 89.08
+    },
+    {
+      "trial": 8,
+      "seed": 50,
+      "revenue_a": 2334040000.0,
+      "revenue_b": 1917275168.69,
+      "delta": -416764831.30999994,
+      "booking_rate_a": 89.6,
+      "booking_rate_b": 89.8
+    },
+    {
+      "trial": 9,
+      "seed": 51,
+      "revenue_a": 2315430000.0,
+      "revenue_b": 1836687927.53,
+      "delta": -478742072.47,
+      "booking_rate_a": 89.76,
+      "booking_rate_b": 90.2
+    },
+    {
+      "trial": 10,
+      "seed": 52,
+      "revenue_a": 2274430000.0,
+      "revenue_b": 1854954836.24,
+      "delta": -419475163.76,
+      "booking_rate_a": 89.96,
+      "booking_rate_b": 89.48
+    }
+  ],
+  "comparison": {
+    "mean_revenue_a": 2293784000.0,
+    "mean_revenue_b": 1865794196.18,
+    "delta_v": -427989803.82,
+    "revenue_uplift_pct": -18.66,
+    "std_delta": 20793235.15,
+    "t_statistic": -65.09,
+    "p_value": 0.0,
+    "mean_occupancy_a": 21.02,
+    "mean_occupancy_b": 21.04,
+    "mean_revpar_a": 92375.82,
+    "mean_revpar_b": 75139.71,
+    "segment_uplift_pp": {
+      "Budget": 0.0,
+      "Business": 0.13,
+      "Luxury": 0.0,
+      "Leisure": 0.04
+    }
+  },
+  "speed": {
+    "wall_seconds": 1.761,
+    "horizon_days": 31,
+    "speedup_realtime_x": 1520524.5,
+    "llm_calls": 0
+  }
+}
