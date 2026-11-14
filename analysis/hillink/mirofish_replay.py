@@ -62,7 +62,8 @@ table { width:100%; border-collapse:collapse; margin:8px 0 14px; font-size:12.5p
 th,td { border:1px solid var(--line); padding:5px 9px; text-align:left; }
 th { background:#f2f5f8; font-weight:700; white-space:nowrap; }
 td.num { text-align:right; font-variant-numeric:tabular-nums; }
-table.heat td { text-align:center; font-variant-numeric:tabular-nums; font-size:11.5px; }
+table.heat td { text-align:center; font-variant-numeric:tabular-nums; font-size:10.5px; padding:3px 4px; }
+table.heat td span { min-width:44px !important; }
 table.heat th:first-child, table.heat td:first-child { text-align:left; white-space:nowrap; font-weight:600; }
 .verdict { background:#fff; border:1px solid var(--line); border-left:5px solid var(--good); border-radius:6px; padding:12px 16px; margin:12px 0; }
 .verdict b { color:var(--good); }
@@ -136,7 +137,7 @@ SWARM_JS = '\nconst SWARM = DATA.swarm;\n(function () {\n  if (!SWARM) return;\n
 
 
 def heat_table(venue_slot: dict) -> str:
-    slots = ["BREAKFAST", "MORNING", "LUNCH", "AFTERNOON", "DINNER"]
+    slots = sorted({sl for row in venue_slot.values() for sl in row})
     head = "<tr><th>업장</th>" + "".join(f"<th>{s}</th>" for s in slots) + "</tr>"
     rows = []
     for venue, row in venue_slot.items():
@@ -148,7 +149,8 @@ def heat_table(venue_slot: dict) -> str:
             cells.append(f"<td><span style='display:inline-block;min-width:52px;border-radius:3px;"
                          f"background:rgba(11,83,148,{alpha:.2f});color:{color};padding:2px 4px'>{r:.0%}</span></td>")
         rows.append(f"<tr><td>{venue}</td>{''.join(cells)}</tr>")
-    return f"<table class='heat'>{head}{''.join(rows)}</table>"
+    return (f"<div style='overflow-x:auto'><table class='heat' style='font-size:11px'>{head}"
+            f"{''.join(rows)}</table></div>")
 
 
 def build(data: dict, replay_only: bool = False, theme: str = "walkerhill") -> str:

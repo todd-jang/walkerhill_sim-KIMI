@@ -17,7 +17,15 @@ ARCHETYPE_LABEL = {
 }
 DEFAULT_PRIORS = {"FAMILY": 0.30, "COUPLE": 0.25, "BUSINESS": 0.11, "LUXURY": 0.09, "LEISURE": 0.25}
 
-SLOT_VISIT_P = {"BREAKFAST": 0.55, "MORNING": 0.25, "LUNCH": 0.50, "AFTERNOON": 0.45, "DINNER": 0.65}
+HOUR_VISIT_P = {7: 0.30, 8: 0.34, 9: 0.24, 10: 0.12, 11: 0.18, 12: 0.32, 13: 0.30, 14: 0.15,
+                15: 0.18, 16: 0.20, 17: 0.22, 18: 0.32, 19: 0.34, 20: 0.26, 21: 0.16}
+ARCH_HOUR_BIAS = {
+    "FAMILY": {7: 1.4, 8: 1.5, 9: 1.2, 12: 1.3, 13: 1.3, 18: 1.3, 19: 1.3},
+    "COUPLE": {19: 1.4, 20: 1.4, 21: 1.2, 18: 1.2},
+    "BUSINESS": {12: 1.5, 13: 1.4, 18: 1.3, 19: 1.2},
+    "LUXURY": {19: 1.4, 20: 1.4, 21: 1.3},
+    "LEISURE": {8: 1.2, 9: 1.1, 15: 1.2, 16: 1.2},
+}
 
 VENUE_PREF: Dict[str, Dict[str, float]] = {
     "FAMILY": {"THE_BUFFET": 0.45, "GRAND_POOL": 0.50, "PIZZA_HILL": 0.40,
@@ -138,9 +146,10 @@ def decide_venue(
 ) -> Optional[str]:
     if guest.exhausted or guest.satisfaction < LOW_SATISFACTION * 0.5:
         return None
+    hour = int(slot_code.split(":")[0])
     rng = random.Random(f"{seed}:{guest.id}:{day_index}:{slot_code}:{len(exclude or ())}")
-    willingness = SLOT_VISIT_P[slot_code] * (1.15 if guest.archetype == "LEISURE" else 1.0)
-    willingness *= 0.75 + 0.5 * guest.satisfaction
+    bias = ARCH_HOUR_BIAS.get(guest.archetype, {}).get(hour, 1.0)
+    willingness = HOUR_VISIT_P.get(hour, 0.1) * bias * (0.75 + 0.5 * guest.satisfaction)
     if rng.random() > willingness:
         return None
 

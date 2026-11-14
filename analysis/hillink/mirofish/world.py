@@ -5,6 +5,7 @@
 """
 from __future__ import annotations
 
+import os
 import sys
 from dataclasses import dataclass
 from datetime import date, timedelta
@@ -31,14 +32,21 @@ VENUE_NAME = {code: name for name, code in VENUE_CODE.items()}
 EXTERNAL_VENUES = {'THEATRE_OF_LIGHT'}
 SEATS_MAP = {VENUE_CODE[name]: SEATS[name]['n'] for name in SEATS if name in VENUE_CODE and name != '빛의 시어터'}
 
-SLOTS: List[tuple[str, int, int]] = [
-    ("BREAKFAST", 7, 10),
-    ("MORNING", 10, 12),
-    ("LUNCH", 12, 15),
-    ("AFTERNOON", 15, 18),
-    ("DINNER", 18, 21),
-]
-SLOT_INDEX = {code: i for i, (code, _, _) in enumerate(SLOTS)}
+SLOT_MINUTES = int(os.environ.get("MIROFISH_SLOT_MINUTES", "60"))
+DAY_START_MIN = 7 * 60
+DAY_END_MIN = 22 * 60
+
+
+def _build_slots(minutes: int) -> List[tuple[str, int, int]]:
+    out: List[tuple[str, int, int]] = []
+    t = DAY_START_MIN
+    while t + minutes <= DAY_END_MIN:
+        out.append((f"{t // 60:02d}:{t % 60:02d}", t, t + minutes))
+        t += minutes
+    return out
+
+
+SLOTS: List[tuple[str, int, int]] = _build_slots(SLOT_MINUTES)
 CALENDAR_START = date(2026, 10, 1)
 
 
@@ -50,12 +58,17 @@ class Venue:
     windows: tuple
 
     def open_in_slot(self, day: date, slot_code: str) -> bool:
-        idx = SLOT_INDEX[slot_code]
-        slot_start, slot_end = SLOTS[idx][1], SLOTS[idx][2]
+        start = next((s for code, s, _ in SLOTS if code == slot_code), None)
+        if start is None:
+            return False
         for w in self.windows:
             if not w.opens_on(day):
                 continue
-            if w.open_at.hour < slot_end and w.close_at.hour > slot_start:
+            open_min = w.open_at.hour * 60 + w.open_at.minute
+            last_min = (w.last_order.hour * 60 + w.last_order.minute) if w.last_order else None
+            close_min = w.close_at.hour * 60 + w.close_at.minute
+            cut = last_min if last_min is not None else close_min
+            if open_min <= start < cut:
                 return True
         return False
 

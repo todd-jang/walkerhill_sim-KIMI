@@ -91,10 +91,10 @@ class IntentValidationTests(unittest.TestCase):
     def test_rejects_unknown_agent_and_bad_venue(self):
         intents, errors = parse_intents(
             [
-                {"agent_id": "g0001", "slot": "DINNER", "venue": "MYONGWOLGWAN"},
-                {"agent_id": "ghost", "slot": "DINNER", "venue": "MYONGWOLGWAN"},
-                {"agent_id": "g0001", "slot": "BRUNCH", "venue": "MYONGWOLGWAN"},
-                {"agent_id": "g0001", "slot": "DINNER", "venue": "MOON"},
+                {"agent_id": "g0001", "slot": "19:00", "venue": "MYONGWOLGWAN"},
+                {"agent_id": "ghost", "slot": "19:00", "venue": "MYONGWOLGWAN"},
+                {"agent_id": "g0001", "slot": "23:00", "venue": "MYONGWOLGWAN"},
+                {"agent_id": "g0001", "slot": "19:00", "venue": "MOON"},
             ],
             valid_agents=["g0001"], valid_slots=[s for s, _, _ in SLOTS],
             valid_venues=["MYONGWOLGWAN"],
@@ -122,15 +122,15 @@ class StatefulAgentTests(unittest.TestCase):
         g = Guest("g2", 0, 2, 3, "BUSINESS", "medium", budget=5.0)
         g.on_accept(0, "BREAKFAST", "THE_BUFFET", 5.0)
         self.assertTrue(g.exhausted)
-        venue = decide_venue(g, 0, "DINNER", ["THE_BUFFET", "LE_PASSAGE"], {}, {}, 17)
+        venue = decide_venue(g, 0, "19:00", ["THE_BUFFET", "LE_PASSAGE"], {}, {}, 17)
         self.assertIsNone(venue)
 
     def test_rejected_guest_avoids_same_venue(self):
         g = Guest("g3", 0, 3, 2, "LEISURE", "low", budget=60.0)
         for _ in range(4):
             g.on_reject(0, "LUNCH", "PIZZA_HILL", "CAPACITY")
-        picks = [decide_venue(g, 1, "LUNCH", ["PIZZA_HILL", "THE_PAVILION"], {}, {}, s)
-                 for s in range(120)]
+        picks = [decide_venue(g, 1, "12:00", ["PIZZA_HILL", "THE_PAVILION"], {}, {}, s)
+                 for s in range(600)]
         chosen = [p for p in picks if p]
         self.assertGreaterEqual(chosen.count("THE_PAVILION"), chosen.count("PIZZA_HILL"))
 

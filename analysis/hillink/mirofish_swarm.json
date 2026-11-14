@@ -11,24 +11,24 @@
     "capacity_scale": 1.0
   },
   "summary": {
-    "visits": 2578,
-    "accept_rate": 0.9961,
+    "visits": 4174,
+    "accept_rate": 0.999,
     "rejections": {
       "CLOSED": 0,
       "SLOT_DUP": 0,
-      "CAPACITY": 10
+      "CAPACITY": 4
     },
-    "unique_guests_served": 588,
-    "spend_proxy": 6483.0,
-    "reroutes": 27,
-    "avg_satisfaction": 0.803,
-    "exhausted_guests": 0,
+    "unique_guests_served": 594,
+    "spend_proxy": 10664.0,
+    "reroutes": 4,
+    "avg_satisfaction": 0.886,
+    "exhausted_guests": 47,
     "satisfaction_by_archetype": {
-      "FAMILY": 0.802,
-      "COUPLE": 0.797,
-      "BUSINESS": 0.813,
-      "LUXURY": 0.794,
-      "LEISURE": 0.81
+      "FAMILY": 0.9,
+      "COUPLE": 0.878,
+      "BUSINESS": 0.895,
+      "LUXURY": 0.869,
+      "LEISURE": 0.877
     }
   },
   "daily": [
@@ -36,11 +36,11 @@
       "day": 0,
       "date": "2026-10-01",
       "present": 90,
-      "visits": 231,
-      "parties": 566,
-      "spend_proxy": 566.0,
+      "visits": 365,
+      "parties": 886,
+      "spend_proxy": 886.0,
       "reroutes": 0,
-      "satisfaction": 0.728,
+      "satisfaction": 0.802,
       "exhausted": 0,
       "reject_closed": 0,
       "reject_dup": 0,
@@ -50,12 +50,12 @@
       "day": 1,
       "date": "2026-10-02",
       "present": 151,
-      "visits": 393,
-      "parties": 979,
-      "spend_proxy": 979.0,
+      "visits": 662,
+      "parties": 1717,
+      "spend_proxy": 1717.0,
       "reroutes": 0,
-      "satisfaction": 0.764,
-      "exhausted": 0,
+      "satisfaction": 0.854,
+      "exhausted": 6,
       "reject_closed": 0,
       "reject_dup": 0,
       "reject_cap": 0
@@ -64,26 +64,26 @@
       "day": 2,
       "date": "2026-10-03",
       "present": 175,
-      "visits": 474,
-      "parties": 1208,
-      "spend_proxy": 1208.0,
-      "reroutes": 7,
-      "satisfaction": 0.786,
-      "exhausted": 0,
+      "visits": 723,
+      "parties": 1865,
+      "spend_proxy": 1865.0,
+      "reroutes": 0,
+      "satisfaction": 0.866,
+      "exhausted": 13,
       "reject_closed": 0,
       "reject_dup": 0,
-      "reject_cap": 3
+      "reject_cap": 0
     },
     {
       "day": 3,
       "date": "2026-10-04",
       "present": 164,
-      "visits": 426,
-      "parties": 1070,
-      "spend_proxy": 1070.0,
-      "reroutes": 1,
-      "satisfaction": 0.783,
-      "exhausted": 0,
+      "visits": 672,
+      "parties": 1664,
+      "spend_proxy": 1664.0,
+      "reroutes": 0,
+      "satisfaction": 0.863,
+      "exhausted": 9,
       "reject_closed": 0,
       "reject_dup": 0,
       "reject_cap": 0
@@ -92,40 +92,40 @@
       "day": 4,
       "date": "2026-10-05",
       "present": 157,
-      "visits": 419,
-      "parties": 1053,
-      "spend_proxy": 1053.0,
-      "reroutes": 1,
-      "satisfaction": 0.794,
-      "exhausted": 0,
+      "visits": 686,
+      "parties": 1781,
+      "spend_proxy": 1781.0,
+      "reroutes": 0,
+      "satisfaction": 0.882,
+      "exhausted": 7,
       "reject_closed": 0,
       "reject_dup": 0,
-      "reject_cap": 1
+      "reject_cap": 0
     },
     {
       "day": 5,
       "date": "2026-10-06",
       "present": 169,
-      "visits": 470,
-      "parties": 1182,
-      "spend_proxy": 1182.0,
-      "reroutes": 18,
-      "satisfaction": 0.789,
-      "exhausted": 0,
+      "visits": 789,
+      "parties": 2042,
+      "spend_proxy": 2042.0,
+      "reroutes": 4,
+      "satisfaction": 0.884,
+      "exhausted": 13,
       "reject_closed": 0,
       "reject_dup": 0,
-      "reject_cap": 6
+      "reject_cap": 4
     },
     {
       "day": 6,
       "date": "2026-10-07",
       "present": 60,
-      "visits": 165,
-      "parties": 425,
-      "spend_proxy": 425.0,
+      "visits": 277,
+      "parties": 709,
+      "spend_proxy": 709.0,
       "reroutes": 0,
-      "satisfaction": 0.88,
-      "exhausted": 0,
+      "satisfaction": 0.985,
+      "exhausted": 9,
       "reject_closed": 0,
       "reject_dup": 0,
       "reject_cap": 0
@@ -133,67 +133,157 @@
   ],
   "venue_slot_fill": {
     "THE_BUFFET": {
-      "BREAKFAST": 0.41,
-      "MORNING": 0.122,
-      "LUNCH": 0.192,
-      "AFTERNOON": 0.306,
-      "DINNER": 0.267
+      "07:00": 0.479,
+      "08:00": 0.56,
+      "09:00": 0.186,
+      "10:00": 0.0,
+      "11:00": 0.125,
+      "12:00": 0.14,
+      "13:00": 0.102,
+      "14:00": 0.074,
+      "15:00": 0.09,
+      "16:00": 0.0,
+      "17:00": 0.0,
+      "18:00": 0.146,
+      "19:00": 0.158,
+      "20:00": 0.1,
+      "21:00": 0.208
     },
     "PIZZA_HILL": {
-      "BREAKFAST": 0.0,
-      "MORNING": 0.312,
-      "LUNCH": 0.417,
-      "AFTERNOON": 0.607,
-      "DINNER": 0.46
+      "07:00": 0.0,
+      "08:00": 0.0,
+      "09:00": 0.0,
+      "10:00": 0.0,
+      "11:00": 0.0,
+      "12:00": 0.312,
+      "13:00": 0.378,
+      "14:00": 0.104,
+      "15:00": 0.207,
+      "16:00": 0.399,
+      "17:00": 0.371,
+      "18:00": 0.318,
+      "19:00": 0.295,
+      "20:00": 0.241,
+      "21:00": 0.0
     },
     "THE_PAVILION": {
-      "BREAKFAST": 0.885,
-      "MORNING": 0.46,
-      "LUNCH": 0.33,
-      "AFTERNOON": 0.57,
-      "DINNER": 0.471
+      "07:00": 0.0,
+      "08:00": 0.0,
+      "09:00": 0.469,
+      "10:00": 0.489,
+      "11:00": 0.547,
+      "12:00": 0.238,
+      "13:00": 0.298,
+      "14:00": 0.101,
+      "15:00": 0.293,
+      "16:00": 0.409,
+      "17:00": 0.448,
+      "18:00": 0.31,
+      "19:00": 0.33,
+      "20:00": 0.0,
+      "21:00": 0.0
     },
     "MYONGWOLGWAN": {
-      "BREAKFAST": 0.0,
-      "MORNING": 0.0,
-      "LUNCH": 0.157,
-      "AFTERNOON": 0.255,
-      "DINNER": 0.183
+      "07:00": 0.0,
+      "08:00": 0.0,
+      "09:00": 0.0,
+      "10:00": 0.0,
+      "11:00": 0.0,
+      "12:00": 0.117,
+      "13:00": 0.139,
+      "14:00": 0.056,
+      "15:00": 0.0,
+      "16:00": 0.0,
+      "17:00": 0.0,
+      "18:00": 0.091,
+      "19:00": 0.162,
+      "20:00": 0.072,
+      "21:00": 0.0
     },
     "MOEGI": {
-      "BREAKFAST": 0.0,
-      "MORNING": 0.0,
-      "LUNCH": 0.033,
-      "AFTERNOON": 0.0,
-      "DINNER": 0.026
+      "07:00": 0.0,
+      "08:00": 0.0,
+      "09:00": 0.0,
+      "10:00": 0.0,
+      "11:00": 0.0,
+      "12:00": 0.022,
+      "13:00": 0.022,
+      "14:00": 0.008,
+      "15:00": 0.0,
+      "16:00": 0.0,
+      "17:00": 0.0,
+      "18:00": 0.019,
+      "19:00": 0.033,
+      "20:00": 0.015,
+      "21:00": 0.0
     },
     "ONDAL": {
-      "BREAKFAST": 0.0,
-      "MORNING": 0.0,
-      "LUNCH": 0.138,
-      "AFTERNOON": 0.0,
-      "DINNER": 0.129
+      "07:00": 0.0,
+      "08:00": 0.0,
+      "09:00": 0.0,
+      "10:00": 0.0,
+      "11:00": 0.0,
+      "12:00": 0.079,
+      "13:00": 0.089,
+      "14:00": 0.04,
+      "15:00": 0.0,
+      "16:00": 0.0,
+      "17:00": 0.0,
+      "18:00": 0.097,
+      "19:00": 0.129,
+      "20:00": 0.08,
+      "21:00": 0.0
     },
     "GEUMRYONG": {
-      "BREAKFAST": 0.0,
-      "MORNING": 0.0,
-      "LUNCH": 0.13,
-      "AFTERNOON": 0.0,
-      "DINNER": 0.126
+      "07:00": 0.0,
+      "08:00": 0.0,
+      "09:00": 0.0,
+      "10:00": 0.0,
+      "11:00": 0.0,
+      "12:00": 0.076,
+      "13:00": 0.073,
+      "14:00": 0.022,
+      "15:00": 0.0,
+      "16:00": 0.0,
+      "17:00": 0.0,
+      "18:00": 0.086,
+      "19:00": 0.111,
+      "20:00": 0.069,
+      "21:00": 0.0
     },
     "LE_PASSAGE": {
-      "BREAKFAST": 0.676,
-      "MORNING": 0.29,
-      "LUNCH": 0.271,
-      "AFTERNOON": 0.39,
-      "DINNER": 0.281
+      "07:00": 0.0,
+      "08:00": 0.0,
+      "09:00": 0.3,
+      "10:00": 0.162,
+      "11:00": 0.257,
+      "12:00": 0.248,
+      "13:00": 0.319,
+      "14:00": 0.043,
+      "15:00": 0.257,
+      "16:00": 0.267,
+      "17:00": 0.362,
+      "18:00": 0.21,
+      "19:00": 0.181,
+      "20:00": 0.124,
+      "21:00": 0.0
     },
     "LUX_BAR": {
-      "BREAKFAST": 0.0,
-      "MORNING": 0.0,
-      "LUNCH": 0.0,
-      "AFTERNOON": 0.0,
-      "DINNER": 0.175
+      "07:00": 0.0,
+      "08:00": 0.0,
+      "09:00": 0.0,
+      "10:00": 0.0,
+      "11:00": 0.0,
+      "12:00": 0.0,
+      "13:00": 0.0,
+      "14:00": 0.0,
+      "15:00": 0.0,
+      "16:00": 0.0,
+      "17:00": 0.0,
+      "18:00": 0.0,
+      "19:00": 0.0,
+      "20:00": 0.094,
+      "21:00": 0.36
     }
   },
   "swarm": {
@@ -682,7 +772,1136 @@
     "frames": [
       {
         "d": 0,
-        "s": "BREAKFAST",
+        "s": "07:00",
+        "a": [
+          [
+            "g0008",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0036",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0064",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0066",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0086",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0105",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0107",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0125",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0145",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0162",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0167",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0218",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0263",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0267",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0287",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0308",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0367",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0388",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0391",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0415",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0438",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0448",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0461",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0477",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0479",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0483",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0506",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0526",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0529",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0530",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0567",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0574",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0587",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0591",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 0,
+        "s": "08:00",
+        "a": [
+          [
+            "g0041",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0063",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0064",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0086",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0091",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0105",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0107",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0145",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0243",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0250",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0267",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0281",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0287",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0296",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0339",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0367",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0388",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0414",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0464",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0477",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0479",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0483",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0491",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0525",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0527",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0529",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0530",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0556",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0574",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0578",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0580",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0587",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 0,
+        "s": "09:00",
+        "a": [
+          [
+            "g0005",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0086",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0105",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0114",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0125",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0167",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0212",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0250",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0262",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0277",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0287",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0294",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0301",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0397",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0400",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0448",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0526",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0529",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0545",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0589",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0591",
+            "THE_PAVILION",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 0,
+        "s": "10:00",
+        "a": [
+          [
+            "g0038",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0055",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0162",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0167",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0243",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0281",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0301",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0397",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0457",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0461",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0464",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0499",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0558",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0578",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0591",
+            "THE_PAVILION",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 0,
+        "s": "11:00",
+        "a": [
+          [
+            "g0008",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0055",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0204",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0243",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0250",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0262",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0284",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0287",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0294",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0339",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0367",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0388",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0397",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0400",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0402",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0415",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0499",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0530",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0545",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0554",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0556",
+            "THE_PAVILION",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 0,
+        "s": "12:00",
+        "a": [
+          [
+            "g0018",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0041",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0055",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0063",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0086",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0105",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0107",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0125",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0162",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0201",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0212",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0218",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0223",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0243",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0262",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0263",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0277",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0281",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0284",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0287",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0296",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0402",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0438",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0442",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0448",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0461",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0479",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0483",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0518",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0520",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0525",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0527",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0529",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0530",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0545",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0578",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0591",
+            "MYONGWOLGWAN",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 0,
+        "s": "13:00",
+        "a": [
+          [
+            "g0008",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0027",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0038",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0041",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0091",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0114",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0162",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0167",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0180",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0201",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0224",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0284",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0287",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0294",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0296",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0301",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0367",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0402",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0448",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0455",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0483",
+            "MOEGI",
+            1
+          ],
+          [
+            "g0496",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0567",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0578",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0580",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0583",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0587",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 0,
+        "s": "14:00",
+        "a": [
+          [
+            "g0041",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0105",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0114",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0162",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0267",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0284",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0397",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0414",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0415",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0479",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0556",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0559",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0587",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 0,
+        "s": "15:00",
+        "a": [
+          [
+            "g0114",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0125",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0308",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0365",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0367",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0388",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0397",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0414",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0448",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0455",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0476",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0520",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0559",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0574",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0587",
+            "PIZZA_HILL",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 0,
+        "s": "16:00",
         "a": [
           [
             "g0005",
@@ -690,18 +1909,200 @@
             1
           ],
           [
-            "g0008",
+            "g0027",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0036",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0107",
             "THE_PAVILION",
             1
           ],
           [
-            "g0018",
+            "g0162",
             "THE_PAVILION",
+            1
+          ],
+          [
+            "g0167",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0180",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0201",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0277",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0284",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0287",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0339",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0367",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0397",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0402",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0413",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0483",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0529",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0558",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0559",
+            "THE_PAVILION",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 0,
+        "s": "17:00",
+        "a": [
+          [
+            "g0008",
+            "PIZZA_HILL",
             1
           ],
           [
             "g0027",
             "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0063",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0114",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0204",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0250",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0262",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0281",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0284",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0399",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0457",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0464",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0496",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0527",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0529",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0530",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0567",
+            "LE_PASSAGE",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 0,
+        "s": "18:00",
+        "a": [
+          [
+            "g0018",
+            "ONDAL",
             1
           ],
           [
@@ -715,475 +2116,68 @@
             1
           ],
           [
-            "g0041",
-            "THE_PAVILION",
+            "g0055",
+            "MYONGWOLGWAN",
             1
           ],
           [
-            "g0055",
+            "g0063",
             "THE_PAVILION",
             1
           ],
           [
             "g0066",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0105",
             "THE_PAVILION",
             1
           ],
           [
-            "g0086",
-            "THE_PAVILION",
+            "g0107",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0114",
+            "THE_BUFFET",
             1
           ],
           [
             "g0125",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0145",
-            "THE_BUFFET",
+            "PIZZA_HILL",
             1
           ],
           [
             "g0162",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0167",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0180",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0201",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0204",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0213",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0223",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0224",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0243",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0262",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0281",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0287",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0294",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0301",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0308",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0367",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0399",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0400",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0413",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0414",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0415",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0442",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0455",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0457",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0461",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0464",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0483",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0499",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0520",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0527",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0528",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0529",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0545",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0556",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0558",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0567",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0574",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0583",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0587",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0589",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0591",
-            "THE_BUFFET",
-            1
-          ]
-        ]
-      },
-      {
-        "d": 0,
-        "s": "MORNING",
-        "a": [
-          [
-            "g0027",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0064",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0065",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0066",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0091",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0201",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0212",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0296",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0365",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0397",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0399",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0414",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0448",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0457",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0476",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0506",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0520",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0545",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0578",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0580",
-            "THE_PAVILION",
-            1
-          ]
-        ]
-      },
-      {
-        "d": 0,
-        "s": "LUNCH",
-        "a": [
-          [
-            "g0005",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0018",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0027",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0038",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0055",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0064",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0065",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0091",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0145",
             "ONDAL",
             1
           ],
           [
-            "g0162",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0167",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0180",
-            "THE_BUFFET",
-            1
-          ],
-          [
             "g0212",
             "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0218",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0243",
-            "MYONGWOLGWAN",
             1
           ],
           [
             "g0250",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0262",
-            "ONDAL",
-            1
-          ],
-          [
-            "g0277",
-            "ONDAL",
+            "PIZZA_HILL",
             1
           ],
           [
             "g0281",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0287",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0294",
-            "THE_BUFFET",
+            "ONDAL",
             1
           ],
           [
             "g0296",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0301",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0339",
-            "THE_BUFFET",
+            "MYONGWOLGWAN",
             1
           ],
           [
             "g0365",
-            "ONDAL",
+            "GEUMRYONG",
             1
           ],
           [
@@ -1192,48 +2186,28 @@
             1
           ],
           [
-            "g0388",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0391",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0397",
-            "THE_BUFFET",
-            1
-          ],
-          [
             "g0399",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0400",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0414",
             "ONDAL",
             1
           ],
           [
-            "g0448",
-            "PIZZA_HILL",
+            "g0400",
+            "THE_BUFFET",
             1
           ],
           [
-            "g0457",
-            "PIZZA_HILL",
+            "g0413",
+            "THE_BUFFET",
             1
           ],
           [
-            "g0476",
-            "THE_PAVILION",
+            "g0414",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0438",
+            "MOEGI",
             1
           ],
           [
@@ -1243,12 +2217,218 @@
           ],
           [
             "g0479",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0496",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0518",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0530",
             "THE_BUFFET",
             1
           ],
           [
-            "g0491",
+            "g0559",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0574",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0591",
             "MYONGWOLGWAN",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 0,
+        "s": "19:00",
+        "a": [
+          [
+            "g0027",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0041",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0065",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0091",
+            "MOEGI",
+            1
+          ],
+          [
+            "g0105",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0114",
+            "MOEGI",
+            1
+          ],
+          [
+            "g0145",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0162",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0180",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0204",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0218",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0223",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0224",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0243",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0250",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0262",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0267",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0277",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0281",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0284",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0301",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0365",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0367",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0388",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0391",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0399",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0400",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0402",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0414",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0438",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0442",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0448",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0455",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0464",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0491",
+            "GEUMRYONG",
             1
           ],
           [
@@ -1257,239 +2437,13 @@
             1
           ],
           [
-            "g0518",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0525",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0527",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0528",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0529",
+            "g0520",
             "THE_BUFFET",
             1
           ],
           [
             "g0530",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0554",
             "THE_BUFFET",
-            1
-          ],
-          [
-            "g0556",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0558",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0587",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0591",
-            "MYONGWOLGWAN",
-            1
-          ]
-        ]
-      },
-      {
-        "d": 0,
-        "s": "AFTERNOON",
-        "a": [
-          [
-            "g0008",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0027",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0038",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0063",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0066",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0086",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0105",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0114",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0167",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0180",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0213",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0250",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0262",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0281",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0284",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0301",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0367",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0397",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0402",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0413",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0414",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0438",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0457",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0461",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0464",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0479",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0491",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0496",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0499",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0506",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0525",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0526",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0527",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0528",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0529",
-            "PIZZA_HILL",
             1
           ],
           [
@@ -1498,99 +2452,29 @@
             1
           ],
           [
-            "g0554",
-            "LE_PASSAGE",
+            "g0559",
+            "ONDAL",
             1
           ],
           [
-            "g0556",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0558",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0578",
+            "g0574",
             "THE_PAVILION",
             1
           ],
           [
             "g0580",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0587",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0589",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0591",
-            "PIZZA_HILL",
+            "GEUMRYONG",
             1
           ]
         ]
       },
       {
         "d": 0,
-        "s": "DINNER",
+        "s": "20:00",
         "a": [
           [
-            "g0005",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0008",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0018",
-            "ONDAL",
-            1
-          ],
-          [
             "g0027",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0038",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0041",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0055",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0063",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0064",
-            "ONDAL",
-            1
-          ],
-          [
-            "g0065",
-            "THE_BUFFET",
+            "LUX_BAR",
             1
           ],
           [
@@ -1599,23 +2483,8 @@
             1
           ],
           [
-            "g0086",
-            "LUX_BAR",
-            1
-          ],
-          [
-            "g0091",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0114",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0145",
-            "THE_PAVILION",
+            "g0105",
+            "MOEGI",
             1
           ],
           [
@@ -1624,68 +2493,8 @@
             1
           ],
           [
-            "g0167",
-            "ONDAL",
-            1
-          ],
-          [
-            "g0180",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0201",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0223",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0224",
-            "MOEGI",
-            1
-          ],
-          [
-            "g0243",
-            "THE_BUFFET",
-            1
-          ],
-          [
             "g0262",
-            "LUX_BAR",
-            1
-          ],
-          [
-            "g0267",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0277",
-            "LUX_BAR",
-            1
-          ],
-          [
-            "g0281",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0284",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0287",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0296",
-            "THE_PAVILION",
+            "LE_PASSAGE",
             1
           ],
           [
@@ -1694,58 +2503,38 @@
             1
           ],
           [
-            "g0308",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0339",
-            "THE_BUFFET",
-            1
-          ],
-          [
             "g0365",
             "LUX_BAR",
             1
           ],
           [
-            "g0367",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0388",
-            "THE_PAVILION",
-            1
-          ],
-          [
             "g0391",
-            "LUX_BAR",
+            "MYONGWOLGWAN",
             1
           ],
           [
             "g0397",
-            "LE_PASSAGE",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0400",
+            "PIZZA_HILL",
             1
           ],
           [
             "g0402",
-            "MOEGI",
-            1
-          ],
-          [
-            "g0414",
-            "MYONGWOLGWAN",
+            "LE_PASSAGE",
             1
           ],
           [
             "g0415",
-            "GEUMRYONG",
+            "ONDAL",
             1
           ],
           [
             "g0438",
-            "MYONGWOLGWAN",
+            "GEUMRYONG",
             1
           ],
           [
@@ -1754,7 +2543,7 @@
             1
           ],
           [
-            "g0461",
+            "g0464",
             "LUX_BAR",
             1
           ],
@@ -1764,68 +2553,33 @@
             1
           ],
           [
-            "g0477",
+            "g0491",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0506",
             "THE_BUFFET",
-            1
-          ],
-          [
-            "g0479",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0483",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0496",
-            "LUX_BAR",
-            1
-          ],
-          [
-            "g0499",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0518",
-            "PIZZA_HILL",
             1
           ],
           [
             "g0525",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0527",
             "LUX_BAR",
             1
           ],
           [
-            "g0528",
+            "g0527",
             "MYONGWOLGWAN",
             1
           ],
           [
-            "g0529",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0545",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0556",
-            "THE_BUFFET",
+            "g0554",
+            "LE_PASSAGE",
             1
           ],
           [
             "g0558",
-            "THE_PAVILION",
+            "PIZZA_HILL",
             1
           ],
           [
@@ -1835,17 +2589,7 @@
           ],
           [
             "g0567",
-            "ONDAL",
-            1
-          ],
-          [
-            "g0574",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0578",
-            "THE_BUFFET",
+            "LUX_BAR",
             1
           ],
           [
@@ -1855,19 +2599,95 @@
           ],
           [
             "g0587",
-            "THE_BUFFET",
+            "PIZZA_HILL",
             1
           ],
           [
             "g0591",
-            "THE_PAVILION",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 0,
+        "s": "21:00",
+        "a": [
+          [
+            "g0005",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0027",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0041",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0065",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0086",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0243",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0294",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0301",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0448",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0496",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0499",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0518",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0527",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0529",
+            "LUX_BAR",
             1
           ]
         ]
       },
       {
         "d": 1,
-        "s": "BREAKFAST",
+        "s": "07:00",
         "a": [
           [
             "g0008",
@@ -1875,23 +2695,23 @@
             1
           ],
           [
-            "g0042",
+            "g0039",
             "THE_BUFFET",
             1
           ],
           [
-            "g0063",
+            "g0055",
             "THE_BUFFET",
-            1
-          ],
-          [
-            "g0065",
-            "THE_PAVILION",
             1
           ],
           [
             "g0066",
-            "THE_PAVILION",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0070",
+            "THE_BUFFET",
             1
           ],
           [
@@ -1901,11 +2721,21 @@
           ],
           [
             "g0075",
-            "LE_PASSAGE",
+            "THE_BUFFET",
             1
           ],
           [
             "g0085",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0086",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0087",
             "THE_BUFFET",
             1
           ],
@@ -1915,13 +2745,159 @@
             1
           ],
           [
-            "g0107",
-            "THE_PAVILION",
+            "g0144",
+            "THE_BUFFET",
             1
           ],
           [
-            "g0121",
-            "THE_PAVILION",
+            "g0164",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0218",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0250",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0267",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0300",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0311",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0346",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0388",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0400",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0425",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0442",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0455",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0461",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0483",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0506",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0529",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0551",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0591",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 1,
+        "s": "08:00",
+        "a": [
+          [
+            "g0008",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0039",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0044",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0063",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0070",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0072",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0075",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0085",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0086",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0105",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0144",
+            "THE_BUFFET",
             1
           ],
           [
@@ -1931,32 +2907,7 @@
           ],
           [
             "g0159",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0164",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0176",
             "THE_BUFFET",
-            1
-          ],
-          [
-            "g0187",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0190",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0201",
-            "THE_PAVILION",
             1
           ],
           [
@@ -1970,33 +2921,23 @@
             1
           ],
           [
+            "g0243",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0267",
+            "THE_BUFFET",
+            1
+          ],
+          [
             "g0287",
             "THE_BUFFET",
             1
           ],
           [
-            "g0300",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0308",
-            "LE_PASSAGE",
-            1
-          ],
-          [
             "g0346",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0367",
             "THE_BUFFET",
-            1
-          ],
-          [
-            "g0388",
-            "THE_PAVILION",
             1
           ],
           [
@@ -2006,12 +2947,17 @@
           ],
           [
             "g0402",
-            "THE_PAVILION",
+            "THE_BUFFET",
             1
           ],
           [
             "g0410",
-            "LE_PASSAGE",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0413",
+            "THE_BUFFET",
             1
           ],
           [
@@ -2021,11 +2967,16 @@
           ],
           [
             "g0436",
-            "THE_PAVILION",
+            "THE_BUFFET",
             1
           ],
           [
             "g0442",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0455",
             "THE_BUFFET",
             1
           ],
@@ -2035,32 +2986,148 @@
             1
           ],
           [
-            "g0461",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0472",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0483",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0520",
+            "g0476",
             "THE_BUFFET",
             1
           ],
           [
-            "g0525",
+            "g0506",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0512",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0518",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0528",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0551",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0558",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0589",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0591",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 1,
+        "s": "09:00",
+        "a": [
+          [
+            "g0008",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0025",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0039",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0044",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0072",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0086",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0105",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0176",
             "LE_PASSAGE",
             1
           ],
           [
-            "g0529",
+            "g0190",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0209",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0243",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0308",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0402",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0410",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0425",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0438",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0442",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0455",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0512",
             "THE_PAVILION",
             1
           ],
@@ -2070,22 +3137,68 @@
             1
           ],
           [
-            "g0554",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0558",
+            "g0551",
             "THE_PAVILION",
             1
           ],
           [
-            "g0559",
-            "LE_PASSAGE",
+            "g0558",
+            "THE_BUFFET",
             1
           ],
           [
             "g0589",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 1,
+        "s": "10:00",
+        "a": [
+          [
+            "g0075",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0121",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0224",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0263",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0438",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0442",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0484",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0512",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0528",
             "THE_PAVILION",
             1
           ],
@@ -2098,35 +3211,30 @@
       },
       {
         "d": 1,
-        "s": "MORNING",
+        "s": "11:00",
         "a": [
           [
-            "g0044",
+            "g0087",
             "THE_PAVILION",
             1
           ],
           [
-            "g0055",
+            "g0144",
             "THE_PAVILION",
             1
           ],
           [
-            "g0105",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0164",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0250",
+            "g0190",
             "THE_PAVILION",
             1
           ],
           [
-            "g0263",
+            "g0218",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0287",
             "THE_PAVILION",
             1
           ],
@@ -2136,73 +3244,13 @@
             1
           ],
           [
-            "g0311",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0346",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0367",
-            "THE_PAVILION",
-            1
-          ],
-          [
             "g0436",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0438",
             "THE_PAVILION",
             1
           ],
           [
-            "g0461",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0472",
+            "g0528",
             "THE_PAVILION",
-            1
-          ],
-          [
-            "g0476",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0484",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0506",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0512",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0518",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0529",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0545",
-            "PIZZA_HILL",
             1
           ],
           [
@@ -2211,54 +3259,64 @@
             1
           ],
           [
-            "g0589",
-            "LE_PASSAGE",
+            "g0559",
+            "THE_PAVILION",
             1
           ]
         ]
       },
       {
         "d": 1,
-        "s": "LUNCH",
+        "s": "12:00",
         "a": [
           [
             "g0008",
-            "THE_BUFFET",
+            "PIZZA_HILL",
             1
           ],
           [
             "g0039",
-            "THE_BUFFET",
+            "PIZZA_HILL",
             1
           ],
           [
-            "g0065",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0066",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0075",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0086",
+            "g0044",
             "THE_PAVILION",
+            1
+          ],
+          [
+            "g0063",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0070",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0072",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0085",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0087",
+            "LE_PASSAGE",
             1
           ],
           [
             "g0105",
-            "THE_BUFFET",
+            "MYONGWOLGWAN",
             1
           ],
           [
-            "g0121",
-            "THE_PAVILION",
+            "g0107",
+            "ONDAL",
             1
           ],
           [
@@ -2272,23 +3330,785 @@
             1
           ],
           [
+            "g0209",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0243",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0274",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0287",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0346",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0388",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0410",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0413",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0425",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0442",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0455",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0457",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0476",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0483",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0484",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0506",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0518",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0520",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0558",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0591",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 1,
+        "s": "13:00",
+        "a": [
+          [
+            "g0008",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0044",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0063",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0070",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0087",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0105",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0218",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0287",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0311",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0346",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0367",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0400",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0410",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0413",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0425",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0457",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0484",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0506",
+            "MOEGI",
+            1
+          ],
+          [
+            "g0525",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0528",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0545",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0591",
+            "THE_PAVILION",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 1,
+        "s": "14:00",
+        "a": [
+          [
+            "g0066",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0267",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0277",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0300",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0346",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0402",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0455",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0472",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0506",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0529",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0589",
+            "MYONGWOLGWAN",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 1,
+        "s": "15:00",
+        "a": [
+          [
+            "g0042",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0085",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0086",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0107",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0121",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0158",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0176",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0201",
+            "THE_PAVILION",
+            1
+          ],
+          [
             "g0218",
             "PIZZA_HILL",
             1
           ],
           [
+            "g0250",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0436",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0461",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0506",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0525",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0558",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0591",
+            "PIZZA_HILL",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 1,
+        "s": "16:00",
+        "a": [
+          [
+            "g0039",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0065",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0070",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0072",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0107",
+            "THE_PAVILION",
+            1
+          ],
+          [
             "g0221",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0277",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0300",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0367",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0425",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0455",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0484",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0551",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0559",
+            "THE_PAVILION",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 1,
+        "s": "17:00",
+        "a": [
+          [
+            "g0008",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0072",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0086",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0176",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0218",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0263",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0274",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0287",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0300",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0311",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0410",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0457",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0472",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0476",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0528",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0529",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0559",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0591",
+            "PIZZA_HILL",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 1,
+        "s": "18:00",
+        "a": [
+          [
+            "g0025",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0055",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0063",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0065",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0085",
             "THE_BUFFET",
+            1
+          ],
+          [
+            "g0105",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0158",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0159",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0218",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0221",
+            "PIZZA_HILL",
             1
           ],
           [
             "g0224",
-            "THE_BUFFET",
+            "THE_PAVILION",
             1
           ],
           [
             "g0250",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0267",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0274",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0300",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0346",
             "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0367",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0410",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0425",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0436",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0472",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0476",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0512",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0518",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0525",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0545",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0551",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0556",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0559",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0591",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 1,
+        "s": "19:00",
+        "a": [
+          [
+            "g0008",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0025",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0039",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0042",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0055",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0070",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0072",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0085",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0086",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0087",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0107",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0121",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0158",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0159",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0176",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0187",
+            "MOEGI",
+            1
+          ],
+          [
+            "g0221",
+            "THE_BUFFET",
             1
           ],
           [
@@ -2307,28 +4127,13 @@
             1
           ],
           [
-            "g0287",
-            "THE_BUFFET",
-            1
-          ],
-          [
             "g0300",
             "GEUMRYONG",
             1
           ],
           [
             "g0308",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0311",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0346",
-            "MYONGWOLGWAN",
+            "ONDAL",
             1
           ],
           [
@@ -2337,63 +4142,63 @@
             1
           ],
           [
-            "g0388",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0410",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0413",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0425",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0436",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0438",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0455",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0461",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0484",
+            "g0400",
             "THE_BUFFET",
             1
           ],
           [
-            "g0506",
-            "LE_PASSAGE",
+            "g0413",
+            "THE_BUFFET",
             1
           ],
           [
-            "g0512",
+            "g0425",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0436",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0438",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0442",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0455",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0461",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0476",
             "PIZZA_HILL",
             1
           ],
           [
-            "g0518",
-            "MOEGI",
+            "g0512",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0520",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0525",
+            "GEUMRYONG",
             1
           ],
           [
@@ -2407,13 +4212,18 @@
             1
           ],
           [
+            "g0545",
+            "THE_BUFFET",
+            1
+          ],
+          [
             "g0551",
-            "PIZZA_HILL",
+            "THE_BUFFET",
             1
           ],
           [
             "g0554",
-            "LE_PASSAGE",
+            "MOEGI",
             1
           ],
           [
@@ -2423,158 +4233,7 @@
           ],
           [
             "g0559",
-            "GEUMRYONG",
-            1
-          ]
-        ]
-      },
-      {
-        "d": 1,
-        "s": "AFTERNOON",
-        "a": [
-          [
-            "g0025",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0042",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0063",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0065",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0072",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0085",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0087",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0107",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0158",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0159",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0164",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0176",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0187",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0190",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0201",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0243",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0263",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0267",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0287",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0311",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0346",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0367",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0461",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0483",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0506",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0525",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0528",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0529",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0558",
-            "THE_PAVILION",
+            "ONDAL",
             1
           ],
           [
@@ -2584,58 +4243,38 @@
           ],
           [
             "g0591",
-            "MYONGWOLGWAN",
+            "THE_PAVILION",
             1
           ]
         ]
       },
       {
         "d": 1,
-        "s": "DINNER",
+        "s": "20:00",
         "a": [
+          [
+            "g0025",
+            "THE_BUFFET",
+            1
+          ],
           [
             "g0039",
             "THE_BUFFET",
             1
           ],
           [
-            "g0044",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0055",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0065",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0066",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0070",
+            "g0063",
             "THE_BUFFET",
             1
           ],
           [
-            "g0072",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0075",
-            "LUX_BAR",
+            "g0065",
+            "THE_BUFFET",
             1
           ],
           [
             "g0085",
-            "MYONGWOLGWAN",
+            "MOEGI",
             1
           ],
           [
@@ -2644,32 +4283,17 @@
             1
           ],
           [
-            "g0087",
-            "LE_PASSAGE",
-            1
-          ],
-          [
             "g0105",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0107",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0121",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0144",
             "THE_BUFFET",
             1
           ],
           [
-            "g0158",
+            "g0107",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0144",
             "PIZZA_HILL",
             1
           ],
@@ -2679,83 +4303,13 @@
             1
           ],
           [
-            "g0164",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0176",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0187",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0190",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0201",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0209",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0224",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0243",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0263",
+            "g0250",
             "ONDAL",
             1
           ],
           [
             "g0267",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0274",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0277",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0287",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0308",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0311",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0346",
-            "THE_BUFFET",
+            "PIZZA_HILL",
             1
           ],
           [
@@ -2764,53 +4318,28 @@
             1
           ],
           [
-            "g0388",
-            "PIZZA_HILL",
-            1
-          ],
-          [
             "g0400",
-            "THE_PAVILION",
+            "PIZZA_HILL",
             1
           ],
           [
             "g0402",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0410",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0413",
             "PIZZA_HILL",
             1
           ],
           [
-            "g0425",
+            "g0436",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0438",
             "MYONGWOLGWAN",
             1
           ],
           [
-            "g0436",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0442",
-            "THE_PAVILION",
-            1
-          ],
-          [
             "g0455",
-            "ONDAL",
-            1
-          ],
-          [
-            "g0472",
-            "THE_PAVILION",
+            "GEUMRYONG",
             1
           ],
           [
@@ -2819,12 +4348,12 @@
             1
           ],
           [
-            "g0483",
-            "THE_PAVILION",
+            "g0506",
+            "THE_BUFFET",
             1
           ],
           [
-            "g0506",
+            "g0512",
             "THE_BUFFET",
             1
           ],
@@ -2834,78 +4363,175 @@
             1
           ],
           [
-            "g0520",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0525",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0528",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0529",
-            "PIZZA_HILL",
-            1
-          ],
-          [
             "g0545",
             "THE_BUFFET",
             1
           ],
           [
-            "g0551",
-            "THE_PAVILION",
+            "g0556",
+            "THE_BUFFET",
             1
           ],
           [
             "g0558",
-            "PIZZA_HILL",
+            "THE_BUFFET",
             1
           ],
           [
-            "g0591",
-            "PIZZA_HILL",
+            "g0559",
+            "GEUMRYONG",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 1,
+        "s": "21:00",
+        "a": [
+          [
+            "g0250",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0267",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0274",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0410",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0472",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0506",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0525",
+            "LUX_BAR",
             1
           ]
         ]
       },
       {
         "d": 2,
-        "s": "BREAKFAST",
+        "s": "07:00",
         "a": [
           [
-            "g0025",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0042",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0044",
-            "THE_PAVILION",
-            1
-          ],
-          [
             "g0070",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0072",
             "THE_BUFFET",
             1
           ],
           [
-            "g0085",
+            "g0087",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0121",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0209",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0221",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0274",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0300",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0311",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0438",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0442",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0506",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0512",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0520",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0525",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0559",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 2,
+        "s": "08:00",
+        "a": [
+          [
+            "g0025",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0042",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0044",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0055",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0087",
             "THE_BUFFET",
             1
           ],
@@ -2920,12 +4546,83 @@
             1
           ],
           [
-            "g0159",
+            "g0190",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0209",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0218",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0287",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0300",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0346",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0388",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0455",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0484",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0525",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0551",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0559",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 2,
+        "s": "09:00",
+        "a": [
+          [
+            "g0070",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0072",
             "THE_PAVILION",
             1
           ],
           [
-            "g0176",
+            "g0075",
             "THE_BUFFET",
             1
           ],
@@ -2935,18 +4632,8 @@
             1
           ],
           [
-            "g0190",
-            "THE_PAVILION",
-            1
-          ],
-          [
             "g0218",
             "THE_BUFFET",
-            1
-          ],
-          [
-            "g0267",
-            "LE_PASSAGE",
             1
           ],
           [
@@ -2955,7 +4642,12 @@
             1
           ],
           [
-            "g0300",
+            "g0311",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0346",
             "THE_PAVILION",
             1
           ],
@@ -2965,8 +4657,8 @@
             1
           ],
           [
-            "g0436",
-            "THE_PAVILION",
+            "g0425",
+            "THE_BUFFET",
             1
           ],
           [
@@ -2981,31 +4673,16 @@
           ],
           [
             "g0483",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0484",
             "THE_BUFFET",
             1
           ],
           [
             "g0512",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0520",
-            "THE_BUFFET",
+            "THE_PAVILION",
             1
           ],
           [
             "g0551",
-            "THE_PAVILION",
-            0
-          ],
-          [
-            "g0591",
             "THE_BUFFET",
             1
           ]
@@ -3013,55 +4690,30 @@
       },
       {
         "d": 2,
-        "s": "MORNING",
+        "s": "10:00",
         "a": [
           [
             "g0025",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0039",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0085",
-            "THE_BUFFET",
+            "LE_PASSAGE",
             1
           ],
           [
             "g0087",
-            "PIZZA_HILL",
+            "THE_PAVILION",
             1
           ],
           [
-            "g0158",
-            "THE_BUFFET",
+            "g0121",
+            "LE_PASSAGE",
             1
           ],
           [
-            "g0176",
-            "THE_BUFFET",
+            "g0388",
+            "THE_PAVILION",
             1
           ],
           [
-            "g0267",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0287",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0442",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0455",
+            "g0425",
             "THE_PAVILION",
             1
           ],
@@ -3071,155 +4723,65 @@
             1
           ],
           [
-            "g0483",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0520",
-            "THE_BUFFET",
-            1
-          ]
-        ]
-      },
-      {
-        "d": 2,
-        "s": "LUNCH",
-        "a": [
-          [
-            "g0025",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0072",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0087",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0105",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0158",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0164",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0176",
-            "LE_PASSAGE",
-            1
-          ],
-          [
-            "g0190",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0209",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0287",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0300",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0311",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0346",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0388",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0425",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0436",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0442",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0483",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0484",
-            "THE_PAVILION",
-            1
-          ],
-          [
             "g0506",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0512",
-            "ONDAL",
+            "LE_PASSAGE",
             1
           ],
           [
             "g0559",
-            "ONDAL",
-            1
-          ],
-          [
-            "g0591",
-            "THE_BUFFET",
+            "THE_PAVILION",
             1
           ]
         ]
       },
       {
         "d": 2,
-        "s": "AFTERNOON",
+        "s": "11:00",
         "a": [
           [
-            "g0025",
+            "g0085",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0121",
             "THE_PAVILION",
             1
           ],
           [
-            "g0042",
-            "PIZZA_HILL",
+            "g0311",
+            "THE_BUFFET",
             1
           ],
           [
+            "g0425",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0438",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0506",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0551",
+            "THE_PAVILION",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 2,
+        "s": "12:00",
+        "a": [
+          [
             "g0044",
-            "PIZZA_HILL",
+            "THE_BUFFET",
             1
           ],
           [
@@ -3228,10 +4790,197 @@
             1
           ],
           [
-            "g0070",
+            "g0072",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0075",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0087",
             "THE_BUFFET",
             1
           ],
+          [
+            "g0144",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0176",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0187",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0190",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0311",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0346",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0388",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0410",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0425",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0442",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0506",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0512",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0520",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0551",
+            "PIZZA_HILL",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 2,
+        "s": "13:00",
+        "a": [
+          [
+            "g0025",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0042",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0055",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0087",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0144",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0158",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0164",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0176",
+            "MOEGI",
+            1
+          ],
+          [
+            "g0190",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0221",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0274",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0346",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0388",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0410",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0425",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0442",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0455",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0472",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0512",
+            "PIZZA_HILL",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 2,
+        "s": "14:00",
+        "a": [
           [
             "g0072",
             "THE_BUFFET",
@@ -3243,43 +4992,64 @@
             1
           ],
           [
+            "g0085",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0176",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0190",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0221",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0287",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0525",
+            "ONDAL",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 2,
+        "s": "15:00",
+        "a": [
+          [
+            "g0070",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0085",
+            "THE_PAVILION",
+            1
+          ],
+          [
             "g0087",
             "THE_BUFFET",
             1
           ],
           [
-            "g0105",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0121",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0158",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0159",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0190",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0209",
-            "MYONGWOLGWAN",
+            "g0187",
+            "PIZZA_HILL",
             1
           ],
           [
             "g0218",
-            "PIZZA_HILL",
+            "THE_PAVILION",
             1
           ],
           [
@@ -3288,129 +5058,29 @@
             1
           ],
           [
-            "g0287",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0300",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0346",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0388",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0410",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0436",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0442",
-            "THE_BUFFET",
-            1
-          ],
-          [
             "g0455",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0506",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0512",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0525",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0591",
-            "PIZZA_HILL",
+            "THE_PAVILION",
             1
           ]
         ]
       },
       {
         "d": 2,
-        "s": "DINNER",
+        "s": "16:00",
         "a": [
           [
-            "g0025",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0039",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0042",
-            "LUX_BAR",
-            1
-          ],
-          [
-            "g0044",
+            "g0121",
             "THE_PAVILION",
             1
           ],
           [
-            "g0055",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0070",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0075",
-            "LUX_BAR",
-            1
-          ],
-          [
-            "g0085",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0087",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0121",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0159",
-            "GEUMRYONG",
+            "g0158",
+            "THE_PAVILION",
             1
           ],
           [
             "g0164",
-            "MYONGWOLGWAN",
+            "PIZZA_HILL",
             1
           ],
           [
@@ -3419,38 +5089,236 @@
             1
           ],
           [
-            "g0209",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0218",
-            "THE_BUFFET",
-            1
-          ],
-          [
-            "g0221",
-            "GEUMRYONG",
-            1
-          ],
-          [
-            "g0267",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0274",
+            "g0287",
             "THE_PAVILION",
             1
           ],
           [
+            "g0300",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0346",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0425",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0442",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0483",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0512",
+            "THE_PAVILION",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 2,
+        "s": "17:00",
+        "a": [
+          [
+            "g0072",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0121",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0164",
+            "PIZZA_HILL",
+            1
+          ],
+          [
             "g0287",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0346",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0388",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0438",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0455",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0483",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0506",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0512",
+            "THE_PAVILION",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 2,
+        "s": "18:00",
+        "a": [
+          [
+            "g0039",
             "THE_BUFFET",
             1
           ],
           [
+            "g0055",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0144",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0158",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0209",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0311",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0346",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0388",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0410",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0425",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0438",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0442",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0484",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0506",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0520",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0525",
+            "GEUMRYONG",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 2,
+        "s": "19:00",
+        "a": [
+          [
+            "g0025",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0039",
+            "MOEGI",
+            1
+          ],
+          [
+            "g0042",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0087",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0121",
+            "MOEGI",
+            1
+          ],
+          [
+            "g0144",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0221",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0287",
+            "THE_PAVILION",
+            1
+          ],
+          [
             "g0300",
-            "LUX_BAR",
+            "MYONGWOLGWAN",
             1
           ],
           [
@@ -3464,13 +5332,54 @@
             1
           ],
           [
-            "g0388",
+            "g0410",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0425",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0442",
             "PIZZA_HILL",
             1
           ],
           [
-            "g0438",
+            "g0520",
             "THE_BUFFET",
+            1
+          ],
+          [
+            "g0559",
+            "GEUMRYONG",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 2,
+        "s": "20:00",
+        "a": [
+          [
+            "g0144",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0300",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0425",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0438",
+            "ONDAL",
             1
           ],
           [
@@ -3479,45 +5388,61 @@
             1
           ],
           [
-            "g0472",
-            "LUX_BAR",
-            1
-          ],
-          [
-            "g0483",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0484",
+            "g0506",
             "THE_BUFFET",
-            1
-          ],
-          [
-            "g0512",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0520",
-            "LE_PASSAGE",
             1
           ],
           [
             "g0525",
+            "GEUMRYONG",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 2,
+        "s": "21:00",
+        "a": [
+          [
+            "g0025",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0072",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0164",
             "LUX_BAR",
             1
           ],
           [
-            "g0591",
-            "MYONGWOLGWAN",
+            "g0410",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0455",
+            "LUX_BAR",
+            1
+          ],
+          [
+            "g0472",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0506",
+            "THE_BUFFET",
             1
           ]
         ]
       },
       {
         "d": 3,
-        "s": "BREAKFAST",
+        "s": "07:00",
         "a": [
           [
             "g0070",
@@ -3530,69 +5455,33 @@
             1
           ],
           [
-            "g0346",
+            "g0472",
             "THE_BUFFET",
-            1
-          ],
-          [
-            "g0425",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0436",
-            "THE_PAVILION",
             1
           ],
           [
             "g0484",
-            "THE_PAVILION",
+            "THE_BUFFET",
             1
           ]
         ]
       },
       {
         "d": 3,
-        "s": "MORNING",
+        "s": "08:00",
         "a": [
           [
-            "g0144",
+            "g0311",
             "THE_BUFFET",
             1
           ],
           [
-            "g0300",
-            "THE_PAVILION",
-            1
-          ]
-        ]
-      },
-      {
-        "d": 3,
-        "s": "LUNCH",
-        "a": [
-          [
-            "g0300",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0425",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0436",
+            "g0410",
             "THE_BUFFET",
             1
           ],
           [
-            "g0472",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0551",
+            "g0484",
             "THE_BUFFET",
             1
           ]
@@ -3600,7 +5489,7 @@
       },
       {
         "d": 3,
-        "s": "AFTERNOON",
+        "s": "09:00",
         "a": [
           [
             "g0070",
@@ -3608,64 +5497,8 @@
             1
           ],
           [
-            "g0274",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0410",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0425",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0436",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0472",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0484",
-            "THE_PAVILION",
-            1
-          ],
-          [
-            "g0512",
-            "PIZZA_HILL",
-            1
-          ],
-          [
-            "g0551",
-            "THE_PAVILION",
-            1
-          ]
-        ]
-      },
-      {
-        "d": 3,
-        "s": "DINNER",
-        "a": [
-          [
             "g0144",
-            "MYONGWOLGWAN",
-            1
-          ],
-          [
-            "g0274",
-            "LUX_BAR",
-            1
-          ],
-          [
-            "g0300",
-            "MYONGWOLGWAN",
+            "THE_BUFFET",
             1
           ],
           [
@@ -3674,221 +5507,593 @@
             1
           ],
           [
-            "g0346",
+            "g0436",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 3,
+        "s": "10:00",
+        "a": [
+          [
+            "g0311",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0436",
+            "THE_PAVILION",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 3,
+        "s": "11:00",
+        "a": [
+          [
+            "g0512",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 3,
+        "s": "12:00",
+        "a": [
+          [
+            "g0070",
             "THE_BUFFET",
             1
           ],
           [
-            "g0425",
-            "THE_PAVILION",
+            "g0144",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0300",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0311",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0436",
+            "THE_BUFFET",
             1
           ],
           [
             "g0472",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0484",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 3,
+        "s": "13:00",
+        "a": [
+          [
+            "g0144",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0410",
+            "ONDAL",
+            1
+          ],
+          [
+            "g0436",
+            "THE_PAVILION",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 3,
+        "s": "14:00",
+        "a": [
+          [
+            "g0436",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0472",
+            "MYONGWOLGWAN",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 3,
+        "s": "15:00",
+        "a": [
+          [
+            "g0070",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0512",
+            "THE_BUFFET",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 3,
+        "s": "16:00",
+        "a": [
+          [
+            "g0472",
+            "THE_PAVILION",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 3,
+        "s": "17:00",
+        "a": [
+          [
+            "g0274",
             "THE_PAVILION",
             1
           ],
           [
-            "g0551",
-            "ONDAL",
+            "g0484",
+            "PIZZA_HILL",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 3,
+        "s": "18:00",
+        "a": [
+          [
+            "g0300",
+            "THE_PAVILION",
+            1
+          ],
+          [
+            "g0311",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0472",
+            "MYONGWOLGWAN",
+            1
+          ],
+          [
+            "g0512",
+            "THE_PAVILION",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 3,
+        "s": "19:00",
+        "a": [
+          [
+            "g0311",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0410",
+            "LE_PASSAGE",
+            1
+          ],
+          [
+            "g0472",
+            "MYONGWOLGWAN",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 3,
+        "s": "20:00",
+        "a": [
+          [
+            "g0274",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0300",
+            "GEUMRYONG",
+            1
+          ],
+          [
+            "g0410",
+            "THE_BUFFET",
+            1
+          ],
+          [
+            "g0436",
+            "PIZZA_HILL",
+            1
+          ],
+          [
+            "g0484",
+            "PIZZA_HILL",
+            1
+          ]
+        ]
+      },
+      {
+        "d": 3,
+        "s": "21:00",
+        "a": [
+          [
+            "g0300",
+            "LUX_BAR",
             1
           ]
         ]
       },
       {
         "d": 4,
-        "s": "BREAKFAST",
+        "s": "07:00",
         "a": []
       },
       {
         "d": 4,
-        "s": "MORNING",
+        "s": "08:00",
         "a": []
       },
       {
         "d": 4,
-        "s": "LUNCH",
+        "s": "09:00",
         "a": []
       },
       {
         "d": 4,
-        "s": "AFTERNOON",
+        "s": "10:00",
         "a": []
       },
       {
         "d": 4,
-        "s": "DINNER",
+        "s": "11:00",
+        "a": []
+      },
+      {
+        "d": 4,
+        "s": "12:00",
+        "a": []
+      },
+      {
+        "d": 4,
+        "s": "13:00",
+        "a": []
+      },
+      {
+        "d": 4,
+        "s": "14:00",
+        "a": []
+      },
+      {
+        "d": 4,
+        "s": "15:00",
+        "a": []
+      },
+      {
+        "d": 4,
+        "s": "16:00",
+        "a": []
+      },
+      {
+        "d": 4,
+        "s": "17:00",
+        "a": []
+      },
+      {
+        "d": 4,
+        "s": "18:00",
+        "a": []
+      },
+      {
+        "d": 4,
+        "s": "19:00",
+        "a": []
+      },
+      {
+        "d": 4,
+        "s": "20:00",
+        "a": []
+      },
+      {
+        "d": 4,
+        "s": "21:00",
         "a": []
       },
       {
         "d": 5,
-        "s": "BREAKFAST",
+        "s": "07:00",
         "a": []
       },
       {
         "d": 5,
-        "s": "MORNING",
+        "s": "08:00",
         "a": []
       },
       {
         "d": 5,
-        "s": "LUNCH",
+        "s": "09:00",
         "a": []
       },
       {
         "d": 5,
-        "s": "AFTERNOON",
+        "s": "10:00",
         "a": []
       },
       {
         "d": 5,
-        "s": "DINNER",
+        "s": "11:00",
+        "a": []
+      },
+      {
+        "d": 5,
+        "s": "12:00",
+        "a": []
+      },
+      {
+        "d": 5,
+        "s": "13:00",
+        "a": []
+      },
+      {
+        "d": 5,
+        "s": "14:00",
+        "a": []
+      },
+      {
+        "d": 5,
+        "s": "15:00",
+        "a": []
+      },
+      {
+        "d": 5,
+        "s": "16:00",
+        "a": []
+      },
+      {
+        "d": 5,
+        "s": "17:00",
+        "a": []
+      },
+      {
+        "d": 5,
+        "s": "18:00",
+        "a": []
+      },
+      {
+        "d": 5,
+        "s": "19:00",
+        "a": []
+      },
+      {
+        "d": 5,
+        "s": "20:00",
+        "a": []
+      },
+      {
+        "d": 5,
+        "s": "21:00",
         "a": []
       },
       {
         "d": 6,
-        "s": "BREAKFAST",
+        "s": "07:00",
         "a": []
       },
       {
         "d": 6,
-        "s": "MORNING",
+        "s": "08:00",
         "a": []
       },
       {
         "d": 6,
-        "s": "LUNCH",
+        "s": "09:00",
         "a": []
       },
       {
         "d": 6,
-        "s": "AFTERNOON",
+        "s": "10:00",
         "a": []
       },
       {
         "d": 6,
-        "s": "DINNER",
+        "s": "11:00",
+        "a": []
+      },
+      {
+        "d": 6,
+        "s": "12:00",
+        "a": []
+      },
+      {
+        "d": 6,
+        "s": "13:00",
+        "a": []
+      },
+      {
+        "d": 6,
+        "s": "14:00",
+        "a": []
+      },
+      {
+        "d": 6,
+        "s": "15:00",
+        "a": []
+      },
+      {
+        "d": 6,
+        "s": "16:00",
+        "a": []
+      },
+      {
+        "d": 6,
+        "s": "17:00",
+        "a": []
+      },
+      {
+        "d": 6,
+        "s": "18:00",
+        "a": []
+      },
+      {
+        "d": 6,
+        "s": "19:00",
+        "a": []
+      },
+      {
+        "d": 6,
+        "s": "20:00",
+        "a": []
+      },
+      {
+        "d": 6,
+        "s": "21:00",
         "a": []
       }
     ]
   },
   "state_sample": [
     {
+      "id": "g0498",
+      "archetype": "FAMILY",
+      "party": 3,
+      "satisfaction": 1.0,
+      "frustration": 1,
+      "budget_left": 0.0,
+      "affinity": {
+        "PIZZA_HILL": 1.15,
+        "THE_PAVILION": 0.49,
+        "THE_BUFFET": 0.29
+      },
+      "history": [
+        "D6 20:00 THE_BUFFET ACCEPT",
+        "D7 08:00 THE_BUFFET ACCEPT",
+        "D7 10:00 THE_PAVILION ACCEPT",
+        "D7 13:00 THE_PAVILION ACCEPT",
+        "D7 17:00 PIZZA_HILL ACCEPT",
+        "D7 19:00 PIZZA_HILL ACCEPT"
+      ]
+    },
+    {
       "id": "g0537",
       "archetype": "COUPLE",
       "party": 2,
       "satisfaction": 1.0,
       "frustration": 1,
-      "budget_left": 38.0,
-      "affinity": {
-        "THE_PAVILION": 0.62,
-        "ONDAL": 0.29,
-        "THE_BUFFET": 0.15,
-        "LE_PASSAGE": 0.14
-      },
-      "history": [
-        "D5 MORNING THE_PAVILION ACCEPT",
-        "D6 BREAKFAST THE_PAVILION CAPACITY",
-        "D6 BREAKFAST THE_BUFFET ACCEPT",
-        "D6 DINNER ONDAL ACCEPT",
-        "D6 LUNCH THE_PAVILION ACCEPT",
-        "D6 MORNING THE_PAVILION ACCEPT"
-      ]
-    },
-    {
-      "id": "g0323",
-      "archetype": "FAMILY",
-      "party": 3,
-      "satisfaction": 1.0,
-      "frustration": 1,
-      "budget_left": 12.0,
-      "affinity": {
-        "PIZZA_HILL": 0.73,
-        "THE_BUFFET": 0.73,
-        "THE_PAVILION": -0.1
-      },
-      "history": [
-        "D6 MORNING PIZZA_HILL ACCEPT",
-        "D7 AFTERNOON PIZZA_HILL ACCEPT",
-        "D7 BREAKFAST THE_BUFFET ACCEPT",
-        "D7 DINNER PIZZA_HILL ACCEPT",
-        "D7 LUNCH THE_BUFFET ACCEPT",
-        "D7 MORNING PIZZA_HILL ACCEPT"
-      ]
-    },
-    {
-      "id": "g0562",
-      "archetype": "COUPLE",
-      "party": 2,
-      "satisfaction": 1.0,
-      "frustration": 1,
-      "budget_left": 40.0,
+      "budget_left": 34.0,
       "affinity": {
         "MYONGWOLGWAN": 0.44,
-        "LE_PASSAGE": 0.29,
-        "GEUMRYONG": 0.29,
-        "THE_PAVILION": 0.19
+        "THE_BUFFET": 0.43,
+        "THE_PAVILION": 0.33,
+        "LE_PASSAGE": 0.15
       },
       "history": [
-        "D3 AFTERNOON MYONGWOLGWAN ACCEPT",
-        "D3 BREAKFAST THE_PAVILION CAPACITY",
-        "D3 BREAKFAST LE_PASSAGE ACCEPT",
-        "D3 DINNER MYONGWOLGWAN ACCEPT",
-        "D3 LUNCH GEUMRYONG ACCEPT",
-        "D3 MORNING THE_PAVILION ACCEPT"
+        "D5 21:00 LUX_BAR ACCEPT",
+        "D6 11:00 THE_PAVILION CAPACITY",
+        "D6 11:00 LE_PASSAGE ACCEPT",
+        "D6 12:00 MYONGWOLGWAN ACCEPT",
+        "D6 16:00 THE_PAVILION ACCEPT",
+        "D6 18:00 MYONGWOLGWAN ACCEPT"
       ]
     },
     {
-      "id": "g0582",
-      "archetype": "COUPLE",
-      "party": 2,
-      "satisfaction": 0.96,
-      "frustration": 1,
-      "budget_left": 42.0,
-      "affinity": {
-        "THE_PAVILION": 0.34,
-        "GEUMRYONG": 0.29,
-        "LUX_BAR": 0.15,
-        "MYONGWOLGWAN": 0.14
-      },
-      "history": [
-        "D3 LUNCH GEUMRYONG ACCEPT",
-        "D3 MORNING THE_PAVILION ACCEPT",
-        "D4 AFTERNOON THE_PAVILION ACCEPT",
-        "D4 BREAKFAST THE_PAVILION ACCEPT",
-        "D4 DINNER LUX_BAR ACCEPT",
-        "D4 LUNCH GEUMRYONG ACCEPT"
-      ]
-    },
-    {
-      "id": "g0470",
+      "id": "g0463",
       "archetype": "COUPLE",
       "party": 2,
       "satisfaction": 0.91,
       "frustration": 1,
       "budget_left": 44.0,
       "affinity": {
-        "MYONGWOLGWAN": 0.43,
-        "THE_PAVILION": 0.19,
-        "LE_PASSAGE": 0.15,
-        "ONDAL": 0.15
+        "THE_PAVILION": 0.34,
+        "MYONGWOLGWAN": 0.29,
+        "THE_BUFFET": 0.15,
+        "GEUMRYONG": 0.15
       },
       "history": [
-        "D5 MORNING THE_PAVILION ACCEPT",
-        "D6 AFTERNOON MYONGWOLGWAN ACCEPT",
-        "D6 BREAKFAST THE_PAVILION CAPACITY",
-        "D6 BREAKFAST LE_PASSAGE ACCEPT",
-        "D6 DINNER ONDAL ACCEPT",
-        "D6 MORNING THE_PAVILION ACCEPT"
+        "D6 08:00 THE_BUFFET ACCEPT",
+        "D6 09:00 THE_PAVILION ACCEPT",
+        "D6 10:00 THE_PAVILION ACCEPT",
+        "D6 11:00 THE_PAVILION CAPACITY",
+        "D6 18:00 GEUMRYONG ACCEPT",
+        "D6 19:00 MYONGWOLGWAN ACCEPT"
+      ]
+    },
+    {
+      "id": "g0572",
+      "archetype": "LEISURE",
+      "party": 2,
+      "satisfaction": 0.81,
+      "frustration": 1,
+      "budget_left": 24.0,
+      "affinity": {
+        "PIZZA_HILL": 0.29,
+        "THE_PAVILION": 0.2,
+        "THE_BUFFET": 0.15,
+        "LE_PASSAGE": 0.15
+      },
+      "history": [
+        "D6 10:00 THE_PAVILION ACCEPT",
+        "D6 11:00 THE_PAVILION CAPACITY",
+        "D6 11:00 LE_PASSAGE ACCEPT",
+        "D6 16:00 PIZZA_HILL ACCEPT",
+        "D6 18:00 THE_PAVILION ACCEPT",
+        "D6 19:00 PIZZA_HILL ACCEPT"
+      ]
+    },
+    {
+      "id": "g0478",
+      "archetype": "LEISURE",
+      "party": 2,
+      "satisfaction": 0.76,
+      "frustration": 1,
+      "budget_left": 26.0,
+      "affinity": {
+        "PIZZA_HILL": 0.29,
+        "THE_BUFFET": 0.15,
+        "GEUMRYONG": 0.14,
+        "THE_PAVILION": 0.05
+      },
+      "history": [
+        "D6 11:00 THE_PAVILION CAPACITY",
+        "D6 19:00 GEUMRYONG ACCEPT",
+        "D7 16:00 THE_PAVILION ACCEPT",
+        "D7 17:00 PIZZA_HILL ACCEPT",
+        "D7 19:00 PIZZA_HILL ACCEPT",
+        "D7 20:00 THE_BUFFET ACCEPT"
       ]
     }
   ],
   "events_sample": [
     {
       "day": 0,
-      "slot": "AFTERNOON",
+      "slot": "07:00",
       "agent": "g0008",
-      "venue": "PIZZA_HILL",
+      "venue": "THE_BUFFET",
       "party": 4,
       "archetype": "FAMILY",
       "outcome": "ACCEPT",
@@ -3898,11 +6103,11 @@
     },
     {
       "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0027",
-      "venue": "LE_PASSAGE",
-      "party": 1,
-      "archetype": "BUSINESS",
+      "slot": "07:00",
+      "agent": "g0036",
+      "venue": "THE_BUFFET",
+      "party": 3,
+      "archetype": "LEISURE",
       "outcome": "ACCEPT",
       "reason": "-",
       "rerouted": false,
@@ -3910,11 +6115,11 @@
     },
     {
       "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0038",
-      "venue": "MYONGWOLGWAN",
-      "party": 4,
-      "archetype": "FAMILY",
+      "slot": "07:00",
+      "agent": "g0064",
+      "venue": "THE_BUFFET",
+      "party": 3,
+      "archetype": "LEISURE",
       "outcome": "ACCEPT",
       "reason": "-",
       "rerouted": false,
@@ -3922,21 +6127,9 @@
     },
     {
       "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0063",
-      "venue": "PIZZA_HILL",
-      "party": 5,
-      "archetype": "FAMILY",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
+      "slot": "07:00",
       "agent": "g0066",
-      "venue": "THE_PAVILION",
+      "venue": "THE_BUFFET",
       "party": 2,
       "archetype": "COUPLE",
       "outcome": "ACCEPT",
@@ -3946,9 +6139,9 @@
     },
     {
       "day": 0,
-      "slot": "AFTERNOON",
+      "slot": "07:00",
       "agent": "g0086",
-      "venue": "THE_PAVILION",
+      "venue": "THE_BUFFET",
       "party": 2,
       "archetype": "COUPLE",
       "outcome": "ACCEPT",
@@ -3958,9 +6151,9 @@
     },
     {
       "day": 0,
-      "slot": "AFTERNOON",
+      "slot": "07:00",
       "agent": "g0105",
-      "venue": "PIZZA_HILL",
+      "venue": "THE_BUFFET",
       "party": 3,
       "archetype": "FAMILY",
       "outcome": "ACCEPT",
@@ -3970,21 +6163,9 @@
     },
     {
       "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0114",
-      "venue": "LE_PASSAGE",
-      "party": 1,
-      "archetype": "BUSINESS",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0167",
-      "venue": "PIZZA_HILL",
+      "slot": "07:00",
+      "agent": "g0107",
+      "venue": "THE_BUFFET",
       "party": 2,
       "archetype": "COUPLE",
       "outcome": "ACCEPT",
@@ -3994,9 +6175,9 @@
     },
     {
       "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0180",
-      "venue": "LE_PASSAGE",
+      "slot": "07:00",
+      "agent": "g0125",
+      "venue": "THE_BUFFET",
       "party": 3,
       "archetype": "LEISURE",
       "outcome": "ACCEPT",
@@ -4006,10 +6187,58 @@
     },
     {
       "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0213",
-      "venue": "MYONGWOLGWAN",
+      "slot": "07:00",
+      "agent": "g0145",
+      "venue": "THE_BUFFET",
+      "party": 2,
+      "archetype": "COUPLE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0162",
+      "venue": "THE_BUFFET",
+      "party": 2,
+      "archetype": "COUPLE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0167",
+      "venue": "THE_BUFFET",
+      "party": 2,
+      "archetype": "COUPLE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0218",
+      "venue": "THE_BUFFET",
       "party": 3,
+      "archetype": "FAMILY",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0263",
+      "venue": "THE_BUFFET",
+      "party": 2,
       "archetype": "LUXURY",
       "outcome": "ACCEPT",
       "reason": "-",
@@ -4018,93 +6247,9 @@
     },
     {
       "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0250",
-      "venue": "THE_PAVILION",
-      "party": 3,
-      "archetype": "FAMILY",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0262",
-      "venue": "MYONGWOLGWAN",
-      "party": 2,
-      "archetype": "COUPLE",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0281",
-      "venue": "THE_PAVILION",
-      "party": 2,
-      "archetype": "COUPLE",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0284",
-      "venue": "PIZZA_HILL",
-      "party": 2,
-      "archetype": "COUPLE",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0301",
-      "venue": "LE_PASSAGE",
-      "party": 1,
-      "archetype": "BUSINESS",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0367",
-      "venue": "LE_PASSAGE",
-      "party": 2,
-      "archetype": "BUSINESS",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0397",
-      "venue": "PIZZA_HILL",
-      "party": 2,
-      "archetype": "LEISURE",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0402",
-      "venue": "PIZZA_HILL",
+      "slot": "07:00",
+      "agent": "g0267",
+      "venue": "THE_BUFFET",
       "party": 5,
       "archetype": "FAMILY",
       "outcome": "ACCEPT",
@@ -4114,105 +6259,9 @@
     },
     {
       "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0413",
-      "venue": "PIZZA_HILL",
-      "party": 3,
-      "archetype": "LEISURE",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0414",
-      "venue": "MYONGWOLGWAN",
-      "party": 3,
-      "archetype": "LUXURY",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0438",
-      "venue": "MYONGWOLGWAN",
-      "party": 2,
-      "archetype": "COUPLE",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0457",
-      "venue": "THE_PAVILION",
-      "party": 3,
-      "archetype": "LEISURE",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0461",
-      "venue": "MYONGWOLGWAN",
-      "party": 2,
-      "archetype": "LUXURY",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0464",
-      "venue": "MYONGWOLGWAN",
-      "party": 2,
-      "archetype": "COUPLE",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0479",
-      "venue": "PIZZA_HILL",
-      "party": 3,
-      "archetype": "LEISURE",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0491",
-      "venue": "MYONGWOLGWAN",
-      "party": 2,
-      "archetype": "COUPLE",
-      "outcome": "ACCEPT",
-      "reason": "-",
-      "rerouted": false,
-      "price_index": 1.0
-    },
-    {
-      "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0496",
-      "venue": "THE_PAVILION",
+      "slot": "07:00",
+      "agent": "g0287",
+      "venue": "THE_BUFFET",
       "party": 2,
       "archetype": "LEISURE",
       "outcome": "ACCEPT",
@@ -4222,9 +6271,9 @@
     },
     {
       "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0499",
-      "venue": "MYONGWOLGWAN",
+      "slot": "07:00",
+      "agent": "g0308",
+      "venue": "THE_BUFFET",
       "party": 2,
       "archetype": "COUPLE",
       "outcome": "ACCEPT",
@@ -4234,11 +6283,167 @@
     },
     {
       "day": 0,
-      "slot": "AFTERNOON",
-      "agent": "g0506",
-      "venue": "LE_PASSAGE",
+      "slot": "07:00",
+      "agent": "g0367",
+      "venue": "THE_BUFFET",
       "party": 2,
       "archetype": "BUSINESS",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0388",
+      "venue": "THE_BUFFET",
+      "party": 3,
+      "archetype": "FAMILY",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0391",
+      "venue": "THE_BUFFET",
+      "party": 2,
+      "archetype": "COUPLE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0415",
+      "venue": "THE_BUFFET",
+      "party": 2,
+      "archetype": "COUPLE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0438",
+      "venue": "THE_BUFFET",
+      "party": 2,
+      "archetype": "COUPLE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0448",
+      "venue": "THE_BUFFET",
+      "party": 3,
+      "archetype": "FAMILY",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0461",
+      "venue": "THE_BUFFET",
+      "party": 2,
+      "archetype": "LUXURY",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0477",
+      "venue": "THE_BUFFET",
+      "party": 3,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0479",
+      "venue": "THE_BUFFET",
+      "party": 3,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0483",
+      "venue": "THE_BUFFET",
+      "party": 2,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0506",
+      "venue": "THE_BUFFET",
+      "party": 2,
+      "archetype": "BUSINESS",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0526",
+      "venue": "THE_BUFFET",
+      "party": 1,
+      "archetype": "BUSINESS",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0529",
+      "venue": "THE_BUFFET",
+      "party": 2,
+      "archetype": "LEISURE",
+      "outcome": "ACCEPT",
+      "reason": "-",
+      "rerouted": false,
+      "price_index": 1.0
+    },
+    {
+      "day": 0,
+      "slot": "07:00",
+      "agent": "g0530",
+      "venue": "THE_BUFFET",
+      "party": 3,
+      "archetype": "FAMILY",
       "outcome": "ACCEPT",
       "reason": "-",
       "rerouted": false,
@@ -4247,9 +6452,9 @@
   ],
   "rejections_sample": [
     {
-      "day": 2,
-      "slot": "BREAKFAST",
-      "agent": "g0516",
+      "day": 5,
+      "slot": "11:00",
+      "agent": "g0463",
       "venue": "THE_PAVILION",
       "party": 2,
       "archetype": "COUPLE",
@@ -4258,55 +6463,22 @@
       "rerouted": false
     },
     {
-      "day": 2,
-      "slot": "BREAKFAST",
-      "agent": "g0551",
+      "day": 5,
+      "slot": "11:00",
+      "agent": "g0478",
       "venue": "THE_PAVILION",
-      "party": 4,
-      "archetype": "FAMILY",
+      "party": 2,
+      "archetype": "LEISURE",
       "outcome": "REJECT",
       "reason": "CAPACITY",
       "rerouted": false
     },
     {
-      "day": 2,
-      "slot": "BREAKFAST",
-      "agent": "g0553",
+      "day": 5,
+      "slot": "11:00",
+      "agent": "g0498",
       "venue": "THE_PAVILION",
       "party": 3,
-      "archetype": "LEISURE",
-      "outcome": "REJECT",
-      "reason": "CAPACITY",
-      "rerouted": false
-    },
-    {
-      "day": 4,
-      "slot": "BREAKFAST",
-      "agent": "g0548",
-      "venue": "THE_PAVILION",
-      "party": 2,
-      "archetype": "COUPLE",
-      "outcome": "REJECT",
-      "reason": "CAPACITY",
-      "rerouted": false
-    },
-    {
-      "day": 5,
-      "slot": "AFTERNOON",
-      "agent": "g0572",
-      "venue": "THE_PAVILION",
-      "party": 2,
-      "archetype": "LEISURE",
-      "outcome": "REJECT",
-      "reason": "CAPACITY",
-      "rerouted": false
-    },
-    {
-      "day": 5,
-      "slot": "BREAKFAST",
-      "agent": "g0334",
-      "venue": "THE_PAVILION",
-      "party": 4,
       "archetype": "FAMILY",
       "outcome": "REJECT",
       "reason": "CAPACITY",
@@ -4314,41 +6486,8 @@
     },
     {
       "day": 5,
-      "slot": "BREAKFAST",
-      "agent": "g0343",
-      "venue": "THE_PAVILION",
-      "party": 2,
-      "archetype": "COUPLE",
-      "outcome": "REJECT",
-      "reason": "CAPACITY",
-      "rerouted": false
-    },
-    {
-      "day": 5,
-      "slot": "BREAKFAST",
-      "agent": "g0382",
-      "venue": "THE_PAVILION",
-      "party": 2,
-      "archetype": "COUPLE",
-      "outcome": "REJECT",
-      "reason": "CAPACITY",
-      "rerouted": false
-    },
-    {
-      "day": 5,
-      "slot": "BREAKFAST",
-      "agent": "g0441",
-      "venue": "THE_PAVILION",
-      "party": 2,
-      "archetype": "LEISURE",
-      "outcome": "REJECT",
-      "reason": "CAPACITY",
-      "rerouted": false
-    },
-    {
-      "day": 5,
-      "slot": "BREAKFAST",
-      "agent": "g0458",
+      "slot": "11:00",
+      "agent": "g0548",
       "venue": "THE_PAVILION",
       "party": 2,
       "archetype": "COUPLE",
@@ -4363,8 +6502,8 @@
     "errors": []
   },
   "speed": {
-    "wall_seconds": 0.132,
-    "speedup_realtime_x": 4578400.3
+    "wall_seconds": 0.356,
+    "speedup_realtime_x": 1701052.5
   },
   "experiment": "run"
 }

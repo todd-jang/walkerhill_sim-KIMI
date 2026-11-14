@@ -9,11 +9,12 @@ import json
 import os
 import sys
 import urllib.request
+import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from typing import Dict, List, Optional, Sequence, Tuple
 
-from .agents import Guest, SLOT_VISIT_P, decide_venue
+from .agents import Guest, decide_venue
 from .intent import Intent, parse_intents
 from .world import SLOTS, World
 
@@ -39,6 +40,7 @@ class DayBatchClient:
         self.fallbacks = 0
         self.errors: List[str] = []
         self.chunk_size = int(os.environ.get("MIROFISH_LLM_CHUNK", "10"))
+        self.retries = int(os.environ.get("MIROFISH_LLM_RETRIES", "3"))
         self.timeout = int(os.environ.get("MIROFISH_LLM_TIMEOUT", "300"))
         self.workers = int(os.environ.get("MIROFISH_LLM_WORKERS", "2"))
 
@@ -62,23 +64,31 @@ class DayBatchClient:
             return self._mock(day_index, guests, open_by_slot, price_index, prev_fill, seed)
 
         chunks = [list(guests[i:i + self.chunk_size]) for i in range(0, len(guests), self.chunk_size)] or [[]]
-        try:
-            with ThreadPoolExecutor(max_workers=min(self.workers, len(chunks))) as pool:
-                futures = [
-                    pool.submit(self._llm, day_index, day, chunk, world, open_by_slot,
-                                price_index, prev_fill, closed_extra)
-                    for chunk in chunks if chunk
-                ]
-                intents: List[Intent] = []
-                for f in futures:
-                    intents.extend(f.result())
-            self.calls += len(chunks)
-            return intents
-        except Exception as exc:
-            self.fallbacks += 1
-            self.errors.append(f"day{day_index}: {exc}")
-            print(f"[DayBatchClient] {self.mode} 호출 실패({exc}) → mock 대체", file=sys.stderr)
-            return self._mock(day_index, guests, open_by_slot, price_index, prev_fill, seed)
+        last_exc: Optional[Exception] = None
+        for attempt in range(1, self.retries + 1):
+            try:
+                with ThreadPoolExecutor(max_workers=min(self.workers, len(chunks))) as pool:
+                    futures = [
+                        pool.submit(self._llm, day_index, day, chunk, world, open_by_slot,
+                                    price_index, prev_fill, closed_extra)
+                        for chunk in chunks if chunk
+                    ]
+                    intents: List[Intent] = []
+                    for f in futures:
+                        intents.extend(f.result())
+                self.calls += len(chunks)
+                if attempt > 1:
+                    self.errors.append(f"day{day_index}: attempt {attempt} 성공")
+                return intents
+            except Exception as exc:
+                last_exc = exc
+                self.errors.append(f"day{day_index}: attempt {attempt} 실패 — {exc}")
+                if attempt < self.retries:
+                    time.sleep(15 * attempt)
+        self.fallbacks += 1
+        self.errors.append(f"day{day_index}: {last_exc} (mock 대체)")
+        print(f"[DayBatchClient] {self.mode} 호출 실패({last_exc}) → mock 대체", file=sys.stderr)
+        return self._mock(day_index, guests, open_by_slot, price_index, prev_fill, seed)
 
     def _mock(self, day_index, guests, open_by_slot, price_index, prev_fill, seed) -> List[Intent]:
         out: List[Intent] = []
@@ -129,7 +139,7 @@ class DayBatchClient:
         body = {
             "model": self.model,
             "temperature": 0.0,
-            "max_tokens": 4000,
+            "max_tokens": 8000,
             "messages": [
                 {"role": "system", "content": "You are a multi-agent hotel guest simulator. Output JSON only."},
                 {"role": "user", "content": prompt},
