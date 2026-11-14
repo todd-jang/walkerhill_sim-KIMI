@@ -133,7 +133,197 @@ init();
 """
 
 
-SWARM_JS = '\nconst SWARM = DATA.swarm;\n(function () {\n  if (!SWARM) return;\n  const cv = document.getElementById(\'swarm\'); if (!cv) return;\n  const ctx = cv.getContext(\'2d\', {willReadFrequently: true});\n  const W = cv.width, H = cv.height, CX = W / 2, CY = H / 2 + 6, RX = W * 0.38, RY = H * 0.34;\n  const venues = Object.keys(ARM.venue_slot_fill || {});\n  const pos = {};\n  venues.forEach((v, i) => {\n    const a = -Math.PI / 2 + i * 2 * Math.PI / venues.length;\n    pos[v] = [CX + RX * Math.cos(a), CY + RY * Math.sin(a)];\n  });\n  const COLORS = {FAMILY:\'#0b5394\', COUPLE:\'#7b3fa0\', BUSINESS:\'#1a7f37\', LUXURY:\'#b8860b\', LEISURE:\'#0f7c8a\'};\n  const dots = {};\n  SWARM.agents.forEach((a, i) => {\n    dots[a.i] = {arch: a.a, x: CX, y: CY, tx: CX, ty: CY, ok: 1, active: 0, r: 2.6 + (i % 3) * 0.5};\n  });\n  let fi = 0, playing = false, timer = null, swSpeed = 24, seed = 12345;\n  function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }\n\n  function setFrame(f) {\n    const fr = SWARM.frames[f]; if (!fr) return;\n    Object.values(dots).forEach(d => d.active = 0);\n    let rej = 0;\n    fr.a.forEach(([id, v, ok]) => {\n      const d = dots[id], hub = pos[v]; if (!d || !hub) return;\n      d.tx = hub[0] + (rnd() - 0.5) * 44; d.ty = hub[1] + (rnd() - 0.5) * 44;\n      d.active = 1; d.ok = ok; if (!ok) rej++;\n    });\n    const c = document.getElementById(\'sw-counter\');\n    if (c) c.textContent = `Day ${fr.d + 1} · ${fr.s}`;\n    const fEl = document.getElementById(\'sw-frame\'); if (fEl) fEl.textContent = `${f + 1} / ${SWARM.frames.length}`;\n    const rEl = document.getElementById(\'sw-rej\'); if (rEl) rEl.textContent = rej;\n  }\n\n  function draw() {\n    ctx.clearRect(0, 0, W, H);\n    venues.forEach(v => {\n      const xy = pos[v];\n      ctx.beginPath(); ctx.arc(xy[0], xy[1], 17, 0, Math.PI * 2);\n      ctx.fillStyle = \'#eef3f9\'; ctx.fill();\n      ctx.strokeStyle = \'#0b5394\'; ctx.lineWidth = 1.2; ctx.stroke();\n      ctx.fillStyle = \'#1a1a1a\'; ctx.font = \'600 10px "Apple SD Gothic Neo", sans-serif\';\n      ctx.textAlign = \'center\';\n      ctx.fillText(v.replace(\'THE_\', \'\').replace(/_/g, \' \'), xy[0], xy[1] - 24);\n    });\n    let moving = 0;\n    Object.values(dots).forEach(d => {\n      if (d.active) { d.x += (d.tx - d.x) * 0.14; d.y += (d.ty - d.y) * 0.14; moving++; }\n      const far = Math.abs(d.x - CX) > 1.5 || Math.abs(d.y - CY) > 1.5;\n      if (!d.active && !far) return;\n      ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);\n      ctx.fillStyle = d.active ? (d.ok ? (COLORS[d.arch] || \'#57606a\') : \'#b42318\') : \'#9aa4ae\';\n      ctx.globalAlpha = d.active ? 0.92 : 0.10; ctx.fill(); ctx.globalAlpha = 1;\n      if (d.active && !d.ok) {\n        ctx.beginPath(); ctx.arc(d.x, d.y, d.r + 2.4, 0, Math.PI * 2);\n        ctx.strokeStyle = \'#b42318\'; ctx.lineWidth = 1; ctx.stroke();\n      }\n    });\n    const mEl = document.getElementById(\'sw-moving\'); if (mEl) mEl.textContent = moving;\n    requestAnimationFrame(draw);\n  }\n\n  function tick() {\n    if (fi >= SWARM.frames.length) { if (timer) clearInterval(timer); timer = null; playing = false; return; }\n    setFrame(fi); fi++;\n  }\n  function play() {\n    if (playing) return; playing = true;\n    if (fi >= SWARM.frames.length) fi = 0;\n    timer = setInterval(tick, 900 / swSpeed);\n  }\n  function stop() { playing = false; if (timer) clearInterval(timer); timer = null; }\n  function setSwSpeed(v) {\n    swSpeed = v;\n    document.querySelectorAll(\'button[data-sw-speed]\').forEach(b =>\n      b.classList.toggle(\'on\', Number(b.dataset.swSpeed) === v));\n    if (playing) { stop(); play(); }\n  }\n  document.getElementById(\'sw-play\').addEventListener(\'click\', play);\n  document.getElementById(\'sw-reset\').addEventListener(\'click\', () => {\n    stop(); fi = 0;\n    Object.values(dots).forEach(d => { d.x = CX; d.y = CY; d.active = 0; });\n    setFrame(0);\n    const c = document.getElementById(\'sw-counter\'); if (c) c.textContent = \'준비 — 재생을 누르세요\';\n  });\n  document.querySelectorAll(\'button[data-sw-speed]\').forEach(b =>\n    b.addEventListener(\'click\', () => setSwSpeed(Number(b.dataset.swSpeed))));\n  setSwSpeed(24);\n  setFrame(0);\n  requestAnimationFrame(draw);\n})();\n'
+WH_MAP = {
+    "river": {"x": 0.0, "y": 0.855, "w": 1.0, "h": 0.145},
+    "areas": [
+        {"name": "숲 · 산책로", "x": 0.10, "y": 0.10, "w": 0.26, "h": 0.26, "color": "#E8EFE6"},
+        {"name": "수영장", "x": 0.43, "y": 0.66, "w": 0.16, "h": 0.16, "color": "#DCE9F2", "round": True},
+    ],
+    "buildings": [
+        {"name": "비스타 워커힐", "x": 0.10, "y": 0.36, "w": 0.28, "h": 0.28},
+        {"name": "그랜드 워커힐", "x": 0.52, "y": 0.30, "w": 0.28, "h": 0.34},
+        {"name": "더글라스 하우스", "x": 0.30, "y": 0.08, "w": 0.16, "h": 0.14},
+    ],
+    "venues": {
+        "SKYARD": [0.17, 0.40], "LUX_BAR": [0.14, 0.57], "THE_PAVILION": [0.30, 0.56],
+        "THE_BUFFET": [0.64, 0.47], "LE_PASSAGE": [0.56, 0.57], "MYONGWOLGWAN": [0.72, 0.38],
+        "ONDAL": [0.70, 0.56], "GEUMRYONG": [0.59, 0.36], "MOEGI": [0.76, 0.51],
+        "WELLNESS_SAUNA": [0.67, 0.60], "GRAND_POOL": [0.51, 0.74], "PIZZA_HILL": [0.63, 0.72],
+        "FOREST_PARK": [0.22, 0.20],
+    },
+    "labels": {
+        "SKYARD": "스카이야드", "LUX_BAR": "럭스바", "THE_PAVILION": "파빌리온",
+        "THE_BUFFET": "더뷔페", "LE_PASSAGE": "르파사쥬", "MYONGWOLGWAN": "명월관",
+        "ONDAL": "온달", "GEUMRYONG": "금룡", "MOEGI": "모에기",
+        "WELLNESS_SAUNA": "사우나", "GRAND_POOL": "수영장", "PIZZA_HILL": "피자힐",
+        "FOREST_PARK": "산책로",
+    },
+}
+
+SWARM_JS = r'''const SWARM = DATA.swarm;
+(function () {
+  if (!SWARM) return;
+  const cv = document.getElementById('swarm'); if (!cv) return;
+  const ctx = cv.getContext('2d', {willReadFrequently: true});
+  const W = cv.width, H = cv.height;
+  const MAP = __MAP__;
+  const WH = document.body.classList.contains('wh');
+  const COLORS = WH
+    ? {FAMILY:'#1F3A5F', COUPLE:'#6B4E7A', BUSINESS:'#2F6B46', LUXURY:'#B08A46', LEISURE:'#4E7C7A'}
+    : {FAMILY:'#0b5394', COUPLE:'#7b3fa0', BUSINESS:'#1a7f37', LUXURY:'#b8860b', LEISURE:'#0f7c8a'};
+  const HUB_FILL = WH ? '#F6EFE2' : '#eef3f9';
+  const HUB_STROKE = WH ? '#B08A46' : '#0b5394';
+  const HUB_TEXT = WH ? '#12233F' : '#1a1a1a';
+  const REJECT = WH ? '#A33B2B' : '#b42318';
+  const LOBBY = [W * 0.58, H * 0.50];
+
+  const venues = Object.keys(MAP.venues).filter(v => ARM.venue_slot_fill && ARM.venue_slot_fill[v]);
+  const pos = {};
+  venues.forEach(v => { const xy = MAP.venues[v]; pos[v] = [xy[0] * W, xy[1] * H]; });
+
+  const dots = {};
+  SWARM.agents.forEach((a, i) => {
+    dots[a.i] = {arch: a.a, x: LOBBY[0] + (i % 7) * 3, y: LOBBY[1] + Math.floor(i / 7) * 3,
+                 tx: LOBBY[0], ty: LOBBY[1], ok: 1, active: 0, seen: 0,
+                 r: 2.8 + (i % 3) * 0.6};
+  });
+  let fi = 0, playing = false, timer = null, swSpeed = 24, seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+
+  function setFrame(f) {
+    const fr = SWARM.frames[f]; if (!fr) return;
+    Object.values(dots).forEach(d => { d.active = 0; });
+    let rej = 0;
+    fr.a.forEach(([id, v, ok]) => {
+      const d = dots[id], hub = pos[v]; if (!d || !hub) return;
+      d.tx = hub[0] + (rnd() - 0.5) * 46;
+      d.ty = hub[1] + (rnd() - 0.5) * 40 + 8;
+      d.active = 1; d.seen = 1; d.ok = ok;
+      if (!ok) rej++;
+    });
+    document.getElementById('sw-counter').textContent = `Day ${fr.d + 1} · ${fr.s}`;
+    document.getElementById('sw-frame').textContent = `${f + 1} / ${SWARM.frames.length}`;
+    document.getElementById('sw-rej').textContent = rej;
+  }
+
+  function rr(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y); ctx.closePath();
+  }
+
+  function drawMap() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = WH ? '#FAF7F2' : '#fbfcfd'; ctx.fillRect(0, 0, W, H);
+    const rv = MAP.river;
+    ctx.fillStyle = WH ? '#D9E6EF' : '#dbeafe';
+    ctx.fillRect(rv.x * W, rv.y * H, rv.w * W, rv.h * H);
+    ctx.fillStyle = WH ? '#5B7C93' : '#6b8fb3';
+    ctx.font = '600 11px "Apple SD Gothic Neo", sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('한강', rv.x * W + 14, rv.y * H + 26);
+    MAP.areas.forEach(a => {
+      ctx.fillStyle = a.color;
+      if (a.round) {
+        ctx.beginPath();
+        ctx.ellipse((a.x + a.w / 2) * W, (a.y + a.h / 2) * H, a.w * W / 2, a.h * H / 2, 0, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        rr(a.x * W, a.y * H, a.w * W, a.h * H, 18); ctx.fill();
+      }
+      ctx.fillStyle = WH ? '#6B6257' : '#57606a';
+      ctx.font = '600 10px "Apple SD Gothic Neo", sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(a.name, (a.x + a.w / 2) * W, (a.y + a.h / 2) * H + 4);
+    });
+    MAP.buildings.forEach(b => {
+      rr(b.x * W, b.y * H, b.w * W, b.h * H, 10);
+      ctx.fillStyle = '#ffffff'; ctx.fill();
+      ctx.strokeStyle = WH ? '#CFC6B6' : '#d0d7de'; ctx.lineWidth = 1.4; ctx.stroke();
+      ctx.fillStyle = WH ? '#12233F' : '#1a1a1a';
+      ctx.font = '700 11px "Apple SD Gothic Neo", sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(b.name, (b.x + b.w / 2) * W, b.y * H - 7);
+    });
+    const codes = venues;
+    ctx.strokeStyle = WH ? 'rgba(176,138,70,0.38)' : 'rgba(11,83,148,0.22)';
+    ctx.setLineDash([3, 5]); ctx.lineWidth = 1.2;
+    for (let i = 0; i < codes.length; i++) {
+      for (let j = i + 1; j < codes.length; j++) {
+        const a = pos[codes[i]], b = pos[codes[j]];
+        if (Math.hypot(a[0] - b[0], a[1] - b[1]) > 300) continue;
+        ctx.beginPath(); ctx.moveTo(a[0], a[1]);
+        ctx.quadraticCurveTo((a[0] + b[0]) / 2 + 14, (a[1] + b[1]) / 2 - 14, b[0], b[1]);
+        ctx.stroke();
+      }
+    }
+    ctx.setLineDash([]);
+  }
+
+  let lastT = 0;
+  function draw() {
+    const now = performance.now();
+    const dt = lastT ? Math.min(0.05, (now - lastT) / 1000) : 0.016; lastT = now;
+    drawMap();
+    venues.forEach(v => {
+      const xy = pos[v];
+      ctx.beginPath(); ctx.arc(xy[0], xy[1], 12, 0, Math.PI * 2);
+      ctx.fillStyle = HUB_FILL; ctx.fill();
+      ctx.strokeStyle = HUB_STROKE; ctx.lineWidth = 1.4; ctx.stroke();
+      ctx.fillStyle = HUB_TEXT; ctx.font = '700 10px "Apple SD Gothic Neo", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(MAP.labels[v] || v, xy[0], xy[1] + 26);
+    });
+    let moving = 0;
+    const SPEED = 30 * swSpeed;
+    Object.values(dots).forEach(d => {
+      const dx = d.tx - d.x, dy = d.ty - d.y, dist = Math.hypot(dx, dy);
+      if (d.active && dist > 1.5) {
+        const step = Math.min(dist, SPEED * dt);
+        d.x += dx / dist * step; d.y += dy / dist * step; moving++;
+      }
+      if (!d.seen) return;
+      ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+      ctx.fillStyle = d.active ? (d.ok ? (COLORS[d.arch] || '#57606a') : REJECT) : (WH ? '#CFC6B6' : '#9aa4ae');
+      ctx.globalAlpha = d.active ? 0.95 : 0.14; ctx.fill(); ctx.globalAlpha = 1;
+      if (d.active && !d.ok) {
+        ctx.beginPath(); ctx.arc(d.x, d.y, d.r + 2.4, 0, Math.PI * 2);
+        ctx.strokeStyle = REJECT; ctx.lineWidth = 1; ctx.stroke();
+      }
+    });
+    document.getElementById('sw-moving').textContent = moving;
+    requestAnimationFrame(draw);
+  }
+
+  function tick() {
+    if (fi >= SWARM.frames.length) { if (timer) clearInterval(timer); timer = null; playing = false; return; }
+    setFrame(fi); fi++;
+  }
+  function play() {
+    if (playing) return; playing = true;
+    if (fi >= SWARM.frames.length) fi = 0;
+    timer = setInterval(tick, 900 / swSpeed);
+  }
+  function stop() { playing = false; if (timer) clearInterval(timer); timer = null; }
+  function setSwSpeed(v) {
+    swSpeed = v;
+    document.querySelectorAll('button[data-sw-speed]').forEach(b =>
+      b.classList.toggle('on', Number(b.dataset.swSpeed) === v));
+    if (playing) { stop(); play(); }
+  }
+  document.getElementById('sw-play').addEventListener('click', play);
+  document.getElementById('sw-reset').addEventListener('click', () => {
+    stop(); fi = 0;
+    Object.values(dots).forEach(d => { d.x = LOBBY[0]; d.y = LOBBY[1]; d.active = 0; d.seen = 0; });
+    setFrame(0);
+    document.getElementById('sw-counter').textContent = '준비 — 재생을 누르세요';
+  });
+  document.querySelectorAll('button[data-sw-speed]').forEach(b =>
+    b.addEventListener('click', () => setSwSpeed(Number(b.dataset.swSpeed))));
+  setSwSpeed(24);
+  setFrame(0);
+  requestAnimationFrame(draw);
+})();
+'''
 
 
 def heat_table(venue_slot: dict) -> str:
@@ -216,7 +406,7 @@ def build(data: dict, replay_only: bool = False, theme: str = "walkerhill") -> s
 
     js = JS.replace("__DATA__", json.dumps(data, ensure_ascii=False).replace("</", "<\\/"))
     if data.get("swarm") and not replay_only:
-        js += "\n" + SWARM_JS
+        js += "\n" + SWARM_JS.replace("__MAP__", json.dumps(WH_MAP, ensure_ascii=False))
     return f"""<!DOCTYPE html>
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
