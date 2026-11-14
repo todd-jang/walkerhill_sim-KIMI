@@ -13,9 +13,15 @@ from typing import Dict, List, Optional, Sequence, Set
 from .agents import ARCHETYPES, Guest, decide_venue, fill_ratio_by_venue_slot
 from .intent import Intent
 from .llm import DayBatchClient
+from .queueing import QueueBoard
+from .routing import route
 from .world import SLOTS, World
 
-REJECTIONS = ("CLOSED", "SLOT_DUP", "CAPACITY")
+REJECTIONS = ("CLOSED", "SLOT_DUP", "QUEUE")
+
+
+def world_slot_minutes() -> int:
+    return SLOTS[0][2] - SLOTS[0][1] if SLOTS else 60
 REROUTE_ATTEMPTS = 2
 
 
@@ -39,6 +45,8 @@ def simulate(
     client: DayBatchClient,
     include_events: bool = False,
     swarm_agents: Optional[Sequence[str]] = None,
+    service_minutes: float = 20.0,
+    patience_minutes: float = 25.0,
 ) -> Dict:
     t0 = time.perf_counter()
     guests = copy.deepcopy(list(guests))
@@ -48,6 +56,8 @@ def simulate(
     swarm_frames: List[dict] = []
     prev_fill: Dict[str, float] = {v: 0.0 for v in world.venues}
     seat_total = {v: world.venues[v].seats for v in world.venues}
+    queue = QueueBoard(service_minutes=service_minutes, patience_minutes=patience_minutes,
+                       slot_minutes=world_slot_minutes())
     daily: List[dict] = []
 
     for day_index in range(horizon):
@@ -64,15 +74,18 @@ def simulate(
 
         def seat(guest: Guest, slot: str, venue: str):
             if venue not in open_now[slot]:
-                return False, "CLOSED"
+                return False, "CLOSED", 0.0, 0.0, [venue]
             if (slot, guest.id) in seated:
-                return False, "SLOT_DUP"
-            cap = world.venues[venue].capacity(scenario.capacity_scale)
-            if fill.get((slot, venue), 0) + guest.party > cap:
-                return False, "CAPACITY"
+                return False, "SLOT_DUP", 0.0, 0.0, [venue]
+            path, travel = route(guest.current_venue, venue)
+            seats = world.venues[venue].capacity(scenario.capacity_scale)
+            status, wait = queue.admit(day_index, slot, venue, seats, guest.party,
+                                       arrive_min=travel, slot_end_min=world_slot_minutes())
+            if status != "SEATED":
+                return False, "QUEUE", wait, travel, path
             fill[(slot, venue)] = fill.get((slot, venue), 0) + guest.party
             seated.add((slot, guest.id))
-            return True, "-"
+            return True, "-", wait, travel, path
 
         for intent in sorted(intents, key=lambda i: (i.slot, i.agent_id)):
             guest = next((g for g in present if g.id == intent.agent_id), None)
@@ -81,12 +94,15 @@ def simulate(
             base = {"day": day_index, "slot": intent.slot, "agent": guest.id,
                     "venue": intent.venue, "party": guest.party,
                     "archetype": guest.archetype}
-            ok, reason = seat(guest, intent.slot, intent.venue)
+            ok, reason, wait_min, travel_min, path = seat(guest, intent.slot, intent.venue)
             if ok:
                 guest.on_accept(day_index, intent.slot, intent.venue,
                                 guest.party * scenario.price_of(intent.venue))
+                guest.current_venue = intent.venue
                 day_events.append({**base, "outcome": "ACCEPT", "reason": "-", "rerouted": False,
-                                   "price_index": scenario.price_of(intent.venue)})
+                                   "price_index": scenario.price_of(intent.venue),
+                                   "wait_min": round(wait_min, 1), "travel_min": round(travel_min, 1),
+                                   "path": path})
                 continue
             guest.on_reject(day_index, intent.slot, intent.venue, reason)
             rerouted = False
@@ -98,15 +114,18 @@ def simulate(
                     if alt is None or alt in tried:
                         break
                     tried.append(alt)
-                    ok2, _ = seat(guest, intent.slot, alt)
+                    ok2, _r2, wait2, travel2, path2 = seat(guest, intent.slot, alt)
                     if ok2:
                         guest.on_accept(day_index, intent.slot, alt,
                                         guest.party * scenario.price_of(alt))
+                        guest.current_venue = alt
                         guest.reroutes += 1
                         day_events.append({**base, "venue": alt, "outcome": "ACCEPT", "reason": "-",
                                            "rerouted": True, "from": intent.venue,
                                            "first_reject": reason,
-                                           "price_index": scenario.price_of(alt)})
+                                           "price_index": scenario.price_of(alt),
+                                           "wait_min": round(wait2, 1), "travel_min": round(travel2, 1),
+                                           "path": path2})
                         rerouted = True
                         break
             if not rerouted:
@@ -126,7 +145,9 @@ def simulate(
             "exhausted": sum(1 for g in present if g.exhausted),
             "reject_closed": sum(1 for e in day_events if e.get("reason") == "CLOSED"),
             "reject_dup": sum(1 for e in day_events if e.get("reason") == "SLOT_DUP"),
-            "reject_cap": sum(1 for e in day_events if e.get("reason") == "CAPACITY"),
+            "reject_queue": sum(1 for e in day_events if e.get("reason") == "QUEUE"),
+            "avg_wait_min": round(sum(e.get("wait_min", 0.0) for e in accepts) / max(1, len(accepts)), 1),
+            "avg_travel_min": round(sum(e.get("travel_min", 0.0) for e in accepts) / max(1, len(accepts)), 1),
         })
         if swarm_set:
             by_slot: Dict[str, Dict[str, list]] = {s: {} for s, _, _ in SLOTS}
@@ -174,6 +195,9 @@ def simulate(
             "unique_guests_served": len({e["agent"] for e in accepts_all}),
             "spend_proxy": round(sum(e["party"] * e["price_index"] for e in accepts_all), 1),
             "reroutes": sum(1 for e in accepts_all if e.get("rerouted")),
+            "avg_wait_min": round(sum(e.get("wait_min", 0.0) for e in accepts_all) / max(1, len(accepts_all)), 1),
+            "avg_travel_min": round(sum(e.get("travel_min", 0.0) for e in accepts_all) / max(1, len(accepts_all)), 1),
+            "balked_parties": sum(1 for e in events if e.get("reason") == "QUEUE"),
             "avg_satisfaction": round(sum(g.satisfaction for g in guests) / max(1, len(guests)), 3),
             "exhausted_guests": sum(1 for g in guests if g.exhausted),
             "satisfaction_by_archetype": {

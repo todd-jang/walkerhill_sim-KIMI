@@ -67,6 +67,7 @@ class Guest:
     history: List[tuple] = field(default_factory=list)
     rejections: int = 0
     reroutes: int = 0
+    current_venue: str | None = None
 
     def present_on(self, day_index: int) -> bool:
         return self.arrival_day <= day_index < self.arrival_day + self.nights

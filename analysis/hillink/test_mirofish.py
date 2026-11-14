@@ -12,6 +12,8 @@ from mirofish.agents import Guest, decide_venue, generate_guests
 from mirofish.engine import Scenario, compare, simulate
 from mirofish.intent import parse_intents
 from mirofish.llm import DayBatchClient
+from mirofish.queueing import QueueBoard
+from mirofish.routing import LOBBY, route, travel_minutes
 from mirofish.world import SLOTS, World
 
 MIN_SPEEDUP = 24.0
@@ -174,6 +176,63 @@ class SwarmTests(unittest.TestCase):
         gs = generate_guests(50, 2, 3)
         res = simulate(world, gs, 2, 3, Scenario(), DayBatchClient(mode="mock"))
         self.assertNotIn("swarm", res)
+
+
+class QueueTests(unittest.TestCase):
+    def test_batch_cycles_and_wait(self):
+        q = QueueBoard(service_minutes=20, patience_minutes=60, slot_minutes=60)
+        self.assertEqual(q.queue(0, "08:00", "THE_BUFFET", 5).capacity, 15)
+        first = q.admit(0, "08:00", "THE_BUFFET", 5, party=5, arrive_min=0, slot_end_min=60)
+        second = q.admit(0, "08:00", "THE_BUFFET", 5, party=5, arrive_min=0, slot_end_min=60)
+        self.assertEqual(first[0], "SEATED")
+        self.assertEqual(first[1], 0.0)
+        self.assertEqual(second[0], "SEATED")
+        self.assertEqual(second[1], 20.0)
+
+    def test_balk_when_patience_exceeded(self):
+        q = QueueBoard(service_minutes=20, patience_minutes=5, slot_minutes=60)
+        for _ in range(3):
+            q.admit(0, "08:00", "THE_BUFFET", 5, party=5, arrive_min=0, slot_end_min=60)
+        status, wait = q.admit(0, "08:00", "THE_BUFFET", 5, party=5, arrive_min=0, slot_end_min=60)
+        self.assertEqual(status, "BALK")
+
+    def test_queue_capacity_exhaustion(self):
+        q = QueueBoard(service_minutes=60, patience_minutes=60, slot_minutes=60)
+        self.assertEqual(q.queue(0, "08:00", "THE_BUFFET", 4).capacity, 4)
+        self.assertEqual(q.admit(0, "08:00", "THE_BUFFET", 4, 4, 0, 60)[0], "SEATED")
+        self.assertEqual(q.admit(0, "08:00", "THE_BUFFET", 4, 2, 0, 60)[0], "BALK")
+
+
+class RoutingTests(unittest.TestCase):
+    def test_same_building_direct(self):
+        path, minutes = route("THE_BUFFET", "MYONGWOLGWAN")
+        self.assertEqual(path, ["THE_BUFFET", "MYONGWOLGWAN"])
+        self.assertGreater(minutes, 0)
+
+    def test_cross_building_via_lobby(self):
+        path, minutes = route("THE_PAVILION", "ONDAL")
+        self.assertIn("LOBBY", path)
+        self.assertEqual(path[1], "LOBBY")
+        self.assertGreater(minutes, travel_minutes("THE_BUFFET", "GEUMRYONG"))
+
+    def test_same_venue_zero(self):
+        path, minutes = route("ONDAL", "ONDAL")
+        self.assertEqual(minutes, 0.0)
+
+
+class QueueEngineInvariantTests(unittest.TestCase):
+    def test_accepted_events_respect_slot_budget(self):
+        world = World()
+        gs = generate_guests(1500, 7, 11)
+        res = simulate(world, gs, 7, 11, Scenario(), DayBatchClient(mode="mock"),
+                       include_events=True, service_minutes=20, patience_minutes=25)
+        slot_min = SLOTS[0][2] - SLOTS[0][1]
+        acc = [e for e in res["events"] if e["outcome"] == "ACCEPT"]
+        self.assertTrue(acc)
+        for e in acc:
+            self.assertLessEqual(e["wait_min"] + e["travel_min"] + 30, slot_min + 1e-6)
+            self.assertLessEqual(e["wait_min"], 25)
+        self.assertIn("QUEUE", res["summary"]["rejections"])
 
 
 if __name__ == "__main__":

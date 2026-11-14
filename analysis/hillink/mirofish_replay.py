@@ -99,7 +99,7 @@ function showDay(i) {
   let visits = 0, cap = 0, dup = 0, closed = 0, reroute = 0;
   for (let k = 0; k <= i; k++) {
     const d = daily[k];
-    visits += d.visits; cap += d.reject_cap; dup += d.reject_dup; closed += d.reject_closed;
+    visits += d.visits; cap += (d.reject_queue || 0); dup += d.reject_dup; closed += d.reject_closed;
     reroute += (d.reroutes || 0);
   }
   $('#counter').textContent = `Day ${daily[i].day + 1} / ${daily.length}`;
@@ -365,13 +365,13 @@ def build(data: dict, replay_only: bool = False, theme: str = "walkerhill") -> s
   <div class="kpi"><div class="v">{sp['speedup_realtime_x']:,.0f}×</div><div class="l">실측 배속</div></div>"""
         verdict = (f"<div class='verdict'>판정: <b>{data['scenario']}</b> 시나리오는 기준 대비 방문 "
                    f"<b>{d['visits']:+,}</b> · 지출 프록시 <b>{d['spend_proxy']:+,.1f}</b> · 수용률 {d['accept_rate']:+.2%}pp · "
-                   f"CAPACITY 거절 {d['rejections']['CAPACITY']:+,} — 동일 손님·동일 시드 paired 비교</div>")
+                   f"대기 포기(QUEUE) {d['rejections']['QUEUE']:+,} — 동일 손님·동일 시드 paired 비교</div>")
     else:
         kpis = f"""
   <div class="kpi"><div class="v">{s['visits']:,}</div><div class="l">방문 (수용)</div></div>
   <div class="kpi"><div class="v">{s['accept_rate']:.1%}</div><div class="l">수용률</div></div>
   <div class="kpi"><div class="v">{s.get('reroutes', 0):,}</div><div class="l">재경로 (거절→대안)</div></div>
-  <div class="kpi"><div class="v">{s.get('avg_satisfaction', 0):.2f}</div><div class="l">평균 만족도</div></div>
+  <div class="kpi"><div class="v">{s.get('avg_wait_min', 0):.1f}분</div><div class="l">평균 대기 / 이동 {s.get('avg_travel_min', 0):.1f}분</div></div>
   <div class="kpi"><div class="v">{s['unique_guests_served']:,}</div><div class="l">서비스 손님 수</div></div>
   <div class="kpi"><div class="v">{sp['speedup_realtime_x']:,.0f}×</div><div class="l">실측 배속</div></div>"""
         verdict = ""
@@ -433,7 +433,7 @@ def build(data: dict, replay_only: bool = False, theme: str = "walkerhill") -> s
 <div class="chartbox">
   <div class="bars" id="bars"></div>
   <div class="live">누적 방문 <b id="lv-visits">0</b> · 재경로 <b id="lv-reroute">0</b> ·
-    좌석 초과 <b id="lv-cap">0</b> · 슬롯 중복 <b id="lv-dup">0</b> · 폐쇄 <b id="lv-closed">0</b></div>
+    대기 포기 <b id="lv-cap">0</b> · 슬롯 중복 <b id="lv-dup">0</b> · 폐쇄 <b id="lv-closed">0</b></div>
 </div>
 <h2>업장 × 슬롯 평균 점유율 <span class="note">개장일 기준 평균 — 좌석 대비 수용 인원</span></h2>
 {heat_table(arm['venue_slot_fill'])}
