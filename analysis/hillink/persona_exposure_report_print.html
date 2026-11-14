@@ -334,7 +334,21 @@ python3 -m unittest test_persona_exposure        # 39 tests OK</code></pre>
   <li>결론: validator의 제한일 반려는 보수적으로 <strong>유지</strong>. "패키지 이용자 허용" 정교화는 별도 결정 — 공지의 '일반 이용 제한' 문구를 패키지 이용과 구분해 해석해야 하므로.</li>
   <li><strong>비박(야영) 가설 — 불지지</strong>: ①원장에 캠프·텐트·비박 상품 없음(가든 BBQ 2건뿐) ②제한일 방문 239행 전부 단일 체류 형식(D 접미 0% — D 형식 의미는 미확정이라 보조 근거) ③방문 체류 전부 객실 보유자. 원장 한정에서 야외 캠프 비박 흔적은 없다.</li>
   <li><strong>근거 없음 묶음의 지속 축소</strong>: 키워드 보강('Wine Forest'·'불멍')으로 패키지 근거 61.5% → <strong>72.4%</strong>(173/239). 잔여 66체류 중에도 'KIDS PLAY at FOREST PARK' 같은 파크 결부 SKU 확인. 이전 "38.5% 근거 없음"은 27.6%로 수정.</li>
-  <li><strong>데이터 경계</strong>: 잔여 66체류(27.6%)의 방문 사유는 원장으로 확인 불가 — 회원·리워드 데이터가 원장에 없다(등급 컬럼은 연구 증등 ◎/○/△, 비고도 회원 흔적 없음). 리워드(회원) 데이터나 공지 3757 원문·현행화 확인 필요.</li>
+  <li><strong>데이터 경계</strong>: 잔여 무근거 체류의 방문 사유는 원장으로 확인 불가 — 회원·리워드 데이터가 원장에 없다(등급 컬럼은 연구 증등 ◎/○/△, 비고도 회원 흔적 없음). 리워드(회원) 데이터나 공지 3757 원문·현행화 확인 필요. 이후 §14.3에서 잔여 규모 재교정(66→58).</li>
+</ul>
+
+<h3>14.3 meal_other의 정체와 파크 체험 가설 (§14.2-7 추적)</h3>
+<p>사용자 가설 — "meal_other는 투숙이지만 외부 식당을 쓸 수 있고, 포레스트 파크에서 다양한 체험이 가능할 것" — 을 원장에서 검증했다.</p>
+<p><strong>정체 판명</strong>: meal_other는 객실이 아니라 <strong>IRD(룸서비스)의 0원 행</strong>(업장명 IRD · 부문=ROOM은 원장 분류 기준 · 전부 0원). 보유 체류 16,073(전체의 53%) — 주로 캠크닉 계열 패키지에 붙는다. §14.2-6에서 객실 SKU로 잘못 세었던 것을 교정했다.</p>
+<table>
+  <tr><th style="width:26%">검사</th><th style="width:44%">결과</th><th>가설과의 대응</th></tr>
+  <tr><td>파크 방문율</td><td>meal_other 보유 <strong>5.1%</strong> vs 미보유 0.3% — <strong>17배</strong></td><td>"파크 체험과의 결부" — <strong>강하게 지지</strong></td></tr>
+  <tr><td>인호텔 F&B 지출</td><td>보유 199,986원/체류 vs 미보유 282,776원 — <strong>30% 낮음</strong></td><td>두 해석 병존: ①패키지 식사 포함으로 덜 삼 ②외부 식당 사용 — 원장으로 구분 불가</td></tr>
+  <tr><td>보유 체류의 객실</td><td>캠크닉 인더 포레스트 TYPE 1/2 등 캠크닉 주류</td><td>파크 결부 패키지와 meal_other(IRD 포함)가 세트</td></tr>
+</table>
+<ul>
+  <li><strong>제한일 잔여 무근거 재교정</strong>: 'WINE FOREST'(대문자 SKU) 근거 추가로 66 → <strong>58체류(24.2%)</strong>. 전부 실객실 보유(meal_other만인 체류 0)이고 SKU는 두근두근 성수 2박 · Early Bird · Rest Together · VERY SUITE STAY 등 파크 결부가 아닌 일반 테마 패키지 — 방문 사유는 여전히 원장 밖.</li>
+  <li><strong>종합</strong>: 파크 방문자는 캠크닉·불멍 등 파크 결부 패키지 + IRD 포함(meal_other) 체류가 압도적. "meal_other 체류가 파크에서 체험한다"는 파크 부분은 지지, "외부 식당" 부분은 원장 밖이라 지지·반박 모두 불가(패키지 포함 식사가 F&B 구매를 대체했을 가능성도 동일하게 유효).</li>
 </ul>
 
 <div class="footer-note">
