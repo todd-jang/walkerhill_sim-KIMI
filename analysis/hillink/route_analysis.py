@@ -19,6 +19,7 @@
   CAPACITY     동반 인원이 좌석 수를 넘음
   COMPOSITION  아동동반인데 야식(20시 이후 바) — 운영 규칙상 불가
   TIMING       창·이동시간(15분)·체류시간 안에서 겹치지 않는 배치가 없음
+  EXTERNAL     외부 운영 업장(시어터)만 산 체류-일 — 투숙 동선 분석 대상 아님 (§12)
 
 집계
   · 시간대 × 업장 방문 행렬
@@ -73,6 +74,10 @@ VENUE_CODE = {
 }
 IN_ROOM_VENUE = 'IRD'
 
+# §12: 빛의 시어터는 전시장(외부 운영사) — 구매 체류의 83.8%가 객실 없음(외부 고객 혼입).
+# 투숙 동선 재구성에서 제외한다.
+EXTERNAL_VENUES = {'THEATRE_OF_LIGHT'}
+
 DWELL_MIN = {
     'THE_BUFFET': 90,
     'THE_PAVILION': 75,
@@ -96,7 +101,7 @@ SEATED_MEALS = {'THE_BUFFET', 'THE_PAVILION', 'MYONGWOLGWAN', 'MOEGI', 'ONDAL', 
 MEAL_CLASS_BY_HOUR = ((5, 10, '조식'), (11, 15, '중식'), (17, 22, '석식'))
 BAR_VENUES = {'LUX_BAR'}
 
-REJECTIONS = ('CLOSED', 'SLOT_DUP', 'CAPACITY', 'COMPOSITION', 'TIMING')
+REJECTIONS = ('CLOSED', 'SLOT_DUP', 'CAPACITY', 'COMPOSITION', 'TIMING', 'EXTERNAL')
 
 # 모델링 가정: 창 전체에 균등 배정하면 넓은 창의 시설(수영장·사우나)이 모든 시간대를
 # 독점하는 인공물이 생기므로, 업장 성격별 선호 시간창을 두고 운영 창과 교집합한다.
@@ -250,6 +255,8 @@ def _mapped(items: list[dict], room_products: set[tuple[str, str]]) -> list[tupl
         if venue is None:
             venue = 'IRD' if item['업장'].strip() == IN_ROOM_VENUE else None
         if venue is None:
+            continue
+        if venue in EXTERNAL_VENUES:
             continue
         venues.append((venue, float(item['결제액']), item['상품'].strip()))
     return venues
@@ -416,10 +423,19 @@ def analyze(sample: int, seed: int) -> dict:
     venue_visits: Counter[str] = Counter()
     accepted = 0
     total_items = 0
+    external_excluded = 0
     for key in keys:
         items = day_items[key]
         party, child = _persona_profile(items[0], persona_map)
         day = date.fromisoformat(key[1])
+        external_rows = sum(
+            1 for item in items
+            if VENUE_CODE.get(item['업장'].strip()) in EXTERNAL_VENUES
+        )
+        external_excluded += external_rows
+        if external_rows and not _mapped(items, room_products):
+            reasons['EXTERNAL'] += 1  # 시어터만 산 체류-일 — 외부 고객 (§12)
+            continue
         result = schedule_day(
             items,
             day,
@@ -494,6 +510,8 @@ def analyze(sample: int, seed: int) -> dict:
         'accepted_days': accepted,
         'acceptance_rate': accepted / max(1, len(keys)),
         'rejections': dict(reasons),
+        'external_excluded_sample': external_excluded,
+        'external_excluded_population': round(external_excluded * scale),
         'visits_total': sum(venue_visits.values()),
         'stay_hours_total': round(sum(hour_totals.values()), 1),
         'hour_venue': hour_venue_out,
@@ -527,6 +545,9 @@ def main(argv: list[str] | None = None) -> int:
     print(f"표본 {result['sample_days']:,} 체류-일 · 수용 {result['accepted_days']:,} "
           f"({result['acceptance_rate']:.1%}) · 방문 {result['visits_total']:,}건")
     print(f"필터 사유: {result['rejections'] or '없음'} · 폐장 업장: {result['closed_by_venue'] or '없음'}")
+    if result['external_excluded_sample']:
+        print(f"외부 운영 업장 제외(§12): 시어터 {result['external_excluded_sample']:,}행 "
+              f"(모집단 추정 {result['external_excluded_population']:,}행)")
     print('시간대 재실(시간 환산): ' + ' · '.join(f'{h} {c:.0f}' for h, c in sorted(result['hour_totals'].items())))
     print(f"RevPAR {result['revpar']:,.0f}원 · 객실박 점유율 {result['occupancy']:.1%} "
           f"(객실 {result['rooms_total']}실 × {HORIZON_DAYS}일 = {result['available_room_nights']:,} 박)")

@@ -39,12 +39,19 @@ class FilterTest(unittest.TestCase):
         closed_day = None
         for offset in range(33):
             day = date.fromordinal(date(2026, 10, 1).toordinal() + offset)
-            if not ra._windows('THEATRE_OF_LIGHT', day):
+            if not ra._windows('GRAND_POOL', day):
                 closed_day = day
                 break
-        self.assertIsNotNone(closed_day, '기간 내 빛의 시어터 폐장일이 있어야 한다')
+        self.assertIsNotNone(closed_day, '기간 내 수영장 폐장일이 있어야 한다')
         result = ra.schedule_day(
-            [item('빛의 시어터')], closed_day, 2, False, random.Random(1), self.rooms
+            [item('수영장')], closed_day, 2, False, random.Random(1), self.rooms
+        )
+        self.assertFalse(result.stayed)
+        self.assertEqual(result.reason, 'CLOSED')
+
+    def test_external_venue_excluded(self):
+        result = ra.schedule_day(
+            [item('빛의 시어터')], self.day, 2, False, random.Random(1), self.rooms
         )
         self.assertFalse(result.stayed)
         self.assertEqual(result.reason, 'CLOSED')
