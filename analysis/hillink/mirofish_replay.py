@@ -11,7 +11,25 @@ from pathlib import Path
 
 CSS = """
 :root { --ink:#1a1a1a; --muted:#57606a; --line:#d0d7de; --accent:#0b5394;
-  --accent-soft:#eef3f9; --code-bg:#f6f8fa; --good:#1a7f37; --bad:#b42318; }
+  --accent-soft:#eef3f9; --code-bg:#f6f8fa; --good:#1a7f37; --bad:#b42318;
+  /* Walkerhill 인상 팔레트(딥네이비·골드·크림) — 공식 가이드 캡처 없음(추정, 검증 전) */
+  --wh-navy:#12233F; --wh-navy-2:#1F3A5F; --wh-gold:#B08A46; --wh-cream:#FAF7F2;
+  --wh-line:#E3DCCF; --wh-soft:#F1EADC; --wh-muted:#6B6257; }
+body.wh { background:var(--wh-cream); color:var(--wh-navy); --ink:var(--wh-navy);
+  --muted:var(--wh-muted); --line:var(--wh-line); --accent:var(--wh-navy-2);
+  --accent-soft:var(--wh-soft); --good:#2F6B46; --bad:#A33B2B; }
+body.wh .header { border-bottom-color:var(--wh-gold); }
+body.wh .kicker { color:var(--wh-gold); }
+body.wh h2 { border-left-color:var(--wh-gold); background:var(--wh-soft); }
+body.wh .kpi { border-color:var(--wh-line); }
+body.wh .kpi .v { color:var(--wh-navy); }
+body.wh .bars .bar { background:linear-gradient(180deg, var(--wh-navy) 0%, var(--wh-navy-2) 100%);
+  border-top:3px solid var(--wh-gold); }
+body.wh .controls button.on { background:var(--wh-navy); border-color:var(--wh-navy); }
+body.wh .counter { color:var(--wh-navy); }
+body.wh th { background:var(--wh-soft); }
+body.wh .verdict { border-left-color:var(--wh-gold); }
+body.wh footer { border-top-color:var(--wh-gold); }
 * { box-sizing: border-box; }
 body { margin:0 auto; padding:28px 34px 40px; max-width:1180px;
   font-family:"Apple SD Gothic Neo","NanumGothic",-apple-system,sans-serif;
@@ -133,7 +151,7 @@ def heat_table(venue_slot: dict) -> str:
     return f"<table class='heat'>{head}{''.join(rows)}</table>"
 
 
-def build(data: dict) -> str:
+def build(data: dict, replay_only: bool = False, theme: str = "walkerhill") -> str:
     is_cmp = data.get("experiment") == "compare"
     arm = data["treatment"] if is_cmp else data
     s = arm["summary"]
@@ -195,13 +213,13 @@ def build(data: dict) -> str:
         "<tr><td colspan='6' style='color:var(--muted)'>수용 없음</td></tr>")
 
     js = JS.replace("__DATA__", json.dumps(data, ensure_ascii=False).replace("</", "<\\/"))
-    if data.get("swarm"):
+    if data.get("swarm") and not replay_only:
         js += "\n" + SWARM_JS
     return f"""<!DOCTYPE html>
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HILLINK MiroFish — 라운드 세계</title><style>{CSS}</style></head>
-<body>
+<body class="{'wh' if theme == 'walkerhill' else ''}">
 <div class="header">
   <p class="kicker">HILLINK · MiroFish World</p>
   <h1>미로피쉬 — 라운드 기반 멀티에이전트 세계</h1>
@@ -242,10 +260,15 @@ def build(data: dict) -> str:
 
 
 def main(argv: list | None = None) -> int:
-    args = argv if argv is not None else sys.argv[1:]
+    argv = argv if argv is not None else sys.argv[1:]
+    flags = [a for a in argv if a.startswith("--")]
+    args = [a for a in argv if not a.startswith("--")]
+    replay_only = "--replay-only" in flags
+    theme = "plain" if "--plain" in flags else "walkerhill"
     src = Path(args[0]) if args else Path("/tmp/mf_cmp.json")
     out = Path(args[1]) if len(args) > 1 else src.with_name("mirofish_world.html")
-    out.write_text(build(json.loads(src.read_text())), encoding="utf-8")
+    out.write_text(build(json.loads(src.read_text()), replay_only=replay_only, theme=theme),
+                   encoding="utf-8")
     print(f"OK {out}")
     return 0
 
