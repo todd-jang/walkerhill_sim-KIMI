@@ -267,6 +267,24 @@ python3 -m unittest test_persona_exposure        # 39 tests OK</code></pre>
   <li>부수: 11/1 구매 <strong>30건</strong> (직전 일요일 152건) — 전시 일정 종료 가능성. 요일별 판매는 토요일 최다(756건)로 전시 관객 패턴에 가깝다.</li>
 </ul>
 
+<h2>13. 가격탄력성(ε) 식별 가능성 진단</h2>
+<p>pricing_sim의 ε(1.0/1.5/2.0)는 <strong>가정값</strong>이다(§9·§11). 원장에서 추정할 수 있는지 검사했다.</p>
+<table>
+  <tr><th style="width:22%">검사</th><th style="width:30%">방법</th><th>결과</th></tr>
+  <tr><td>F&B·레저 단가</td><td>결제액 ÷ 구매 수량 · (업장·상품) 122조합</td><td><strong>101개 조합 단가 1종</strong>(33일 내내)</td></tr>
+  <tr><td>나머지 21조합</td><td>이상 단가의 건수·날짜</td><td>전부 <strong>1~3건 이상치</strong>(예: 명월관 모둠 222,500 단가 1건 vs 표준 350,000 801건) — 할인·입력 추정, 실험 아님</td></tr>
+  <tr><td>객실 단가</td><td>상품 39종 × 날짜별 단가</td><td><strong>단가 변동 0종</strong> — 전부 정가 SKU</td></tr>
+  <tr><td>표면적 다양성</td><td>일별 단가 종수</td><td>하루에도 21~25종이지만 <strong>상품 간 차이</strong>이지 같은 상품의 가격 변동이 아님</td></tr>
+</table>
+
+<h3>13.1 결론</h3>
+<ul>
+  <li><strong>동일 상품의 시간별 가격 변동이 0</strong> → 이 원장에서 ε·ρ 추정 불가. §9의 ΔV 결론은 "ε가 그 값이라면"이라는 조건부로만 유효.</li>
+  <li><strong>다이나믹 프라이싱이 원장에 없다</strong> — BAR 변동은 채널(OTA)에서만 발생. xmas 문서 §2.4 채널 스프레드 16.1%와 정합.</li>
+  <li>ε 확보 경로 3개: 단면 접근(품질 혼재·신뢰 낮음) / <strong>외부 가격 관측</strong>(xmas 파일럿 D — OTA BAR 일별 수집) / 자체 가격 실험.</li>
+  <li>경영 함의: 원장이 정가만 담고 있다면 <strong>할인·프로모의 매출 효과도 원장으로 측정 불가</strong> — 프로모 평가엔 실험 설계가 필수다.</li>
+</ul>
+
 <div class="footer-note">
   HILLINK 실데이터 적합 보고 · 2026-11-14 · 재현 명령은 §5 · 소스: research/persona_exposure_report.md
 </div>
