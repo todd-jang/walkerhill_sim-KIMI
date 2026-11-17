@@ -9,6 +9,7 @@ from wise_sim.l3_verdict import full_report
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 PRICE_PANEL_PATH = REPO_ROOT / "analysis" / "price_panel_prior.json"
+HOTEL_PRICING_PATH = REPO_ROOT / "analysis" / "hotel_pricing_report.json"
 MAX_N_WEEKENDS = 10_000
 
 
@@ -21,17 +22,24 @@ class PanelNotFound(ViewDataError):
 
 
 def load_price_panel(path: Path | None = None) -> dict[str, Any]:
-    target = path or PRICE_PANEL_PATH
+    return _load_json_object(path or PRICE_PANEL_PATH, "가격 패널")
+
+
+def load_hotel_pricing(path: Path | None = None) -> dict[str, Any]:
+    return _load_json_object(path or HOTEL_PRICING_PATH, "시뮬레이션 가격 리포트")
+
+
+def _load_json_object(target: Path, label: str) -> dict[str, Any]:
     try:
         text = target.read_text(encoding="utf-8")
     except FileNotFoundError as error:
-        raise PanelNotFound(f"가격 패널 산출물이 없습니다: {target.name}") from error
+        raise PanelNotFound(f"{label} 산출물이 없습니다: {target.name}") from error
     try:
         payload = json.loads(text)
     except json.JSONDecodeError as error:
-        raise ViewDataError("가격 패널 산출물이 올바른 JSON이 아닙니다") from error
+        raise ViewDataError(f"{label} 산출물이 올바른 JSON이 아닙니다") from error
     if not isinstance(payload, dict):
-        raise ViewDataError("가격 패널 산출물은 JSON 객체여야 합니다")
+        raise ViewDataError(f"{label} 산출물은 JSON 객체여야 합니다")
     return payload
 
 

@@ -11,6 +11,7 @@ from wise_sim.web_views import (
     PanelNotFound,
     ViewDataError,
     compute_verdict,
+    load_hotel_pricing,
     load_price_panel,
 )
 
@@ -111,6 +112,34 @@ class ComputeVerdictValidationTest(unittest.TestCase):
     def test_rejects_induction_out_of_range(self):
         with self.assertRaises(ViewDataError):
             compute_verdict({**VALID_REQUEST, "induction_resist": 1.5})
+
+
+class LoadHotelPricingTest(unittest.TestCase):
+    def test_real_report_loads_with_curves(self):
+        payload = load_hotel_pricing()
+        self.assertEqual(len(payload["products"]), 5)
+        product = payload["products"][0]
+        self.assertIn("elasticity_at_median", product)
+        self.assertIn("revenue_max_price_ci95", product)
+        self.assertGreaterEqual(len(product["curve"]), 10)
+        self.assertEqual(product["curve"][0][0], product["price_range"][0])
+
+    def test_missing_file_raises(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaises(PanelNotFound):
+                load_hotel_pricing(Path(tmp) / "없는_리포트.json")
+
+    def test_invalid_json_raises(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp) / "broken.json"
+            target.write_text("[1,2]", encoding="utf-8")
+            with self.assertRaises(ViewDataError):
+                load_hotel_pricing(target)
+
+    def test_simulation_route_registered(self):
+        source = Path("wise_sim/web_app.py").read_text(encoding="utf-8")
+        self.assertIn('path == "/api/hotel-pricing"', source)
+        self.assertIn("load_hotel_pricing", source)
 
 
 class HandlerWiringTest(unittest.TestCase):

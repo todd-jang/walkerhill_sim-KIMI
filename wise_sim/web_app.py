@@ -20,7 +20,13 @@ from wise_sim.experiment_pipeline import (
     summarize_operations_per_stay,
     summarize_survey_responders,
 )
-from wise_sim.web_views import PanelNotFound, ViewDataError, compute_verdict, load_price_panel
+from wise_sim.web_views import (
+    PanelNotFound,
+    ViewDataError,
+    compute_verdict,
+    load_hotel_pricing,
+    load_price_panel,
+)
 
 
 STATIC_DIR = Path(__file__).resolve().parent / "static" / "pilot_dashboard"
@@ -300,6 +306,22 @@ class PilotDashboardHandler(BaseHTTPRequestHandler):
                 return
             try:
                 payload = load_price_panel()
+            except PanelNotFound as error:
+                self._send(404, {"error": str(error)})
+                return
+            except ViewDataError as error:
+                self._send(500, {"error": str(error)})
+                return
+            self._send(200, payload)
+            return
+        if path == "/api/hotel-pricing":
+            try:
+                self._request_session()
+            except ValueError as error:
+                self._send(401, {"error": str(error)})
+                return
+            try:
+                payload = load_hotel_pricing()
             except PanelNotFound as error:
                 self._send(404, {"error": str(error)})
                 return
