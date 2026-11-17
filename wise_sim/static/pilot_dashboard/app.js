@@ -2,7 +2,7 @@
 
 const $ = selector => document.querySelector(selector);
 const $$ = selector => [...document.querySelectorAll(selector)];
-const state = { result: null, tab: "overview", page: 0, filter: "" };
+const state = { result: null, tab: "overview", page: 0, filter: "", pricePanel: null, priceLoaded: false };
 const PAGE_SIZE = 50;
 
 const METRIC_INFO = {
@@ -423,6 +423,120 @@ function setStatus(message, kind = "") {
   el.className = `status-message ${kind}`;
 }
 
+function formatWon(value) {
+  return value == null ? "—" : `${number(value, 0)}원`;
+}
+function formatPct(value) {
+  return value == null ? "—" : `${number(value, 2)}%`;
+}
+function switchView(name) {
+  $$(".view-button[data-view]").forEach(button => button.classList.toggle("active", button.dataset.view === name));
+  ["experiment", "price", "verdict"].forEach(view => {
+    $(`#view-${view}`).classList.toggle("hidden", view !== name);
+  });
+  if (name === "price" && !state.priceLoaded) loadPricePanel();
+}
+function priceCell(point) {
+  if (!point.parse_ok) {
+    return `<span class="badge-muted">미파싸</span><br><span class="raw-cell">${esc(point.raw || "빈 셀")}</span>`;
+  }
+  const extras = [];
+  if (point.weekday != null) extras.push(`주중 ${formatWon(point.weekday)}`);
+  if (point.weekend != null) extras.push(`주말 ${formatWon(point.weekend)}`);
+  return `<b>${formatWon(point.primary)}</b>${extras.length ? `<br><span class="subtle">${extras.join(" · ")}</span>` : ""}`;
+}
+function renderPricePanel(data) {
+  const source = `${esc(data.source || "—")} · 산출 ${esc(data.generated_at || "—")}`;
+  const cards = `<div class="card-row">
+      <div class="mini-card"><span>계열 수</span><strong>${number(data.n_series, 0)}</strong><p class="subtle">B_반복 3년 패널</p></div>
+      <div class="mini-card"><span>관측 수</span><strong>${number(data.n_obs, 0)}</strong><p class="subtle">파싱 성공 가격 셀</p></div>
+      <div class="mini-card"><span>중앙 YoY</span><strong>${formatPct(data.median_yoy_pct)}</strong><p class="subtle">연도별 인상률 중앙값</p></div>
+      <div class="mini-card"><span>중앙 주말 프리미엄</span><strong>${formatPct(data.median_weekend_premium_pct)}</strong><p class="subtle">주말가 ÷ 주중가 − 1</p></div>
+    </div>`;
+  const rows = (data.series || []).map(item => {
+    const yearCells = [2024, 2025, 2026].map(year => {
+      const point = (item.points || []).find(entry => entry.year === year);
+      return `<td class="price-cell">${point ? priceCell(point) : "—"}</td>`;
+    }).join("");
+    const yoy = (item.yoy_pct || []).map(formatPct).join(" · ") || "—";
+    const premium = (item.weekend_premium_pct || []).map(formatPct).join(" · ") || "—";
+    const ids = (item.product_ids || []).join(", ") || "—";
+    return `<tr><td><b>${esc(item.hotel)}</b><br><span class="subtle">${esc(item.series)}</span></td>
+      <td>${esc(ids)}</td>${yearCells}<td class="number">${yoy}</td><td class="number">${premium}</td></tr>`;
+  }).join("");
+  const notes = (data.notes || []).map(note => `<li>${esc(note)}</li>`).join("");
+  $("#priceContent").innerHTML = `${cards}
+    <div class="section-title"><div><h2>계열별 3년 가격 패널</h2><p>${source} · 미파싸 셀은 원문을 함께 표시합니다</p></div></div>
+    <div class="table-card table-wrap"><table><thead><tr><th>호텔 · 계열</th><th>상품ID</th><th>2024</th><th>2025</th><th>2026</th><th class="number">YoY</th><th class="number">주말 프리미엄</th></tr></thead><tbody>${rows || `<tr><td colspan="7">표시할 계열이 없습니다.</td></tr>`}</tbody></table></div>
+    <div class="section-title"><div><h2>산출 규칙</h2><p>해석 전 반드시 확인하세요</p></div></div>
+    <ul class="notes-list">${notes || "<li>등록된 산출 규칙이 없습니다.</li>"}</ul>`;
+}
+async function loadPricePanel() {
+  const status = $("#priceStatus");
+  status.textContent = "가격 패널 산출물을 불러오는 중…";
+  status.className = "status-message";
+  try {
+    const response = await fetch("/api/price-panel");
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || `HTTP ${response.status}`);
+    state.pricePanel = payload;
+    state.priceLoaded = true;
+    renderPricePanel(payload);
+    status.textContent = "";
+  } catch (error) {
+    status.textContent = `가격 패널 로드 실패: ${error.message}`;
+    status.className = "status-message error";
+  }
+}
+function verdictClass(label) {
+  return label === "적합" ? "ok" : label === "부적합" ? "bad" : "conditional";
+}
+function renderVerdict(report) {
+  const metrics = Object.entries(report["보고 지표"] || {}).map(([label, item]) => `<tr>
+      <td>${esc(label)}</td><td class="number">${number(item["값"], 4)}</td><td>${esc(item["기준"])}</td>
+      <td>${item["통과"] ? `<span class="pass">통과</span>` : `<span class="fail">미달</span>`}</td></tr>`).join("");
+  const backtest = report["백테스트"] || {};
+  const ci = (backtest["Wilson 95% CI"] || []).map(value => number(value, 4)).join(" – ");
+  const engines = Object.entries(report["엔진 통계 라이브러리"] || {})
+    .map(([name, available]) => `${name} ${available ? "사용" : "미설치(근사)"}`).join(" · ");
+  $("#verdictContent").innerHTML = `
+    <div class="verdict-badge ${verdictClass(report["판정"])}"><span>${esc(report["판정"])}</span><small>${esc(report["인용 지침"])}</small></div>
+    <div class="section-title"><div><h2>보고 지표</h2><p>판정 기준과의 비교 · 70% 방향·0.60 순위·0.20 기권</p></div></div>
+    <div class="table-card"><table><thead><tr><th>지표</th><th class="number">값</th><th>기준</th><th>판정</th></tr></thead><tbody>${metrics}</tbody></table></div>
+    <div class="section-title"><div><h2>백테스트</h2><p>주말 방향 적중과 이항 우연 확률</p></div></div>
+    <div class="quality-grid">
+      <div class="quality-card ok"><div class="q-label">표본 n · 적중 k</div><div class="q-value">${number(backtest["n"], 0)} · ${number(backtest["적중 k"], 0)}</div><div class="q-note">적중률 ${formatPct(backtest["적중률"])}</div></div>
+      <div class="quality-card ${backtest["70% 기준이 구간 내"] ? "ok" : "alert"}"><div class="q-label">Wilson 95% CI</div><div class="q-value">${ci || "—"}</div><div class="q-note">70% 기준이 구간 내: ${backtest["70% 기준이 구간 내"] ? "예" : "아니요"}</div></div>
+      <div class="quality-card"><div class="q-label">우연 확률 P(X≥k)</div><div class="q-value">${number(backtest["우연 확률 P(X≥k)"], 4)}</div><div class="q-note">n=50 이상에서만 통계적 통과 주장이 가능합니다</div></div>
+    </div>
+    <p class="subtle">통계 라이브러리: ${esc(engines || "—")}</p>`;
+}
+async function submitVerdict(event) {
+  event.preventDefault();
+  const status = $("#verdictStatus");
+  const form = new FormData($("#verdictForm"));
+  const payload = {
+    direction: form.get("direction") === "" ? null : Number(form.get("direction")),
+    rho: form.get("rho") === "" ? null : Number(form.get("rho")),
+    abstain: form.get("abstain") === "" ? null : Number(form.get("abstain")),
+    n_weekends: form.get("n_weekends") === "" ? null : Number(form.get("n_weekends")),
+    n_hits: form.get("n_hits") === "" ? null : Number(form.get("n_hits")),
+    n_exceed: form.get("n_exceed") === "" ? null : Number(form.get("n_exceed")),
+  };
+  if (form.get("induction_resist") !== "") payload.induction_resist = Number(form.get("induction_resist"));
+  status.textContent = "판정을 계산하는 중…";
+  status.className = "status-message";
+  try {
+    const response = await postJson("/api/verdict", payload);
+    renderVerdict(response.result);
+    status.textContent = "";
+  } catch (error) {
+    status.textContent = `판정 계산 실패: ${error.message}`;
+    status.className = "status-message error";
+    $("#verdictContent").innerHTML = "";
+  }
+}
+
 $("#fileInput").addEventListener("change", async event => {
   const file = event.target.files?.[0];
   if (!file) return;
@@ -481,6 +595,8 @@ $("#clearButton").addEventListener("click", async () => {
   }
 });
 $$(".tab[data-tab]").forEach(button => button.addEventListener("click", () => activateTab(button.dataset.tab)));
+$$(".view-button[data-view]").forEach(button => button.addEventListener("click", () => switchView(button.dataset.view)));
+$("#verdictForm").addEventListener("submit", submitVerdict);
 
 fetch("/api/state")
   .then(response => response.json())

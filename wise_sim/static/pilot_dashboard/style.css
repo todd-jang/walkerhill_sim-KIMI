@@ -130,8 +130,36 @@ td.number, th.number { text-align: right; font-variant-numeric: tabular-nums; }
 .facts-table td { white-space: nowrap; }
 footer { display: flex; justify-content: space-between; padding: 27px 2px 0; color: #8d9994; font-size: 9px; letter-spacing: .08em; }
 
+.view-switch { display: flex; gap: 6px; padding-top: 18px; }
+#priceContent .card-row { grid-template-columns: repeat(4, 1fr); }
+.view-button { border: 1px solid #b9ccc3; background: #fff; color: var(--green); border-radius: 20px; padding: 8px 16px; font-size: 12px; font-weight: 650; }
+.view-button.active { background: var(--green); border-color: var(--green); color: #fff; }
+.price-cell { min-width: 132px; }
+.badge-muted { display: inline-block; background: var(--gold-pale); color: #715828; border-radius: 10px; padding: 1px 7px; font-size: 9px; font-weight: 700; }
+.raw-cell { color: var(--muted); font-size: 10px; }
+.notes-list { margin: 0; padding-left: 18px; color: var(--muted); font-size: 10px; line-height: 1.7; }
+.verdict-form { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 14px; align-items: end; }
+.verdict-form label { display: flex; flex-direction: column; gap: 6px; color: var(--muted); font-size: 10px; font-weight: 650; }
+.verdict-form input { width: 100%; border: 1px solid var(--line); border-radius: 5px; padding: 8px 10px; font-size: 12px; color: var(--ink); background: #fafbf9; }
+.verdict-form .primary { justify-self: start; }
+.verdict-badge { display: flex; align-items: center; gap: 16px; margin: 20px 0 4px; padding: 18px 22px; border-radius: 8px; border: 1px solid var(--line); background: #fff; }
+.verdict-badge span { font: 500 26px Georgia, "Noto Serif KR", serif; }
+.verdict-badge small { color: var(--muted); font-size: 11px; line-height: 1.5; }
+.verdict-badge.ok { border-color: #cfe0d4; background: var(--mint); }
+.verdict-badge.ok span { color: var(--green); }
+.verdict-badge.bad { border-color: #efd2ce; background: var(--red-pale); }
+.verdict-badge.bad span { color: var(--red); }
+.verdict-badge.conditional { border-color: #eadbb8; background: var(--gold-pale); }
+.verdict-badge.conditional span { color: #715828; }
+.pass { color: var(--green); font-weight: 700; }
+.fail { color: var(--red); font-weight: 700; }
+
 @media (max-width: 760px) {
   .shell { padding: 0 14px 28px; }
+  #priceContent .card-row { grid-template-columns: repeat(2, 1fr); }
+  .view-switch { flex-wrap: wrap; }
+  .verdict-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .verdict-form .primary { justify-self: stretch; }
   .topbar { padding: 0 15px; }
   .intro { min-height: 195px; padding-top: 31px; }
   .intro-stamp { width: 78px; height: 78px; margin-right: 0; flex: 0 0 auto; }

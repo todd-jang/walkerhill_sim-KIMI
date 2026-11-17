@@ -17,6 +17,13 @@
   </header>
 
   <main class="shell">
+    <nav class="view-switch" aria-label="대시보드 보기 선택">
+      <button class="view-button active" data-view="experiment" type="button">실험 분석</button>
+      <button class="view-button" data-view="price" type="button">가격 패널</button>
+      <button class="view-button" data-view="verdict" type="button">판정 계산기</button>
+    </nav>
+
+    <div id="view-experiment">
     <section class="intro">
       <div>
         <p class="eyebrow">CHRISTMAS PACKAGE · EXPERIMENT REVIEW</p>
@@ -71,6 +78,49 @@
       <section id="tab-survey" class="tab-panel hidden"></section>
       <section id="tab-quality" class="tab-panel hidden"></section>
       <section id="tab-facts" class="tab-panel hidden"></section>
+    </div>
+    </div>
+
+    <div id="view-price" class="hidden">
+      <section class="intro">
+        <div>
+          <p class="eyebrow">PRICE PANEL · 3-YEAR PRIOR</p>
+          <h1>가격 프라이어를<br><em>계열별로</em> 봅니다.</h1>
+          <p class="intro-copy">B_반복 3년 패널에서 산출한 연도별 인상률(YoY)과 주말 프리미엄입니다. 페르소나 가격민감도 캘리브레이션과 ±10% 정책 격자의 실증 근거로 쓰입니다.</p>
+        </div>
+        <div class="intro-stamp"><span>±10%</span><small>PRICE<br>GRID</small></div>
+      </section>
+      <div id="priceStatus" class="status-message" role="status" aria-live="polite"></div>
+      <div id="priceContent"></div>
+    </div>
+
+    <div id="view-verdict" class="hidden">
+      <section class="intro">
+        <div>
+          <p class="eyebrow">L3 VERDICT · BACKTEST CALCULATOR</p>
+          <h1>판정 기준을<br><em>직접</em> 계산합니다.</h1>
+          <p class="intro-copy">방향 적중률·순위 상관·기권률과 주말 백테스트 표본을 입력하면 l3_verdict.full_report와 동일한 판정 리포트를 즉시 산출합니다.</p>
+        </div>
+        <div class="intro-stamp"><span>0.70</span><small>T<br>DIRECTION</small></div>
+      </section>
+      <section class="upload-panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">INPUT</p><h2>판정 입력값</h2></div>
+          <span class="privacy-chip">서버 저장 없음 · 계산만 수행</span>
+        </div>
+        <form id="verdictForm" class="verdict-form">
+          <label>방향 적중률 (0~1)<input name="direction" type="number" step="0.01" min="0" max="1" value="0.75" required></label>
+          <label>순위 상관 ρ (−1~1)<input name="rho" type="number" step="0.01" min="-1" max="1" value="0.64" required></label>
+          <label>기권률 (0~1)<input name="abstain" type="number" step="0.01" min="0" max="1" value="0.12" required></label>
+          <label>주말 백테스트 n<input name="n_weekends" type="number" step="1" min="1" value="8" required></label>
+          <label>방향 적중 k<input name="n_hits" type="number" step="1" min="0" value="6" required></label>
+          <label>초과 항목 수<input name="n_exceed" type="number" step="1" min="0" value="0" required></label>
+          <label>유도저항 (선택, 0~1)<input name="induction_resist" type="number" step="0.01" min="0" max="1" placeholder="예: 0.9"></label>
+          <button class="button primary" type="submit">판정 계산</button>
+        </form>
+        <div id="verdictStatus" class="status-message" role="status" aria-live="polite"></div>
+      </section>
+      <div id="verdictContent"></div>
     </div>
 
     <footer><span>WISE · EXPERIMENT ANALYSIS</span><span>무작위 배정 기준 · 세그먼트별 보고</span></footer>
