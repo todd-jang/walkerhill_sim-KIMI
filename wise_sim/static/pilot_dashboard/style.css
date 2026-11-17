@@ -184,3 +184,7 @@ footer { display: flex; justify-content: space-between; padding: 27px 2px 0; col
   .card-row { grid-template-columns: 1fr 1fr; }
   footer { gap: 10px; flex-direction: column; }
 }
+
+#view-simulation .card-row { grid-template-columns: repeat(3, 1fr); }
+.demand-svg { display: block; }
+#view-simulation table td { vertical-align: middle; }

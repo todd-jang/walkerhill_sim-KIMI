@@ -21,6 +21,7 @@
       <button class="view-button active" data-view="experiment" type="button">실험 분석</button>
       <button class="view-button" data-view="price" type="button">가격 패널</button>
       <button class="view-button" data-view="verdict" type="button">판정 계산기</button>
+      <button class="view-button" data-view="simulation" type="button">시뮬레이션</button>
     </nav>
 
     <div id="view-experiment">
@@ -121,6 +122,19 @@
         <div id="verdictStatus" class="status-message" role="status" aria-live="polite"></div>
       </section>
       <div id="verdictContent"></div>
+    </div>
+
+    <div id="view-simulation" class="hidden">
+      <section class="intro">
+        <div>
+          <p class="eyebrow">LLM PERSONA SIMULATION · HOTEL 5 SKU</p>
+          <h1>시뮬레이션 결과를<br><em>수요곡선으로</em> 봅니다.</h1>
+          <p class="intro-copy">GLM-5.3-Flash 페르소나 6명 × 5상품 × 5가격 응답에서 산출한 가격탄력성·매출최적가(부트스트랩 95% CI)입니다. L3 외부 판정은 WISE 실수요(Gate D) 도착 후 확정됩니다.</p>
+        </div>
+        <div class="intro-stamp"><span>30</span><small>SIM<br>CALLS</small></div>
+      </section>
+      <div id="simulationStatus" class="status-message" role="status" aria-live="polite"></div>
+      <div id="simulationContent"></div>
     </div>
 
     <footer><span>WISE · EXPERIMENT ANALYSIS</span><span>무작위 배정 기준 · 세그먼트별 보고</span></footer>

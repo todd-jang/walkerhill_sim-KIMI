@@ -2,7 +2,7 @@
 
 const $ = selector => document.querySelector(selector);
 const $$ = selector => [...document.querySelectorAll(selector)];
-const state = { result: null, tab: "overview", page: 0, filter: "", pricePanel: null, priceLoaded: false };
+const state = { result: null, tab: "overview", page: 0, filter: "", pricePanel: null, priceLoaded: false, simulation: null, simulationLoaded: false };
 const PAGE_SIZE = 50;
 
 const METRIC_INFO = {
@@ -431,10 +431,11 @@ function formatPct(value) {
 }
 function switchView(name) {
   $$(".view-button[data-view]").forEach(button => button.classList.toggle("active", button.dataset.view === name));
-  ["experiment", "price", "verdict"].forEach(view => {
+  ["experiment", "price", "verdict", "simulation"].forEach(view => {
     $(`#view-${view}`).classList.toggle("hidden", view !== name);
   });
   if (name === "price" && !state.priceLoaded) loadPricePanel();
+  if (name === "simulation" && !state.simulationLoaded) loadSimulation();
 }
 function priceCell(point) {
   if (!point.parse_ok) {
@@ -534,6 +535,71 @@ async function submitVerdict(event) {
     status.textContent = `판정 계산 실패: ${error.message}`;
     status.className = "status-message error";
     $("#verdictContent").innerHTML = "";
+  }
+}
+
+function demandSvg(item) {
+  const points = item.curve || [];
+  if (points.length < 2) return "—";
+  const width = 170;
+  const height = 52;
+  const pad = 4;
+  const prices = points.map(point => point[0]);
+  const probs = points.map(point => point[1]);
+  const minPrice = Math.min(...prices);
+  const maxPrice = Math.max(...prices);
+  const maxProb = Math.max(...probs, 0.001);
+  const sx = price => pad + ((price - minPrice) / (maxPrice - minPrice || 1)) * (width - pad * 2);
+  const sy = prob => height - pad - (prob / maxProb) * (height - pad * 2);
+  const path = points.map(([price, prob], index) => `${index === 0 ? "M" : "L"}${sx(price).toFixed(1)},${sy(prob).toFixed(1)}`).join(" ");
+  const best = points.reduce((acc, point) => Math.abs(point[0] - item.revenue_max_price) < Math.abs(acc[0] - item.revenue_max_price) ? point : acc, points[0]);
+  const bx = sx(best[0]);
+  return `<svg class="demand-svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img" aria-label="수요곡선">
+    <path d="${path}" fill="none" stroke="#214f43" stroke-width="1.6"></path>
+    <line x1="${bx.toFixed(1)}" y1="${pad}" x2="${bx.toFixed(1)}" y2="${height - pad}" stroke="#bd9856" stroke-dasharray="3 2" stroke-width="1"></line>
+    <circle cx="${bx.toFixed(1)}" cy="${sy(best[1]).toFixed(1)}" r="2.4" fill="#bd9856"></circle>
+  </svg>`;
+}
+function renderSimulation(data) {
+  const products = data.products || [];
+  const elastic = products.filter(item => item.elasticity_at_median <= -4).length;
+  const cards = `<div class="card-row">
+      <div class="mini-card"><span>상품 수</span><strong>${number(products.length, 0)}</strong><p class="subtle">호텔 시뮬 SKU</p></div>
+      <div class="mini-card"><span>고탄력 SKU (ε ≤ −4)</span><strong>${number(elastic, 0)}</strong><p class="subtle">가격 인상에 민감한 상품</p></div>
+      <div class="mini-card"><span>외부 판정</span><strong>Gate D 대기</strong><p class="subtle">WISE 주말 실판매 도착 후 확정</p></div>
+    </div>`;
+  const rows = products.map(item => {
+    const ci = (item.revenue_max_price_ci95 || []).map(value => `${number(value, 0)}원`).join(" ~ ");
+    return `<tr>
+      <td><b>${esc(item.product)}</b><br><span class="subtle">SKU ${esc(item.article_id)}</span></td>
+      <td class="number ${item.elasticity_at_median <= -4 ? "delta-negative" : ""}">${number(item.elasticity_at_median, 2)}</td>
+      <td class="number"><b>${formatWon(item.revenue_max_price)}</b></td>
+      <td class="number">${ci || "—"}</td>
+      <td class="number">${formatWon(item.expected_revenue_krw)}</td>
+      <td>${esc(item.actual_2026_price || "—")}</td>
+      <td>${demandSvg(item)}</td>
+    </tr>`;
+  }).join("");
+  $("#simulationContent").innerHTML = `${cards}
+    <div class="section-title"><div><h2>SKU별 가격 분석</h2><p>점선 = 로짓 매출최적가 · 곡선 = 가격별 평균 구매확률</p></div></div>
+    <div class="table-card table-wrap"><table><thead><tr><th>상품</th><th class="number">탄력성 ε</th><th class="number">매출최적가</th><th class="number">95% CI</th><th class="number">기대매출</th><th>실제 2026</th><th>수요곡선</th></tr></thead><tbody>${rows || `<tr><td colspan="7">표시할 시뮬레이션 결과가 없습니다.</td></tr>`}</tbody></table></div>
+    <div class="banner warning">L3 방향 판정은 아직 산출되지 않았습니다 — WISE 주말 실수요(Gate D) 도착 후 <b>판정 계산기</b>에 방향 적중률·n·k를 입력하세요. 1001 SKU는 매출최적가가 관측 하한(340,000원)에 붙어 있어 가격 사다리 확장 재실험이 필요합니다.</div>`;
+}
+async function loadSimulation() {
+  const status = $("#simulationStatus");
+  status.textContent = "시뮬레이션 결과를 불러오는 중…";
+  status.className = "status-message";
+  try {
+    const response = await fetch("/api/hotel-pricing");
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || `HTTP ${response.status}`);
+    state.simulation = payload;
+    state.simulationLoaded = true;
+    renderSimulation(payload);
+    status.textContent = "";
+  } catch (error) {
+    status.textContent = `시뮬레이션 결과 로드 실패: ${error.message}`;
+    status.className = "status-message error";
   }
 }
 
