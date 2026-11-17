@@ -20,6 +20,7 @@ from wise_sim.experiment_pipeline import (
     summarize_operations_per_stay,
     summarize_survey_responders,
 )
+from wise_sim.web_views import PanelNotFound, ViewDataError, compute_verdict, load_price_panel
 
 
 STATIC_DIR = Path(__file__).resolve().parent / "static" / "pilot_dashboard"
@@ -291,6 +292,22 @@ class PilotDashboardHandler(BaseHTTPRequestHandler):
                 result = SESSION_RESULTS.get(session_id, {}).get("result")
             self._send(200, {"result": result})
             return
+        if path == "/api/price-panel":
+            try:
+                self._request_session()
+            except ValueError as error:
+                self._send(401, {"error": str(error)})
+                return
+            try:
+                payload = load_price_panel()
+            except PanelNotFound as error:
+                self._send(404, {"error": str(error)})
+                return
+            except ViewDataError as error:
+                self._send(500, {"error": str(error)})
+                return
+            self._send(200, payload)
+            return
         self._send(404, {"error": "not found"})
 
     def do_POST(self) -> None:
@@ -331,6 +348,18 @@ class PilotDashboardHandler(BaseHTTPRequestHandler):
                 session["last_access"] = time.monotonic()
                 session.pop("result", None)
             self._send(200, {"result": None})
+            return
+        if path == "/api/verdict":
+            try:
+                payload = self._read_json()
+                result = compute_verdict(payload)
+            except ViewDataError as error:
+                self._send(400, {"error": str(error)})
+                return
+            except (ValueError, TypeError, KeyError) as error:
+                self._send(400, {"error": str(error)})
+                return
+            self._send(200, {"result": result})
             return
         self._send(404, {"error": "not found"})
 
