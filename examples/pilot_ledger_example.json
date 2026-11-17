@@ -1,0 +1,2957 @@
+{
+ "experiment": {
+  "experiment_id": "pilot-2026-xmas-v1",
+  "analysis_cutoff_at": "2026-12-31T23:59:59+09:00",
+  "source_complete_through": "2026-12-31T23:59:59+09:00",
+  "attribution_window_days": 14,
+  "data_version": "example-v1"
+ },
+ "assignments": [
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-000",
+   "unit_id": "u-000",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-01T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-15T10:00:00+09:00",
+   "randomization_block_id": "blk-000",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-001",
+   "unit_id": "u-001",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-01T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-15T16:00:00+09:00",
+   "randomization_block_id": "blk-000",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-002",
+   "unit_id": "u-002",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-01T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-15T22:00:00+09:00",
+   "randomization_block_id": "blk-001",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-003",
+   "unit_id": "u-003",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-02T04:00:00+09:00",
+   "outcome_matures_at": "2026-11-16T04:00:00+09:00",
+   "randomization_block_id": "blk-001",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-004",
+   "unit_id": "u-004",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-02T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-16T10:00:00+09:00",
+   "randomization_block_id": "blk-002",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-005",
+   "unit_id": "u-005",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-02T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-16T16:00:00+09:00",
+   "randomization_block_id": "blk-002",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-006",
+   "unit_id": "u-006",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-02T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-16T22:00:00+09:00",
+   "randomization_block_id": "blk-003",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-007",
+   "unit_id": "u-007",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-03T04:00:00+09:00",
+   "outcome_matures_at": "2026-11-17T04:00:00+09:00",
+   "randomization_block_id": "blk-003",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-008",
+   "unit_id": "u-008",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-03T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-17T10:00:00+09:00",
+   "randomization_block_id": "blk-004",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-009",
+   "unit_id": "u-009",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-03T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-17T16:00:00+09:00",
+   "randomization_block_id": "blk-004",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-010",
+   "unit_id": "u-010",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-03T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-17T22:00:00+09:00",
+   "randomization_block_id": "blk-005",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-011",
+   "unit_id": "u-011",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-04T04:00:00+09:00",
+   "outcome_matures_at": "2026-11-18T04:00:00+09:00",
+   "randomization_block_id": "blk-005",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-012",
+   "unit_id": "u-012",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-04T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-18T10:00:00+09:00",
+   "randomization_block_id": "blk-006",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-013",
+   "unit_id": "u-013",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-04T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-18T16:00:00+09:00",
+   "randomization_block_id": "blk-006",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-014",
+   "unit_id": "u-014",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-04T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-18T22:00:00+09:00",
+   "randomization_block_id": "blk-007",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-015",
+   "unit_id": "u-015",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-05T04:00:00+09:00",
+   "outcome_matures_at": "2026-11-19T04:00:00+09:00",
+   "randomization_block_id": "blk-007",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-016",
+   "unit_id": "u-016",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-05T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-19T10:00:00+09:00",
+   "randomization_block_id": "blk-008",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-017",
+   "unit_id": "u-017",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-05T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-19T16:00:00+09:00",
+   "randomization_block_id": "blk-008",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-018",
+   "unit_id": "u-018",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-05T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-19T22:00:00+09:00",
+   "randomization_block_id": "blk-009",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-019",
+   "unit_id": "u-019",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-06T04:00:00+09:00",
+   "outcome_matures_at": "2026-11-20T04:00:00+09:00",
+   "randomization_block_id": "blk-009",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-020",
+   "unit_id": "u-020",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-06T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-20T10:00:00+09:00",
+   "randomization_block_id": "blk-010",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-021",
+   "unit_id": "u-021",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-06T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-20T16:00:00+09:00",
+   "randomization_block_id": "blk-010",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-022",
+   "unit_id": "u-022",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-06T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-20T22:00:00+09:00",
+   "randomization_block_id": "blk-011",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-023",
+   "unit_id": "u-023",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-07T04:00:00+09:00",
+   "outcome_matures_at": "2026-11-21T04:00:00+09:00",
+   "randomization_block_id": "blk-011",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-024",
+   "unit_id": "u-024",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-07T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-21T10:00:00+09:00",
+   "randomization_block_id": "blk-012",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-025",
+   "unit_id": "u-025",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-07T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-21T16:00:00+09:00",
+   "randomization_block_id": "blk-012",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-026",
+   "unit_id": "u-026",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-07T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-21T22:00:00+09:00",
+   "randomization_block_id": "blk-013",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-027",
+   "unit_id": "u-027",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-08T04:00:00+09:00",
+   "outcome_matures_at": "2026-11-22T04:00:00+09:00",
+   "randomization_block_id": "blk-013",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-028",
+   "unit_id": "u-028",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-08T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-22T10:00:00+09:00",
+   "randomization_block_id": "blk-014",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-029",
+   "unit_id": "u-029",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-08T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-22T16:00:00+09:00",
+   "randomization_block_id": "blk-014",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-030",
+   "unit_id": "u-030",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-08T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-22T22:00:00+09:00",
+   "randomization_block_id": "blk-015",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-031",
+   "unit_id": "u-031",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-09T04:00:00+09:00",
+   "outcome_matures_at": "2026-11-23T04:00:00+09:00",
+   "randomization_block_id": "blk-015",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-032",
+   "unit_id": "u-032",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-09T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-23T10:00:00+09:00",
+   "randomization_block_id": "blk-016",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-033",
+   "unit_id": "u-033",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-09T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-23T16:00:00+09:00",
+   "randomization_block_id": "blk-016",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-034",
+   "unit_id": "u-034",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-09T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-23T22:00:00+09:00",
+   "randomization_block_id": "blk-017",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-035",
+   "unit_id": "u-035",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-10T04:00:00+09:00",
+   "outcome_matures_at": "2026-11-24T04:00:00+09:00",
+   "randomization_block_id": "blk-017",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-036",
+   "unit_id": "u-036",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-10T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-24T10:00:00+09:00",
+   "randomization_block_id": "blk-018",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-037",
+   "unit_id": "u-037",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-10T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-24T16:00:00+09:00",
+   "randomization_block_id": "blk-018",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-038",
+   "unit_id": "u-038",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-10T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-24T22:00:00+09:00",
+   "randomization_block_id": "blk-019",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-039",
+   "unit_id": "u-039",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-11T04:00:00+09:00",
+   "outcome_matures_at": "2026-11-25T04:00:00+09:00",
+   "randomization_block_id": "blk-019",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-040",
+   "unit_id": "u-040",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-11T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-25T10:00:00+09:00",
+   "randomization_block_id": "blk-020",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-041",
+   "unit_id": "u-041",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-11T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-25T16:00:00+09:00",
+   "randomization_block_id": "blk-020",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-042",
+   "unit_id": "u-042",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-11T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-25T22:00:00+09:00",
+   "randomization_block_id": "blk-021",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-043",
+   "unit_id": "u-043",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-12T04:00:00+09:00",
+   "outcome_matures_at": "2026-11-26T04:00:00+09:00",
+   "randomization_block_id": "blk-021",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-044",
+   "unit_id": "u-044",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-12T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-26T10:00:00+09:00",
+   "randomization_block_id": "blk-022",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-045",
+   "unit_id": "u-045",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-12T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-26T16:00:00+09:00",
+   "randomization_block_id": "blk-022",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-046",
+   "unit_id": "u-046",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-12T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-26T22:00:00+09:00",
+   "randomization_block_id": "blk-023",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-047",
+   "unit_id": "u-047",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-13T04:00:00+09:00",
+   "outcome_matures_at": "2026-11-27T04:00:00+09:00",
+   "randomization_block_id": "blk-023",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-048",
+   "unit_id": "u-048",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-13T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-27T10:00:00+09:00",
+   "randomization_block_id": "blk-024",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-049",
+   "unit_id": "u-049",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-13T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-27T16:00:00+09:00",
+   "randomization_block_id": "blk-024",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-050",
+   "unit_id": "u-050",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-13T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-27T22:00:00+09:00",
+   "randomization_block_id": "blk-025",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-051",
+   "unit_id": "u-051",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-14T04:00:00+09:00",
+   "outcome_matures_at": "2026-11-28T04:00:00+09:00",
+   "randomization_block_id": "blk-025",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-052",
+   "unit_id": "u-052",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-14T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-28T10:00:00+09:00",
+   "randomization_block_id": "blk-026",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-053",
+   "unit_id": "u-053",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-14T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-28T16:00:00+09:00",
+   "randomization_block_id": "blk-026",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-054",
+   "unit_id": "u-054",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-14T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-28T22:00:00+09:00",
+   "randomization_block_id": "blk-027",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-055",
+   "unit_id": "u-055",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-15T04:00:00+09:00",
+   "outcome_matures_at": "2026-11-29T04:00:00+09:00",
+   "randomization_block_id": "blk-027",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-056",
+   "unit_id": "u-056",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-15T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-29T10:00:00+09:00",
+   "randomization_block_id": "blk-028",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-057",
+   "unit_id": "u-057",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-15T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-29T16:00:00+09:00",
+   "randomization_block_id": "blk-028",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-058",
+   "unit_id": "u-058",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-15T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-29T22:00:00+09:00",
+   "randomization_block_id": "blk-029",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-059",
+   "unit_id": "u-059",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-16T04:00:00+09:00",
+   "outcome_matures_at": "2026-11-30T04:00:00+09:00",
+   "randomization_block_id": "blk-029",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-060",
+   "unit_id": "u-060",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-16T10:00:00+09:00",
+   "outcome_matures_at": "2026-11-30T10:00:00+09:00",
+   "randomization_block_id": "blk-030",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-061",
+   "unit_id": "u-061",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-16T16:00:00+09:00",
+   "outcome_matures_at": "2026-11-30T16:00:00+09:00",
+   "randomization_block_id": "blk-030",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-062",
+   "unit_id": "u-062",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-16T22:00:00+09:00",
+   "outcome_matures_at": "2026-11-30T22:00:00+09:00",
+   "randomization_block_id": "blk-031",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-063",
+   "unit_id": "u-063",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-17T04:00:00+09:00",
+   "outcome_matures_at": "2026-12-01T04:00:00+09:00",
+   "randomization_block_id": "blk-031",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-064",
+   "unit_id": "u-064",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-17T10:00:00+09:00",
+   "outcome_matures_at": "2026-12-01T10:00:00+09:00",
+   "randomization_block_id": "blk-032",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-065",
+   "unit_id": "u-065",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-17T16:00:00+09:00",
+   "outcome_matures_at": "2026-12-01T16:00:00+09:00",
+   "randomization_block_id": "blk-032",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-066",
+   "unit_id": "u-066",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-17T22:00:00+09:00",
+   "outcome_matures_at": "2026-12-01T22:00:00+09:00",
+   "randomization_block_id": "blk-033",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-067",
+   "unit_id": "u-067",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-18T04:00:00+09:00",
+   "outcome_matures_at": "2026-12-02T04:00:00+09:00",
+   "randomization_block_id": "blk-033",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-068",
+   "unit_id": "u-068",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-18T10:00:00+09:00",
+   "outcome_matures_at": "2026-12-02T10:00:00+09:00",
+   "randomization_block_id": "blk-034",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-069",
+   "unit_id": "u-069",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-18T16:00:00+09:00",
+   "outcome_matures_at": "2026-12-02T16:00:00+09:00",
+   "randomization_block_id": "blk-034",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-070",
+   "unit_id": "u-070",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-18T22:00:00+09:00",
+   "outcome_matures_at": "2026-12-02T22:00:00+09:00",
+   "randomization_block_id": "blk-035",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-071",
+   "unit_id": "u-071",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-19T04:00:00+09:00",
+   "outcome_matures_at": "2026-12-03T04:00:00+09:00",
+   "randomization_block_id": "blk-035",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-072",
+   "unit_id": "u-072",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-19T10:00:00+09:00",
+   "outcome_matures_at": "2026-12-03T10:00:00+09:00",
+   "randomization_block_id": "blk-036",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-073",
+   "unit_id": "u-073",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-19T16:00:00+09:00",
+   "outcome_matures_at": "2026-12-03T16:00:00+09:00",
+   "randomization_block_id": "blk-036",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-074",
+   "unit_id": "u-074",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-19T22:00:00+09:00",
+   "outcome_matures_at": "2026-12-03T22:00:00+09:00",
+   "randomization_block_id": "blk-037",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-075",
+   "unit_id": "u-075",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-20T04:00:00+09:00",
+   "outcome_matures_at": "2026-12-04T04:00:00+09:00",
+   "randomization_block_id": "blk-037",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-076",
+   "unit_id": "u-076",
+   "segment": "family",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-20T10:00:00+09:00",
+   "outcome_matures_at": "2026-12-04T10:00:00+09:00",
+   "randomization_block_id": "blk-038",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-077",
+   "unit_id": "u-077",
+   "segment": "family",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-20T16:00:00+09:00",
+   "outcome_matures_at": "2026-12-04T16:00:00+09:00",
+   "randomization_block_id": "blk-038",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-078",
+   "unit_id": "u-078",
+   "segment": "adult",
+   "assigned_variant": "treatment",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-20T22:00:00+09:00",
+   "outcome_matures_at": "2026-12-04T22:00:00+09:00",
+   "randomization_block_id": "blk-039",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  },
+  {
+   "experiment_id": "pilot-2026-xmas-v1",
+   "design": "randomized",
+   "data_origin": "randomized_experiment",
+   "assignment_id": "a-079",
+   "unit_id": "u-079",
+   "segment": "adult",
+   "assigned_variant": "control",
+   "assignment_probability": 0.5,
+   "assigned_at": "2026-11-21T04:00:00+09:00",
+   "outcome_matures_at": "2026-12-05T04:00:00+09:00",
+   "randomization_block_id": "blk-039",
+   "protocol_id": "protocol-v1",
+   "eligibility_version": "elig-v1",
+   "assignment_logic_version": "assign-v1"
+  }
+ ],
+ "exposures": [
+  {
+   "event_id": "e-001",
+   "assignment_id": "a-001",
+   "exposed_at": "2026-11-01T16:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-003",
+   "assignment_id": "a-003",
+   "exposed_at": "2026-11-02T04:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-004",
+   "assignment_id": "a-004",
+   "exposed_at": "2026-11-02T10:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-006",
+   "assignment_id": "a-006",
+   "exposed_at": "2026-11-02T22:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-007",
+   "assignment_id": "a-007",
+   "exposed_at": "2026-11-03T04:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-010",
+   "assignment_id": "a-010",
+   "exposed_at": "2026-11-03T22:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-012",
+   "assignment_id": "a-012",
+   "exposed_at": "2026-11-04T10:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-016",
+   "assignment_id": "a-016",
+   "exposed_at": "2026-11-05T10:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-017",
+   "assignment_id": "a-017",
+   "exposed_at": "2026-11-05T16:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-018",
+   "assignment_id": "a-018",
+   "exposed_at": "2026-11-05T22:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-022",
+   "assignment_id": "a-022",
+   "exposed_at": "2026-11-06T22:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-023",
+   "assignment_id": "a-023",
+   "exposed_at": "2026-11-07T04:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-024",
+   "assignment_id": "a-024",
+   "exposed_at": "2026-11-07T10:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-025",
+   "assignment_id": "a-025",
+   "exposed_at": "2026-11-07T16:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-026",
+   "assignment_id": "a-026",
+   "exposed_at": "2026-11-07T22:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-028",
+   "assignment_id": "a-028",
+   "exposed_at": "2026-11-08T10:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-029",
+   "assignment_id": "a-029",
+   "exposed_at": "2026-11-08T16:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-030",
+   "assignment_id": "a-030",
+   "exposed_at": "2026-11-08T22:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-031",
+   "assignment_id": "a-031",
+   "exposed_at": "2026-11-09T04:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-032",
+   "assignment_id": "a-032",
+   "exposed_at": "2026-11-09T10:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-033",
+   "assignment_id": "a-033",
+   "exposed_at": "2026-11-09T16:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-034",
+   "assignment_id": "a-034",
+   "exposed_at": "2026-11-09T22:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-036",
+   "assignment_id": "a-036",
+   "exposed_at": "2026-11-10T10:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-037",
+   "assignment_id": "a-037",
+   "exposed_at": "2026-11-10T16:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-038",
+   "assignment_id": "a-038",
+   "exposed_at": "2026-11-10T22:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-042",
+   "assignment_id": "a-042",
+   "exposed_at": "2026-11-11T22:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-043",
+   "assignment_id": "a-043",
+   "exposed_at": "2026-11-12T04:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-045",
+   "assignment_id": "a-045",
+   "exposed_at": "2026-11-12T16:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-046",
+   "assignment_id": "a-046",
+   "exposed_at": "2026-11-12T22:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-047",
+   "assignment_id": "a-047",
+   "exposed_at": "2026-11-13T04:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-048",
+   "assignment_id": "a-048",
+   "exposed_at": "2026-11-13T10:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-049",
+   "assignment_id": "a-049",
+   "exposed_at": "2026-11-13T16:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-051",
+   "assignment_id": "a-051",
+   "exposed_at": "2026-11-14T04:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-052",
+   "assignment_id": "a-052",
+   "exposed_at": "2026-11-14T10:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-053",
+   "assignment_id": "a-053",
+   "exposed_at": "2026-11-14T16:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-055",
+   "assignment_id": "a-055",
+   "exposed_at": "2026-11-15T04:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-056",
+   "assignment_id": "a-056",
+   "exposed_at": "2026-11-15T10:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-057",
+   "assignment_id": "a-057",
+   "exposed_at": "2026-11-15T16:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-058",
+   "assignment_id": "a-058",
+   "exposed_at": "2026-11-15T22:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-060",
+   "assignment_id": "a-060",
+   "exposed_at": "2026-11-16T10:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-063",
+   "assignment_id": "a-063",
+   "exposed_at": "2026-11-17T04:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-068",
+   "assignment_id": "a-068",
+   "exposed_at": "2026-11-18T10:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-069",
+   "assignment_id": "a-069",
+   "exposed_at": "2026-11-18T16:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-071",
+   "assignment_id": "a-071",
+   "exposed_at": "2026-11-19T04:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-073",
+   "assignment_id": "a-073",
+   "exposed_at": "2026-11-19T16:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-074",
+   "assignment_id": "a-074",
+   "exposed_at": "2026-11-19T22:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-075",
+   "assignment_id": "a-075",
+   "exposed_at": "2026-11-20T04:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-076",
+   "assignment_id": "a-076",
+   "exposed_at": "2026-11-20T10:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-078",
+   "assignment_id": "a-078",
+   "exposed_at": "2026-11-20T22:30:00+09:00",
+   "rendered_variant": "treatment",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  },
+  {
+   "event_id": "e-079",
+   "assignment_id": "a-079",
+   "exposed_at": "2026-11-21T04:30:00+09:00",
+   "rendered_variant": "control",
+   "page": "xmas-package",
+   "channel": "web",
+   "price": {
+    "amount": 445000,
+    "currency": "KRW"
+   },
+   "inventory_snapshot": {
+    "remaining_rooms": 12
+   }
+  }
+ ],
+ "bookings": [
+  {
+   "booking_id": "b-001",
+   "assignment_id": "a-001",
+   "booked_at": "2026-11-02T00:00:00+09:00"
+  },
+  {
+   "booking_id": "b-002",
+   "assignment_id": "a-010",
+   "booked_at": "2026-11-04T06:00:00+09:00"
+  },
+  {
+   "booking_id": "b-003",
+   "assignment_id": "a-024",
+   "booked_at": "2026-11-07T18:00:00+09:00"
+  },
+  {
+   "booking_id": "b-004",
+   "assignment_id": "a-025",
+   "booked_at": "2026-11-08T00:00:00+09:00"
+  },
+  {
+   "booking_id": "b-005",
+   "assignment_id": "a-026",
+   "booked_at": "2026-11-08T06:00:00+09:00"
+  },
+  {
+   "booking_id": "b-006",
+   "assignment_id": "a-033",
+   "booked_at": "2026-11-10T00:00:00+09:00"
+  },
+  {
+   "booking_id": "b-007",
+   "assignment_id": "a-057",
+   "booked_at": "2026-11-16T00:00:00+09:00"
+  },
+  {
+   "booking_id": "b-008",
+   "assignment_id": "a-058",
+   "booked_at": "2026-11-16T06:00:00+09:00"
+  },
+  {
+   "booking_id": "b-009",
+   "assignment_id": "a-076",
+   "booked_at": "2026-11-20T18:00:00+09:00"
+  }
+ ],
+ "payments": [
+  {
+   "payment_id": "p-001",
+   "booking_id": "b-001",
+   "payment_status": "succeeded",
+   "paid_at": "2026-11-02T01:00:00+09:00",
+   "amount": 445000,
+   "currency": "KRW"
+  },
+  {
+   "payment_id": "p-002",
+   "booking_id": "b-002",
+   "payment_status": "succeeded",
+   "paid_at": "2026-11-04T07:00:00+09:00",
+   "amount": 390000,
+   "currency": "KRW"
+  },
+  {
+   "payment_id": "p-003",
+   "booking_id": "b-003",
+   "payment_status": "succeeded",
+   "paid_at": "2026-11-07T19:00:00+09:00",
+   "amount": 445000,
+   "currency": "KRW"
+  },
+  {
+   "payment_id": "p-004",
+   "booking_id": "b-004",
+   "payment_status": "succeeded",
+   "paid_at": "2026-11-08T01:00:00+09:00",
+   "amount": 445000,
+   "currency": "KRW"
+  },
+  {
+   "payment_id": "p-005",
+   "booking_id": "b-005",
+   "payment_status": "succeeded",
+   "paid_at": "2026-11-08T07:00:00+09:00",
+   "amount": 390000,
+   "currency": "KRW"
+  },
+  {
+   "payment_id": "p-006",
+   "booking_id": "b-006",
+   "payment_status": "succeeded",
+   "paid_at": "2026-11-10T01:00:00+09:00",
+   "amount": 445000,
+   "currency": "KRW"
+  },
+  {
+   "payment_id": "p-007",
+   "booking_id": "b-007",
+   "payment_status": "succeeded",
+   "paid_at": "2026-11-16T01:00:00+09:00",
+   "amount": 445000,
+   "currency": "KRW"
+  },
+  {
+   "payment_id": "p-008",
+   "booking_id": "b-008",
+   "payment_status": "succeeded",
+   "paid_at": "2026-11-16T07:00:00+09:00",
+   "amount": 390000,
+   "currency": "KRW"
+  },
+  {
+   "payment_id": "p-009",
+   "booking_id": "b-009",
+   "payment_status": "succeeded",
+   "paid_at": "2026-11-20T19:00:00+09:00",
+   "amount": 445000,
+   "currency": "KRW"
+  }
+ ],
+ "cancellations": [
+  {
+   "event_id": "c-005",
+   "booking_id": "b-005",
+   "cancelled_at": "2026-11-11T07:00:00+09:00",
+   "status": "cancelled",
+   "fee_amount": 0,
+   "currency": "KRW"
+  },
+  {
+   "event_id": "c-008",
+   "booking_id": "b-008",
+   "cancelled_at": "2026-11-19T07:00:00+09:00",
+   "status": "cancelled",
+   "fee_amount": 0,
+   "currency": "KRW"
+  },
+  {
+   "event_id": "c-009",
+   "booking_id": "b-009",
+   "cancelled_at": "2026-11-23T19:00:00+09:00",
+   "status": "cancelled",
+   "fee_amount": 0,
+   "currency": "KRW"
+  }
+ ],
+ "refunds": [
+  {
+   "event_id": "r-005",
+   "refund_id": "rf-005",
+   "booking_id": "b-005",
+   "payment_id": "p-005",
+   "event_at": "2026-11-12T07:00:00+09:00",
+   "status": "completed",
+   "amount": 390000,
+   "currency": "KRW"
+  },
+  {
+   "event_id": "r-008",
+   "refund_id": "rf-008",
+   "booking_id": "b-008",
+   "payment_id": "p-008",
+   "event_at": "2026-11-20T07:00:00+09:00",
+   "status": "completed",
+   "amount": 390000,
+   "currency": "KRW"
+  },
+  {
+   "event_id": "r-009",
+   "refund_id": "rf-009",
+   "booking_id": "b-009",
+   "payment_id": "p-009",
+   "event_at": "2026-11-24T19:00:00+09:00",
+   "status": "completed",
+   "amount": 445000,
+   "currency": "KRW"
+  }
+ ],
+ "costs": [
+  {
+   "event_id": "k-001",
+   "booking_id": "b-001",
+   "incurred_at": "2026-11-21T16:00:00+09:00",
+   "amount": 142400,
+   "currency": "KRW"
+  },
+  {
+   "event_id": "k-002",
+   "booking_id": "b-002",
+   "incurred_at": "2026-11-23T22:00:00+09:00",
+   "amount": 124800,
+   "currency": "KRW"
+  },
+  {
+   "event_id": "k-003",
+   "booking_id": "b-003",
+   "incurred_at": "2026-11-27T10:00:00+09:00",
+   "amount": 142400,
+   "currency": "KRW"
+  },
+  {
+   "event_id": "k-004",
+   "booking_id": "b-004",
+   "incurred_at": "2026-11-27T16:00:00+09:00",
+   "amount": 142400,
+   "currency": "KRW"
+  },
+  {
+   "event_id": "k-005",
+   "booking_id": "b-005",
+   "incurred_at": "2026-11-27T22:00:00+09:00",
+   "amount": 124800,
+   "currency": "KRW"
+  },
+  {
+   "event_id": "k-006",
+   "booking_id": "b-006",
+   "incurred_at": "2026-11-29T16:00:00+09:00",
+   "amount": 142400,
+   "currency": "KRW"
+  },
+  {
+   "event_id": "k-007",
+   "booking_id": "b-007",
+   "incurred_at": "2026-12-05T16:00:00+09:00",
+   "amount": 142400,
+   "currency": "KRW"
+  },
+  {
+   "event_id": "k-008",
+   "booking_id": "b-008",
+   "incurred_at": "2026-12-05T22:00:00+09:00",
+   "amount": 124800,
+   "currency": "KRW"
+  },
+  {
+   "event_id": "k-009",
+   "booking_id": "b-009",
+   "incurred_at": "2026-12-10T10:00:00+09:00",
+   "amount": 142400,
+   "currency": "KRW"
+  }
+ ],
+ "stays": [
+  {
+   "event_id": "s-001",
+   "booking_id": "b-001",
+   "checked_in_at": "2026-11-21T16:00:00+09:00",
+   "checked_out_at": "2026-11-22T16:00:00+09:00"
+  },
+  {
+   "event_id": "s-002",
+   "booking_id": "b-002",
+   "checked_in_at": "2026-11-23T22:00:00+09:00",
+   "checked_out_at": "2026-11-24T22:00:00+09:00"
+  },
+  {
+   "event_id": "s-003",
+   "booking_id": "b-003",
+   "checked_in_at": "2026-11-27T10:00:00+09:00",
+   "checked_out_at": "2026-11-28T10:00:00+09:00"
+  },
+  {
+   "event_id": "s-004",
+   "booking_id": "b-004",
+   "checked_in_at": "2026-11-27T16:00:00+09:00",
+   "checked_out_at": "2026-11-28T16:00:00+09:00"
+  },
+  {
+   "event_id": "s-006",
+   "booking_id": "b-006",
+   "checked_in_at": "2026-11-29T16:00:00+09:00",
+   "checked_out_at": "2026-11-30T16:00:00+09:00"
+  },
+  {
+   "event_id": "s-007",
+   "booking_id": "b-007",
+   "checked_in_at": "2026-12-05T16:00:00+09:00",
+   "checked_out_at": "2026-12-06T16:00:00+09:00"
+  }
+ ],
+ "operations": [
+  {
+   "event_id": "o-000",
+   "assignment_id": "a-000",
+   "occurred_at": "2026-11-06T10:00:00+09:00",
+   "event_type": "complaint"
+  },
+  {
+   "event_id": "o-013",
+   "assignment_id": "a-013",
+   "occurred_at": "2026-11-09T16:00:00+09:00",
+   "event_type": "complaint"
+  },
+  {
+   "event_id": "o-036",
+   "assignment_id": "a-036",
+   "occurred_at": "2026-11-15T10:00:00+09:00",
+   "event_type": "complaint"
+  },
+  {
+   "event_id": "o-039",
+   "assignment_id": "a-039",
+   "occurred_at": "2026-11-16T04:00:00+09:00",
+   "event_type": "complaint"
+  },
+  {
+   "event_id": "o-050",
+   "assignment_id": "a-050",
+   "occurred_at": "2026-11-18T22:00:00+09:00",
+   "event_type": "complaint"
+  },
+  {
+   "event_id": "o-078",
+   "assignment_id": "a-078",
+   "occurred_at": "2026-11-25T22:00:00+09:00",
+   "event_type": "complaint"
+  }
+ ],
+ "surveys": [
+  {
+   "survey_id": "sv-000",
+   "assignment_id": "a-000",
+   "invited_at": "2026-11-23T10:00:00+09:00",
+   "responded_at": "2026-11-23T15:00:00+09:00",
+   "satisfaction_score": 4,
+   "recommendation_score": 8
+  },
+  {
+   "survey_id": "sv-001",
+   "assignment_id": "a-001",
+   "invited_at": "2026-11-23T16:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-002",
+   "assignment_id": "a-002",
+   "invited_at": "2026-11-23T22:00:00+09:00",
+   "responded_at": "2026-11-24T03:00:00+09:00",
+   "satisfaction_score": 5,
+   "recommendation_score": 8
+  },
+  {
+   "survey_id": "sv-003",
+   "assignment_id": "a-003",
+   "invited_at": "2026-11-24T04:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-004",
+   "assignment_id": "a-004",
+   "invited_at": "2026-11-24T10:00:00+09:00",
+   "responded_at": "2026-11-24T15:00:00+09:00",
+   "satisfaction_score": 3,
+   "recommendation_score": 8
+  },
+  {
+   "survey_id": "sv-005",
+   "assignment_id": "a-005",
+   "invited_at": "2026-11-24T16:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-006",
+   "assignment_id": "a-006",
+   "invited_at": "2026-11-24T22:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-007",
+   "assignment_id": "a-007",
+   "invited_at": "2026-11-25T04:00:00+09:00",
+   "responded_at": "2026-11-25T09:00:00+09:00",
+   "satisfaction_score": 3,
+   "recommendation_score": 10
+  },
+  {
+   "survey_id": "sv-008",
+   "assignment_id": "a-008",
+   "invited_at": "2026-11-25T10:00:00+09:00",
+   "responded_at": "2026-11-25T15:00:00+09:00",
+   "satisfaction_score": 5,
+   "recommendation_score": 7
+  },
+  {
+   "survey_id": "sv-009",
+   "assignment_id": "a-009",
+   "invited_at": "2026-11-25T16:00:00+09:00",
+   "responded_at": "2026-11-25T21:00:00+09:00",
+   "satisfaction_score": 5,
+   "recommendation_score": 10
+  },
+  {
+   "survey_id": "sv-010",
+   "assignment_id": "a-010",
+   "invited_at": "2026-11-25T22:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-011",
+   "assignment_id": "a-011",
+   "invited_at": "2026-11-26T04:00:00+09:00",
+   "responded_at": "2026-11-26T09:00:00+09:00",
+   "satisfaction_score": 4,
+   "recommendation_score": 8
+  },
+  {
+   "survey_id": "sv-012",
+   "assignment_id": "a-012",
+   "invited_at": "2026-11-26T10:00:00+09:00",
+   "responded_at": "2026-11-26T15:00:00+09:00",
+   "satisfaction_score": 4,
+   "recommendation_score": 9
+  },
+  {
+   "survey_id": "sv-013",
+   "assignment_id": "a-013",
+   "invited_at": "2026-11-26T16:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-014",
+   "assignment_id": "a-014",
+   "invited_at": "2026-11-26T22:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-015",
+   "assignment_id": "a-015",
+   "invited_at": "2026-11-27T04:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-016",
+   "assignment_id": "a-016",
+   "invited_at": "2026-11-27T10:00:00+09:00",
+   "responded_at": "2026-11-27T15:00:00+09:00",
+   "satisfaction_score": 4,
+   "recommendation_score": 10
+  },
+  {
+   "survey_id": "sv-017",
+   "assignment_id": "a-017",
+   "invited_at": "2026-11-27T16:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-019",
+   "assignment_id": "a-019",
+   "invited_at": "2026-11-28T04:00:00+09:00",
+   "responded_at": "2026-11-28T09:00:00+09:00",
+   "satisfaction_score": 4,
+   "recommendation_score": 9
+  },
+  {
+   "survey_id": "sv-020",
+   "assignment_id": "a-020",
+   "invited_at": "2026-11-28T10:00:00+09:00",
+   "responded_at": "2026-11-28T15:00:00+09:00",
+   "satisfaction_score": 4,
+   "recommendation_score": 10
+  },
+  {
+   "survey_id": "sv-021",
+   "assignment_id": "a-021",
+   "invited_at": "2026-11-28T16:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-022",
+   "assignment_id": "a-022",
+   "invited_at": "2026-11-28T22:00:00+09:00",
+   "responded_at": "2026-11-29T03:00:00+09:00",
+   "satisfaction_score": 3,
+   "recommendation_score": 9
+  },
+  {
+   "survey_id": "sv-023",
+   "assignment_id": "a-023",
+   "invited_at": "2026-11-29T04:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-024",
+   "assignment_id": "a-024",
+   "invited_at": "2026-11-29T10:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-025",
+   "assignment_id": "a-025",
+   "invited_at": "2026-11-29T16:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-026",
+   "assignment_id": "a-026",
+   "invited_at": "2026-11-29T22:00:00+09:00",
+   "responded_at": "2026-11-30T03:00:00+09:00",
+   "satisfaction_score": 3,
+   "recommendation_score": 9
+  },
+  {
+   "survey_id": "sv-027",
+   "assignment_id": "a-027",
+   "invited_at": "2026-11-30T04:00:00+09:00",
+   "responded_at": "2026-11-30T09:00:00+09:00",
+   "satisfaction_score": 5,
+   "recommendation_score": 8
+  },
+  {
+   "survey_id": "sv-028",
+   "assignment_id": "a-028",
+   "invited_at": "2026-11-30T10:00:00+09:00",
+   "responded_at": "2026-11-30T15:00:00+09:00",
+   "satisfaction_score": 3,
+   "recommendation_score": 7
+  },
+  {
+   "survey_id": "sv-029",
+   "assignment_id": "a-029",
+   "invited_at": "2026-11-30T16:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-030",
+   "assignment_id": "a-030",
+   "invited_at": "2026-11-30T22:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-031",
+   "assignment_id": "a-031",
+   "invited_at": "2026-12-01T04:00:00+09:00",
+   "responded_at": "2026-12-01T09:00:00+09:00",
+   "satisfaction_score": 4,
+   "recommendation_score": 9
+  },
+  {
+   "survey_id": "sv-032",
+   "assignment_id": "a-032",
+   "invited_at": "2026-12-01T10:00:00+09:00",
+   "responded_at": "2026-12-01T15:00:00+09:00",
+   "satisfaction_score": 4,
+   "recommendation_score": 7
+  },
+  {
+   "survey_id": "sv-033",
+   "assignment_id": "a-033",
+   "invited_at": "2026-12-01T16:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-034",
+   "assignment_id": "a-034",
+   "invited_at": "2026-12-01T22:00:00+09:00",
+   "responded_at": "2026-12-02T03:00:00+09:00",
+   "satisfaction_score": 5,
+   "recommendation_score": 10
+  },
+  {
+   "survey_id": "sv-037",
+   "assignment_id": "a-037",
+   "invited_at": "2026-12-02T16:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-038",
+   "assignment_id": "a-038",
+   "invited_at": "2026-12-02T22:00:00+09:00",
+   "responded_at": "2026-12-03T03:00:00+09:00",
+   "satisfaction_score": 5,
+   "recommendation_score": 7
+  },
+  {
+   "survey_id": "sv-039",
+   "assignment_id": "a-039",
+   "invited_at": "2026-12-03T04:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-040",
+   "assignment_id": "a-040",
+   "invited_at": "2026-12-03T10:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-041",
+   "assignment_id": "a-041",
+   "invited_at": "2026-12-03T16:00:00+09:00",
+   "responded_at": "2026-12-03T21:00:00+09:00",
+   "satisfaction_score": 5,
+   "recommendation_score": 10
+  },
+  {
+   "survey_id": "sv-042",
+   "assignment_id": "a-042",
+   "invited_at": "2026-12-03T22:00:00+09:00",
+   "responded_at": "2026-12-04T03:00:00+09:00",
+   "satisfaction_score": 3,
+   "recommendation_score": 9
+  },
+  {
+   "survey_id": "sv-043",
+   "assignment_id": "a-043",
+   "invited_at": "2026-12-04T04:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-044",
+   "assignment_id": "a-044",
+   "invited_at": "2026-12-04T10:00:00+09:00",
+   "responded_at": "2026-12-04T15:00:00+09:00",
+   "satisfaction_score": 4,
+   "recommendation_score": 10
+  },
+  {
+   "survey_id": "sv-045",
+   "assignment_id": "a-045",
+   "invited_at": "2026-12-04T16:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-046",
+   "assignment_id": "a-046",
+   "invited_at": "2026-12-04T22:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-047",
+   "assignment_id": "a-047",
+   "invited_at": "2026-12-05T04:00:00+09:00",
+   "responded_at": "2026-12-05T09:00:00+09:00",
+   "satisfaction_score": 5,
+   "recommendation_score": 7
+  },
+  {
+   "survey_id": "sv-048",
+   "assignment_id": "a-048",
+   "invited_at": "2026-12-05T10:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-049",
+   "assignment_id": "a-049",
+   "invited_at": "2026-12-05T16:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-050",
+   "assignment_id": "a-050",
+   "invited_at": "2026-12-05T22:00:00+09:00",
+   "responded_at": "2026-12-06T03:00:00+09:00",
+   "satisfaction_score": 5,
+   "recommendation_score": 10
+  },
+  {
+   "survey_id": "sv-051",
+   "assignment_id": "a-051",
+   "invited_at": "2026-12-06T04:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-052",
+   "assignment_id": "a-052",
+   "invited_at": "2026-12-06T10:00:00+09:00",
+   "responded_at": "2026-12-06T15:00:00+09:00",
+   "satisfaction_score": 4,
+   "recommendation_score": 8
+  },
+  {
+   "survey_id": "sv-053",
+   "assignment_id": "a-053",
+   "invited_at": "2026-12-06T16:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-054",
+   "assignment_id": "a-054",
+   "invited_at": "2026-12-06T22:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-056",
+   "assignment_id": "a-056",
+   "invited_at": "2026-12-07T10:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-057",
+   "assignment_id": "a-057",
+   "invited_at": "2026-12-07T16:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-058",
+   "assignment_id": "a-058",
+   "invited_at": "2026-12-07T22:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-060",
+   "assignment_id": "a-060",
+   "invited_at": "2026-12-08T10:00:00+09:00",
+   "responded_at": "2026-12-08T15:00:00+09:00",
+   "satisfaction_score": 4,
+   "recommendation_score": 10
+  },
+  {
+   "survey_id": "sv-061",
+   "assignment_id": "a-061",
+   "invited_at": "2026-12-08T16:00:00+09:00",
+   "responded_at": "2026-12-08T21:00:00+09:00",
+   "satisfaction_score": 3,
+   "recommendation_score": 7
+  },
+  {
+   "survey_id": "sv-062",
+   "assignment_id": "a-062",
+   "invited_at": "2026-12-08T22:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-063",
+   "assignment_id": "a-063",
+   "invited_at": "2026-12-09T04:00:00+09:00",
+   "responded_at": "2026-12-09T09:00:00+09:00",
+   "satisfaction_score": 4,
+   "recommendation_score": 8
+  },
+  {
+   "survey_id": "sv-064",
+   "assignment_id": "a-064",
+   "invited_at": "2026-12-09T10:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-065",
+   "assignment_id": "a-065",
+   "invited_at": "2026-12-09T16:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-066",
+   "assignment_id": "a-066",
+   "invited_at": "2026-12-09T22:00:00+09:00",
+   "responded_at": "2026-12-10T03:00:00+09:00",
+   "satisfaction_score": 4,
+   "recommendation_score": 9
+  },
+  {
+   "survey_id": "sv-067",
+   "assignment_id": "a-067",
+   "invited_at": "2026-12-10T04:00:00+09:00",
+   "responded_at": "2026-12-10T09:00:00+09:00",
+   "satisfaction_score": 4,
+   "recommendation_score": 10
+  },
+  {
+   "survey_id": "sv-068",
+   "assignment_id": "a-068",
+   "invited_at": "2026-12-10T10:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-069",
+   "assignment_id": "a-069",
+   "invited_at": "2026-12-10T16:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-070",
+   "assignment_id": "a-070",
+   "invited_at": "2026-12-10T22:00:00+09:00",
+   "responded_at": "2026-12-11T03:00:00+09:00",
+   "satisfaction_score": 5,
+   "recommendation_score": 9
+  },
+  {
+   "survey_id": "sv-071",
+   "assignment_id": "a-071",
+   "invited_at": "2026-12-11T04:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-072",
+   "assignment_id": "a-072",
+   "invited_at": "2026-12-11T10:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-073",
+   "assignment_id": "a-073",
+   "invited_at": "2026-12-11T16:00:00+09:00",
+   "responded_at": "2026-12-11T21:00:00+09:00",
+   "satisfaction_score": 3,
+   "recommendation_score": 9
+  },
+  {
+   "survey_id": "sv-074",
+   "assignment_id": "a-074",
+   "invited_at": "2026-12-11T22:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-075",
+   "assignment_id": "a-075",
+   "invited_at": "2026-12-12T04:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-076",
+   "assignment_id": "a-076",
+   "invited_at": "2026-12-12T10:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-078",
+   "assignment_id": "a-078",
+   "invited_at": "2026-12-12T22:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  },
+  {
+   "survey_id": "sv-079",
+   "assignment_id": "a-079",
+   "invited_at": "2026-12-13T04:00:00+09:00",
+   "responded_at": null,
+   "satisfaction_score": null,
+   "recommendation_score": null
+  }
+ ]
+}
