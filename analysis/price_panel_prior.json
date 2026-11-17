@@ -1,0 +1,421 @@
+{
+  "source": "호텔조사_정리 (2).xlsx",
+  "generated_at": "2026-11-17T23:40:30",
+  "n_series": 10,
+  "n_obs": 28,
+  "median_yoy_pct": 6.7,
+  "median_weekend_premium_pct": 7.24,
+  "yoy_obs": [
+    5.45,
+    -5.17,
+    5.56,
+    5.26,
+    13.57,
+    -2.52,
+    10.0,
+    9.09,
+    25.0,
+    4.65,
+    4.44,
+    7.84,
+    18.18,
+    10.0,
+    -21.21,
+    18.25,
+    0.0,
+    690.0
+  ],
+  "weekend_premium_obs": [
+    5.45,
+    9.03
+  ],
+  "series": [
+    {
+      "hotel": "그랜드 하얏트 서울",
+      "series": "겨울 아이스링크 이용권",
+      "product_ids": [
+        "GHS-25W-02"
+      ],
+      "points": [
+        {
+          "year": 2024,
+          "primary": 55000,
+          "weekday": 55000,
+          "weekend": 58000,
+          "parse_ok": true,
+          "raw": "주중 5.5만 / 주말 5.8만 (단독입장 1.2~1.5만)"
+        },
+        {
+          "year": 2025,
+          "primary": 58000,
+          "weekday": null,
+          "weekend": 58000,
+          "parse_ok": true,
+          "raw": "주중·주말 통합 5.8만 (단독입장 2.0만)"
+        },
+        {
+          "year": 2026,
+          "primary": 55000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "월~목 5.5만 / 금~일 6.5만 (단독입장 2.0만)"
+        }
+      ],
+      "yoy_pct": [
+        5.45,
+        -5.17
+      ],
+      "weekend_premium_pct": [
+        5.45
+      ]
+    },
+    {
+      "hotel": "그랜드 하얏트 서울",
+      "series": "연말 시즌 홀케이크 (더 델리)",
+      "product_ids": [
+        "GHS-25W-03"
+      ],
+      "points": [
+        {
+          "year": 2024,
+          "primary": 90000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "9만~12만 원대 실속 라인업"
+        },
+        {
+          "year": 2025,
+          "primary": 95000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "9.5만~13만 원대 (네이버 10% 얼리버드 도입)"
+        },
+        {
+          "year": 2026,
+          "primary": 100000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "10만~15만 원대 6종 + 28~30만 원 햄퍼 3종 신설"
+        }
+      ],
+      "yoy_pct": [
+        5.56,
+        5.26
+      ],
+      "weekend_premium_pct": []
+    },
+    {
+      "hotel": "그랜드 하얏트 서울",
+      "series": "여름 풀사이드 바비큐",
+      "product_ids": [
+        "GHS-26S-02"
+      ],
+      "points": [
+        {
+          "year": 2024,
+          "primary": 140000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "성인 14만~15만 원대"
+        },
+        {
+          "year": 2025,
+          "primary": 159000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "성인 15.9만 / 어린이 7.95만"
+        },
+        {
+          "year": 2026,
+          "primary": 155000,
+          "weekday": 155000,
+          "weekend": 169000,
+          "parse_ok": true,
+          "raw": "주중 15.5만 / 주말 16.9만 (음료무제한 +2만)"
+        }
+      ],
+      "yoy_pct": [
+        13.57,
+        -2.52
+      ],
+      "weekend_premium_pct": [
+        9.03
+      ]
+    },
+    {
+      "hotel": "그랜드 하얏트 서울",
+      "series": "여름 시그니처 빙수 (갤러리)",
+      "product_ids": [
+        "GHS-26S-03"
+      ],
+      "points": [
+        {
+          "year": 2024,
+          "primary": 100000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "망고 빙수 10만 원대"
+        },
+        {
+          "year": 2025,
+          "primary": 110000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "망고 빙수 11만 원"
+        },
+        {
+          "year": 2026,
+          "primary": 120000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "망고 빙수 12만 원 / 말차 빙수 9만 원"
+        }
+      ],
+      "yoy_pct": [
+        10.0,
+        9.09
+      ],
+      "weekend_premium_pct": []
+    },
+    {
+      "hotel": "서울신라",
+      "series": "연말 최고가 케이크",
+      "product_ids": [
+        "SHL-25W-02"
+      ],
+      "points": [
+        {
+          "year": 2024,
+          "primary": 400000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "화이트 트러플 케이크 40만 원"
+        },
+        {
+          "year": 2025,
+          "primary": 500000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "더 파이니스트 럭셔리 50만 원"
+        },
+        {
+          "year": 2026,
+          "primary": null,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": false,
+          "raw": "연말 케이크 라인업 공개 전"
+        }
+      ],
+      "yoy_pct": [
+        25.0
+      ],
+      "weekend_premium_pct": []
+    },
+    {
+      "hotel": "서울신라",
+      "series": "연말 뷔페 (더 파크뷰)",
+      "product_ids": [
+        "SHL-25W-03"
+      ],
+      "points": [
+        {
+          "year": 2024,
+          "primary": 215000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "성수기 디너 21.5만 원"
+        },
+        {
+          "year": 2025,
+          "primary": 225000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "성수기 디너 22.5만 원"
+        },
+        {
+          "year": 2026,
+          "primary": 235000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "성수기 디너 23.5만 원 (12/18~31)"
+        }
+      ],
+      "yoy_pct": [
+        4.65,
+        4.44
+      ],
+      "weekend_premium_pct": []
+    },
+    {
+      "hotel": "서울신라",
+      "series": "여름 애플망고 빙수",
+      "product_ids": [
+        "SHL-26S-02"
+      ],
+      "points": [
+        {
+          "year": 2024,
+          "primary": 102000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "10.2만 원"
+        },
+        {
+          "year": 2025,
+          "primary": 110000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "11만 원"
+        },
+        {
+          "year": 2026,
+          "primary": 130000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "13만 원"
+        }
+      ],
+      "yoy_pct": [
+        7.84,
+        18.18
+      ],
+      "weekend_premium_pct": []
+    },
+    {
+      "hotel": "포시즌스 호텔 서울",
+      "series": "연말 시즌 홀케이크",
+      "product_ids": [
+        "FSS-25W-02"
+      ],
+      "points": [
+        {
+          "year": 2024,
+          "primary": 90000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "9만~17만 원대 케이크 및 투고 중심"
+        },
+        {
+          "year": 2025,
+          "primary": 99000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "9.9만~30만 원 (트러플 리프 30만 신설)"
+        },
+        {
+          "year": 2026,
+          "primary": 78000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "7.8만~15만 원 (스노우 크리스탈 15만 상단)"
+        }
+      ],
+      "yoy_pct": [
+        10.0,
+        -21.21
+      ],
+      "weekend_premium_pct": []
+    },
+    {
+      "hotel": "포시즌스 호텔 서울",
+      "series": "여름 시그니처 빙수",
+      "product_ids": [
+        "FSS-26S-02"
+      ],
+      "points": [
+        {
+          "year": 2024,
+          "primary": 126000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "제주 애플망고 빙수 12.6만 원"
+        },
+        {
+          "year": 2025,
+          "primary": 149000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "제주 애플망고 빙수 14.9만 원"
+        },
+        {
+          "year": 2026,
+          "primary": 149000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "제주 애플망고 14.9만(동결) / 클래식 9.9만"
+        }
+      ],
+      "yoy_pct": [
+        18.25,
+        0.0
+      ],
+      "weekend_premium_pct": []
+    },
+    {
+      "hotel": "포시즌스 호텔 서울",
+      "series": "여름 크레딧 호캉스 패키지",
+      "product_ids": [
+        "FSS-26S-01"
+      ],
+      "points": [
+        {
+          "year": 2024,
+          "primary": null,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": false,
+          "raw": "조식 포함 위주 패키지"
+        },
+        {
+          "year": 2025,
+          "primary": 100000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "크레딧 10만~15만 원 결합"
+        },
+        {
+          "year": 2026,
+          "primary": 790000,
+          "weekday": null,
+          "weekend": null,
+          "parse_ok": true,
+          "raw": "디럭스 79만 원~(크레딧 15만+사우나 2인)"
+        }
+      ],
+      "yoy_pct": [
+        690.0
+      ],
+      "weekend_premium_pct": []
+    }
+  ],
+  "notes": [
+    "primary=셀 첫 숫자(만/원 단위) — 'n만~m만 원대'는 하한 채택",
+    "라벨은 바로 뒤(다음 라벨 전) 숫자와만 짝 — '주중/주말 요금 차등화'류 서술형 복합 언급은 오배정하지 않음",
+    "YoY·프리미엄은 parse_ok 관측치만 사용 — 2026 미공개 라인업은 자동 제외"
+  ]
+}
