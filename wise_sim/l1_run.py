@@ -26,6 +26,7 @@ from pricing_core.environment import BookingRecord  # noqa: E402
 from pricing_core.state_machine_adapter import GuestStateMachineAdapter  # noqa: E402
 from wise_sim.l1_agent import MockAgent, Policy, get_ollama_cloud_agent  # noqa: E402
 from wise_sim.personas import generate_population  # noqa: E402
+from wise_sim.stay_timeline import strict_validation  # noqa: E402
 
 PRICE_DELTAS = (-0.10, 0.0, 0.10)
 PROMOS = ("none", "package", "breakfast")
@@ -77,13 +78,19 @@ def build_booking_records(
     return records
 
 
+def outlet_for(persona: Any) -> str | None:
+    dining = getattr(persona, "dining_preference", "unknown")
+    if dining != "unknown":
+        return dining
+    return OUTLET_BY_ARCHETYPE.get(getattr(persona, "archetype", ""))
+
+
 def synthetic_machines(persona: Any, rng: random.Random) -> dict[str, Any]:
     """M4·M5·M7 — 어댑터 범위 밖 머신의 시뮬레이션 이벤트(출처 명시).
 
     M7 업장은 페르소나 dining_preference가 없으므로 아키타입→업장 매핑으로 합성한다.
     """
-    dining = getattr(persona, "dining_preference", "unknown")
-    outlet = dining if dining != "unknown" else OUTLET_BY_ARCHETYPE.get(getattr(persona, "archetype", ""))
+    outlet = outlet_for(persona)
     outlet_path = ["ENTERED", "SEATED", "ORDERED", "SERVED", "PAID", "EXITED"] if outlet else []
     return {
         "m4_compliance": {
@@ -129,7 +136,9 @@ def run_policy(
         transitions = GuestStateMachineAdapter.booking_to_state_machine_events(record)
         transitions.update(synthetic_machines(personas_by_id[int(record.agent_id.split("-")[1])], rng))
         validation = GuestStateMachineAdapter.validate_booking_timeline(record)
-        violations += int(validation.get("violations_count", 0) or 0)
+        persona = personas_by_id[int(record.agent_id.split("-")[1])]
+        strict = strict_validation(record, outlet_for(persona))
+        violations += int(strict.get("violations_count", 0) or 0)
         bookings.append({
             "agent_id": record.agent_id,
             "persona": record.persona,
@@ -140,6 +149,7 @@ def run_policy(
             "total_price": record.total_price,
             "machines": transitions,
             "validation": validation,
+            "validation_strict": strict,
         })
     booked = sum(1 for decision in decisions if decision.booked)
     abstained = sum(1 for decision in decisions if decision.abstained)
@@ -190,7 +200,7 @@ def run(
         "state_machine_scope": {
             "adapter_machines": ["M1", "M2", "M3"],
             "runner_simulated_machines": ["M4", "M5", "M7"],
-            "validation_coverage": "room-only segment (어댑터 기본) · I1~I6",
+            "validation_coverage": "full-stay segment (checkin→room→outlet→room→checkout) · I1~I6",
         },
         "summary": {
             "policies": len(runs),
