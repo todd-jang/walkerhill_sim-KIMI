@@ -10,6 +10,7 @@ from wise_sim.l3_verdict import full_report
 REPO_ROOT = Path(__file__).resolve().parent.parent
 PRICE_PANEL_PATH = REPO_ROOT / "analysis" / "price_panel_prior.json"
 HOTEL_PRICING_PATH = REPO_ROOT / "analysis" / "hotel_pricing_report.json"
+L1_RUN_PATH = REPO_ROOT / "analysis" / "l1_run_100.json"
 MAX_N_WEEKENDS = 10_000
 
 
@@ -27,6 +28,10 @@ def load_price_panel(path: Path | None = None) -> dict[str, Any]:
 
 def load_hotel_pricing(path: Path | None = None) -> dict[str, Any]:
     return _load_json_object(path or HOTEL_PRICING_PATH, "시뮬레이션 가격 리포트")
+
+
+def load_l1_run(path: Path | None = None) -> dict[str, Any]:
+    return _load_json_object(path or L1_RUN_PATH, "L1 실행 결과")
 
 
 def _load_json_object(target: Path, label: str) -> dict[str, Any]:

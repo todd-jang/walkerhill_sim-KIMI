@@ -25,6 +25,7 @@ from wise_sim.web_views import (
     ViewDataError,
     compute_verdict,
     load_hotel_pricing,
+    load_l1_run,
     load_price_panel,
 )
 
@@ -322,6 +323,22 @@ class PilotDashboardHandler(BaseHTTPRequestHandler):
                 return
             try:
                 payload = load_hotel_pricing()
+            except PanelNotFound as error:
+                self._send(404, {"error": str(error)})
+                return
+            except ViewDataError as error:
+                self._send(500, {"error": str(error)})
+                return
+            self._send(200, payload)
+            return
+        if path == "/api/l1-run":
+            try:
+                self._request_session()
+            except ValueError as error:
+                self._send(401, {"error": str(error)})
+                return
+            try:
+                payload = load_l1_run()
             except PanelNotFound as error:
                 self._send(404, {"error": str(error)})
                 return

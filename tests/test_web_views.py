@@ -12,6 +12,7 @@ from wise_sim.web_views import (
     ViewDataError,
     compute_verdict,
     load_hotel_pricing,
+    load_l1_run,
     load_price_panel,
 )
 
@@ -140,6 +141,26 @@ class LoadHotelPricingTest(unittest.TestCase):
         source = Path("wise_sim/web_app.py").read_text(encoding="utf-8")
         self.assertIn('path == "/api/hotel-pricing"', source)
         self.assertIn("load_hotel_pricing", source)
+
+
+class LoadL1RunTest(unittest.TestCase):
+    def test_real_artifact_loads(self):
+        payload = load_l1_run()
+        self.assertEqual(len(payload["runs"]), 9)
+        self.assertGreater(payload["summary"]["booked"], 0)
+        booking = payload["runs"][0]["bookings"][0]
+        self.assertIn("m7_outlet_session", booking["machines"])
+        self.assertIn("validation_strict", booking)
+
+    def test_missing_file_raises(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaises(PanelNotFound):
+                load_l1_run(Path(tmp) / "없는_실행.json")
+
+    def test_route_registered(self):
+        source = Path("wise_sim/web_app.py").read_text(encoding="utf-8")
+        self.assertIn('path == "/api/l1-run"', source)
+        self.assertIn("load_l1_run", source)
 
 
 class HandlerWiringTest(unittest.TestCase):
