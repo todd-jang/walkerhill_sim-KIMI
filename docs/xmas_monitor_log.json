@@ -1,0 +1,344 @@
+{
+ "records": [
+  {
+   "sku_id": "SANTA-NIGHT-VILLAGE-VISTA-STANDARD",
+   "outlet_id": "VISTA",
+   "label": "산타나잇빌리지 비스타 스탠다드",
+   "currency": "KRW",
+   "listed_unit_amount": 578000,
+   "price_status": "OFFICIAL_PAGE_CHECKED",
+   "price_source_id": "APP-OBS",
+   "checked_at_kst": "2026-11-16T16:44:53.372455+09:00",
+   "conditions": {
+    "months": [
+     11,
+     12
+    ],
+    "stay_date": "2026-12-24?",
+    "day_rule": "12/24-25 피크일 별도",
+    "tax_service": "포함(앱 표기 기준)"
+   },
+   "tax_included": "YES_PER_APP_DISPLAY",
+   "service_charge_included": "UNKNOWN",
+   "customer_payment_status": "NOT_A_TRANSACTION",
+   "auto_bill_allowed": false,
+   "limits": [
+    "견적가 기록 · 실거래·재고 미확인",
+    "관찰 매체: app",
+    "관찰자: rj"
+   ],
+   "record_kind": "POSTED_PRICE",
+   "source_amount_confirmed": true,
+   "transaction_confirmed": false,
+   "price_application_approved": false,
+   "grade": "◆",
+   "grade_promotion_ready": false
+  },
+  {
+   "sku_id": "SANTA-NIGHT-VILLAGE-VISTA-DELUXE",
+   "outlet_id": "VISTA",
+   "label": "산타나잇빌리지 비스타 디럭스",
+   "currency": "KRW",
+   "listed_unit_amount": 1130000,
+   "price_status": "OFFICIAL_PAGE_CHECKED",
+   "price_source_id": "APP-OBS",
+   "checked_at_kst": "2026-11-16T16:44:53.373593+09:00",
+   "conditions": {
+    "months": [
+     11,
+     12
+    ],
+    "stay_date": "2026-12-24",
+    "day_rule": "12/24-25 피크일 별도",
+    "tax_service": "포함(앱 표기 기준)"
+   },
+   "tax_included": "YES_PER_APP_DISPLAY",
+   "service_charge_included": "UNKNOWN",
+   "customer_payment_status": "NOT_A_TRANSACTION",
+   "auto_bill_allowed": false,
+   "limits": [
+    "견적가 기록 · 실거래·재고 미확인",
+    "관찰 매체: app",
+    "관찰자: rj"
+   ],
+   "record_kind": "POSTED_PRICE",
+   "source_amount_confirmed": true,
+   "transaction_confirmed": false,
+   "price_application_approved": false,
+   "grade": "◆",
+   "grade_promotion_ready": false
+  },
+  {
+   "sku_id": "SANTA-NIGHT-VILLAGE-VISTA-STANDARD",
+   "outlet_id": "VISTA",
+   "label": "산타나잇빌리지 비스타 스탠다드",
+   "currency": "KRW",
+   "listed_unit_amount": 0,
+   "price_status": "OFFICIAL_PAGE_CHECKED",
+   "price_source_id": "APP-OBS",
+   "checked_at_kst": "2026-11-17T19:14:46.158151+09:00",
+   "conditions": {
+    "months": [
+     11,
+     12
+    ],
+    "stay_date": "y",
+    "day_rule": "12/24-25 피크일 별도",
+    "tax_service": "포함(앱 표기 기준)"
+   },
+   "tax_included": "YES_PER_APP_DISPLAY",
+   "service_charge_included": "UNKNOWN",
+   "customer_payment_status": "NOT_A_TRANSACTION",
+   "auto_bill_allowed": false,
+   "limits": [
+    "견적가 기록 · 실거래·재고 미확인",
+    "관찰 매체: app",
+    "관찰자: gh"
+   ],
+   "record_kind": "POSTED_PRICE",
+   "source_amount_confirmed": true,
+   "transaction_confirmed": false,
+   "price_application_approved": false,
+   "grade": "◆",
+   "grade_promotion_ready": false
+  },
+  {
+   "sku_id": "SANTA-NIGHT-VILLAGE-VISTA-DELUXE",
+   "outlet_id": "VISTA",
+   "label": "산타나잇빌리지 비스타 디럭스",
+   "currency": "KRW",
+   "listed_unit_amount": 983000,
+   "price_status": "OFFICIAL_PAGE_CHECKED",
+   "price_source_id": "APP-OBS",
+   "checked_at_kst": "2026-11-17T19:15:42.198468+09:00",
+   "conditions": {
+    "months": [
+     11,
+     12
+    ],
+    "stay_date": "2026-12-24",
+    "day_rule": "12/24-25 피크일 별도",
+    "tax_service": "포함(앱 표기 기준)"
+   },
+   "tax_included": "YES_PER_APP_DISPLAY",
+   "service_charge_included": "UNKNOWN",
+   "customer_payment_status": "NOT_A_TRANSACTION",
+   "auto_bill_allowed": false,
+   "limits": [
+    "견적가 기록 · 실거래·재고 미확인",
+    "관찰 매체: app",
+    "관찰자: gh"
+   ],
+   "record_kind": "POSTED_PRICE",
+   "source_amount_confirmed": true,
+   "transaction_confirmed": false,
+   "price_application_approved": false,
+   "grade": "◆",
+   "grade_promotion_ready": false
+  },
+  {
+   "sku_id": "SANTA-NIGHT-VILLAGE-VISTA-STANDARD",
+   "outlet_id": "VISTA",
+   "label": "산타나잇빌리지 비스타 스탠다드",
+   "currency": "KRW",
+   "listed_unit_amount": 0,
+   "price_status": "OFFICIAL_PAGE_CHECKED",
+   "price_source_id": "APP-OBS",
+   "checked_at_kst": "2026-11-17T19:16:15.606434+09:00",
+   "conditions": {
+    "months": [
+     11,
+     12
+    ],
+    "stay_date": "2026-12-24",
+    "day_rule": "12/24-25 피크일 별도",
+    "tax_service": "포함(앱 표기 기준)"
+   },
+   "tax_included": "YES_PER_APP_DISPLAY",
+   "service_charge_included": "UNKNOWN",
+   "customer_payment_status": "NOT_A_TRANSACTION",
+   "auto_bill_allowed": false,
+   "limits": [
+    "견적가 기록 · 실거래·재고 미확인",
+    "관찰 매체: app",
+    "관찰자: gh"
+   ],
+   "record_kind": "POSTED_PRICE",
+   "source_amount_confirmed": true,
+   "transaction_confirmed": false,
+   "price_application_approved": false,
+   "grade": "◆",
+   "grade_promotion_ready": false
+  },
+  {
+   "sku_id": "SANTA-NIGHT-VILLAGE-VISTA-SIGNATURE",
+   "outlet_id": "VISTA",
+   "label": "산타나잇빌리지 비스타 시그니처",
+   "currency": "KRW",
+   "listed_unit_amount": 1091444,
+   "price_status": "OFFICIAL_PAGE_CHECKED",
+   "price_source_id": "APP-OBS",
+   "checked_at_kst": "2026-11-17T19:19:11.815205+09:00",
+   "conditions": {
+    "months": [
+     11,
+     12
+    ],
+    "stay_date": "2026-12-24",
+    "day_rule": "12/24-25 피크일 별도",
+    "tax_service": "포함(앱 표기 기준)"
+   },
+   "tax_included": "YES_PER_APP_DISPLAY",
+   "service_charge_included": "UNKNOWN",
+   "customer_payment_status": "NOT_A_TRANSACTION",
+   "auto_bill_allowed": false,
+   "limits": [
+    "견적가 기록 · 실거래·재고 미확인",
+    "관찰 매체: app",
+    "관찰자: gh"
+   ],
+   "record_kind": "POSTED_PRICE",
+   "source_amount_confirmed": true,
+   "transaction_confirmed": false,
+   "price_application_approved": false,
+   "grade": "◆",
+   "grade_promotion_ready": false
+  },
+  {
+   "sku_id": "SANTA-NIGHT-VILLAGE-GRAND-STD-DELUXE",
+   "outlet_id": "GRAND",
+   "label": "산타나잇빌리지 그랜드 스탠다드~딜럭스",
+   "currency": "KRW",
+   "listed_unit_amount": 759500,
+   "price_status": "OFFICIAL_PAGE_CHECKED",
+   "price_source_id": "APP-OBS",
+   "checked_at_kst": "2026-11-17T19:21:02.074782+09:00",
+   "conditions": {
+    "months": [
+     11,
+     12
+    ],
+    "stay_date": "2026-12-24",
+    "day_rule": "12/24-25 피크일 별도",
+    "tax_service": "포함(앱 표기 기준)"
+   },
+   "tax_included": "YES_PER_APP_DISPLAY",
+   "service_charge_included": "UNKNOWN",
+   "customer_payment_status": "NOT_A_TRANSACTION",
+   "auto_bill_allowed": false,
+   "limits": [
+    "견적가 기록 · 실거래·재고 미확인",
+    "관찰 매체: app",
+    "관찰자: gh"
+   ],
+   "record_kind": "POSTED_PRICE",
+   "source_amount_confirmed": true,
+   "transaction_confirmed": false,
+   "price_application_approved": false,
+   "grade": "◆",
+   "grade_promotion_ready": false
+  },
+  {
+   "sku_id": "SANTA-NIGHT-VILLAGE-DOUGLAS",
+   "outlet_id": "DOUGLAS",
+   "label": "산타나잇빌리지 더글라스(성인전용)",
+   "currency": "KRW",
+   "listed_unit_amount": 819400,
+   "price_status": "OFFICIAL_PAGE_CHECKED",
+   "price_source_id": "APP-OBS",
+   "checked_at_kst": "2026-11-17T19:21:54.737331+09:00",
+   "conditions": {
+    "months": [
+     11,
+     12
+    ],
+    "stay_date": "2026-12-24",
+    "day_rule": "12/24-25 피크일 별도",
+    "tax_service": "포함(앱 표기 기준)"
+   },
+   "tax_included": "YES_PER_APP_DISPLAY",
+   "service_charge_included": "UNKNOWN",
+   "customer_payment_status": "NOT_A_TRANSACTION",
+   "auto_bill_allowed": false,
+   "limits": [
+    "견적가 기록 · 실거래·재고 미확인",
+    "관찰 매체: app",
+    "관찰자: gh"
+   ],
+   "record_kind": "POSTED_PRICE",
+   "source_amount_confirmed": true,
+   "transaction_confirmed": false,
+   "price_application_approved": false,
+   "grade": "◆",
+   "grade_promotion_ready": false
+  },
+  {
+   "sku_id": "SANTA-KIDS-VILLAGE-EXTRA-CHILD-ADV",
+   "outlet_id": "FOREST_PARK",
+   "label": "키즈빌리지 추가티켓 사전 아동",
+   "currency": "KRW",
+   "listed_unit_amount": 135000,
+   "price_status": "OFFICIAL_PAGE_CHECKED",
+   "price_source_id": "APP-OBS",
+   "checked_at_kst": "2026-11-17T19:25:38.682478+09:00",
+   "conditions": {
+    "months": [
+     11,
+     12
+    ],
+    "stay_date": "2026-12-24",
+    "day_rule": "12/24-25 피크일 별도",
+    "tax_service": "포함(앱 표기 기준)"
+   },
+   "tax_included": "YES_PER_APP_DISPLAY",
+   "service_charge_included": "UNKNOWN",
+   "customer_payment_status": "NOT_A_TRANSACTION",
+   "auto_bill_allowed": false,
+   "limits": [
+    "견적가 기록 · 실거래·재고 미확인",
+    "관찰 매체: app",
+    "관찰자: gh"
+   ],
+   "record_kind": "POSTED_PRICE",
+   "source_amount_confirmed": true,
+   "transaction_confirmed": false,
+   "price_application_approved": false,
+   "grade": "◆",
+   "grade_promotion_ready": false
+  },
+  {
+   "sku_id": "SANTA-KIDS-VILLAGE-EXTRA-CHILD-ONSITE",
+   "outlet_id": "FOREST_PARK",
+   "label": "키즈빌리지 추가티켓 현장 아동",
+   "currency": "KRW",
+   "listed_unit_amount": 150000,
+   "price_status": "OFFICIAL_PAGE_CHECKED",
+   "price_source_id": "APP-OBS",
+   "checked_at_kst": "2026-11-17T19:25:59.606842+09:00",
+   "conditions": {
+    "months": [
+     11,
+     12
+    ],
+    "stay_date": "2026-12-24",
+    "day_rule": "12/24-25 피크일 별도",
+    "tax_service": "포함(앱 표기 기준)"
+   },
+   "tax_included": "YES_PER_APP_DISPLAY",
+   "service_charge_included": "UNKNOWN",
+   "customer_payment_status": "NOT_A_TRANSACTION",
+   "auto_bill_allowed": false,
+   "limits": [
+    "견적가 기록 · 실거래·재고 미확인",
+    "관찰 매체: app",
+    "관찰자: gh"
+   ],
+   "record_kind": "POSTED_PRICE",
+   "source_amount_confirmed": true,
+   "transaction_confirmed": false,
+   "price_application_approved": false,
+   "grade": "◆",
+   "grade_promotion_ready": false
+  }
+ ]
+}
