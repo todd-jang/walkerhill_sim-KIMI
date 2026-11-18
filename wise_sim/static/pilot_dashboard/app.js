@@ -585,6 +585,75 @@ function renderSimulation(data) {
     <div class="table-card table-wrap"><table><thead><tr><th>상품</th><th class="number">탄력성 ε</th><th class="number">매출최적가</th><th class="number">95% CI</th><th class="number">기대매출</th><th>실제 2026</th><th>수요곡선</th></tr></thead><tbody>${rows || `<tr><td colspan="7">표시할 시뮬레이션 결과가 없습니다.</td></tr>`}</tbody></table></div>
     <div class="banner warning">L3 방향 판정은 아직 산출되지 않았습니다 — WISE 주말 실수요(Gate D) 도착 후 <b>판정 계산기</b>에 방향 적중률·n·k를 입력하세요. 1001 SKU는 매출최적가가 관측 하한(340,000원)에 붙어 있어 가격 사다리 확장 재실험이 필요합니다.</div>`;
 }
+function machineSteps(run) {
+  const bookings = run.bookings || [];
+  const count = predicate => bookings.filter(predicate).length;
+  return [
+    ["예약 결정", run.decision_counts.booked],
+    ["M1 CONFIRMED", count(b => (b.machines?.m1_reservation?.final_state || "") === "CONFIRMED")],
+    ["M2 CHECKED_OUT", count(b => (b.machines?.m2_stay?.final_state || "") === "CHECKED_OUT")],
+    ["M3 SETTLED", count(b => (b.machines?.m3_folio?.status || "") === "SETTLED")],
+    ["M7 업장 세션", count(b => (b.machines?.m7_outlet_session?.state_path || []).length > 0)],
+  ];
+}
+function distribution(bookings, pick) {
+  const counts = {};
+  for (const booking of bookings) {
+    const key = pick(booking) || "—";
+    counts[key] = (counts[key] || 0) + 1;
+  }
+  return Object.entries(counts).sort((a, b) => b[1] - a[1]);
+}
+function renderL1Run(data) {
+  const runs = data.runs || [];
+  if (!runs.length) {
+    $("#l1Content").innerHTML = "";
+    return;
+  }
+  const base = runs.find(run => run.price_delta === 0 && run.promo === "none") || runs[0];
+  const summary = data.summary || {};
+  const cards = `<div class="card-row">
+      <div class="mini-card"><span>정책</span><strong>${number(summary.policies, 0)}</strong><p class="subtle">가격±10% × 프로모션</p></div>
+      <div class="mini-card"><span>결정</span><strong>${number(summary.decisions, 0)}</strong><p class="subtle">${esc(data.provider)} · ${number(data.agents, 0)}명</p></div>
+      <div class="mini-card"><span>예약</span><strong>${number(summary.booked, 0)}</strong><p class="subtle">상태머신 통과 건</p></div>
+      <div class="mini-card"><span>I1~I6 위반</span><strong class="${summary.invariant_violations === 0 ? "pass" : "fail"}">${number(summary.invariant_violations, 0)}</strong><p class="subtle">전 구간 타임라인</p></div>
+    </div>`;
+  const rows = runs.map(run => {
+    const counts = run.decision_counts || {};
+    return `<tr><td>${esc(run.policy)}</td>
+      <td class="number">${number(counts.booked, 0)}</td>
+      <td class="number">${number(counts.abstained, 0)}</td>
+      <td class="number">${number(counts.rejected, 0)}</td>
+      <td class="number">${formatWon(run.total_spend)}</td>
+      <td>${run.invariant_violations === 0 ? '<span class="pass">0</span>' : `<span class="fail">${number(run.invariant_violations, 0)}</span>`}</td></tr>`;
+  }).join("");
+  const steps = machineSteps(base).map(([label, value]) =>
+    `<span class="flow-step"><b>${number(value, 0)}</b><small>${esc(label)}</small></span>`).join('<span class="flow-arrow">→</span>');
+  const outlets = distribution(base.bookings || [], b => b.machines?.m7_outlet_session?.outlet)
+    .map(([name, count]) => `<span class="chip">${esc(name)} ${number(count, 0)}</span>`).join("");
+  const modes = distribution(base.bookings || [], b => b.machines?.m5_transport?.mode)
+    .map(([name, count]) => `<span class="chip">${esc(name)} ${number(count, 0)}</span>`).join("");
+  $("#l1Content").innerHTML = `<div class="section-title"><div><h2>L1 정책 × 상태전이</h2><p>기준 정책 = ${esc(base.policy)} · provider ${esc(data.provider)} · ${esc(data.state_machine_scope?.validation_coverage || "")}</p></div></div>
+    ${cards}
+    <div class="flow-row">${steps}</div>
+    <div class="section-title"><div><h2>정책별 결정·매출</h2><p>예약 = booked · 기권 = abstained · 거절 = rejected</p></div></div>
+    <div class="table-card table-wrap"><table><thead><tr><th>정책</th><th class="number">예약</th><th class="number">기권</th><th class="number">거절</th><th class="number">총 지출</th><th class="number">위반</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="card-row">
+      <div class="mini-card"><span>M7 업장 분포 (기준)</span><p class="chip-row">${outlets || "—"}</p></div>
+      <div class="mini-card"><span>M5 이동수단 (기준)</span><p class="chip-row">${modes || "—"}</p></div>
+      <div class="mini-card"><span>검증 커버리지</span><p class="subtle">${esc(data.state_machine_scope?.validation_coverage || "—")}</p></div>
+    </div>`;
+}
+async function loadL1Run() {
+  try {
+    const response = await fetch("/api/l1-run");
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || `HTTP ${response.status}`);
+    renderL1Run(payload);
+  } catch (error) {
+    $("#l1Content").innerHTML = `<div class="banner warning">L1 실행 결과 로드 실패: ${esc(error.message)}</div>`;
+  }
+}
 async function loadSimulation() {
   const status = $("#simulationStatus");
   status.textContent = "시뮬레이션 결과를 불러오는 중…";
@@ -597,6 +666,7 @@ async function loadSimulation() {
     state.simulationLoaded = true;
     renderSimulation(payload);
     status.textContent = "";
+    loadL1Run();
   } catch (error) {
     status.textContent = `시뮬레이션 결과 로드 실패: ${error.message}`;
     status.className = "status-message error";
